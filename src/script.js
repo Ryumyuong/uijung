@@ -3,27 +3,30 @@
    ============================================================ */
 
 /* ---------- 헤더 스크롤 그림자 ---------- */
-const header = document.querySelector('.header');
+const header = document.querySelector('[data-header]');
 if (header) {
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  const onScroll = () => header.classList.toggle('header-scrolled', window.scrollY > 40);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 }
 
 /* ---------- FAQ: 한 번에 하나만 열림 ---------- */
-document.querySelectorAll('.faq details').forEach((d) => {
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach((d) => {
   d.addEventListener('toggle', () => {
     if (d.open) {
-      document.querySelectorAll('.faq details').forEach((o) => { if (o !== d) o.open = false; });
+      faqItems.forEach((o) => {
+        if (o !== d) o.open = false;
+      });
     }
   });
 });
 
 /* ---------- 변제금 진단: 선택지 토글 ---------- */
-document.querySelectorAll('.diag__opts').forEach((group) => {
-  group.querySelectorAll('.diag__opt').forEach((opt) => {
+document.querySelectorAll('[data-diag-opts]').forEach((group) => {
+  group.querySelectorAll('[data-diag-opt]').forEach((opt) => {
     opt.addEventListener('click', () => {
-      group.querySelectorAll('.diag__opt').forEach((o) => o.classList.remove('is-on'));
+      group.querySelectorAll('[data-diag-opt]').forEach((o) => o.classList.remove('is-on'));
       opt.classList.add('is-on');
     });
   });
@@ -43,9 +46,14 @@ if (contactForm) {
     const name = contactForm.name.value.trim();
     const phone = contactForm.phone.value.trim();
     const agree = contactForm.agree.checked;
-    if (!name || !phone) { alert('이름과 연락처를 입력해 주세요.'); return; }
-    if (!agree) { alert('개인정보 수집 및 이용에 동의해 주세요.'); return; }
-    // TODO: 실제 접수 처리(API 연동) 연결
+    if (!name || !phone) {
+      alert('이름과 연락처를 입력해 주세요.');
+      return;
+    }
+    if (!agree) {
+      alert('개인정보 수집 및 이용에 동의해 주세요.');
+      return;
+    }
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
     contactForm.reset();
   });
@@ -57,7 +65,8 @@ if (contactForm) {
   if (!targets.length || !('IntersectionObserver' in window)) return;
   const animate = (el) => {
     const end = parseInt(el.dataset.count, 10) || 0;
-    const dur = 1100; const start = performance.now();
+    const dur = 1100;
+    const start = performance.now();
     const tick = (now) => {
       const p = Math.min((now - start) / dur, 1);
       el.textContent = Math.floor(end * (1 - Math.pow(1 - p, 3))).toLocaleString();
@@ -65,49 +74,64 @@ if (contactForm) {
     };
     requestAnimationFrame(tick);
   };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en) => { if (en.isIntersecting) { animate(en.target); io.unobserve(en.target); } });
-  }, { threshold: 0.4 });
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          animate(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
   targets.forEach((t) => io.observe(t));
 })();
 
 /* ============================================================
    캐러셀 (data-carousel)
-   data-mode="center" : 가운데 카드 강조
+   data-mode="center" : 가운데 카드 강조 + 무한 루프
    data-mode="cards"  : 여러 카드 슬라이드
    ============================================================ */
 document.querySelectorAll('[data-carousel]').forEach((root) => {
-  const viewport = root.querySelector('.carousel__viewport');
-  const track = root.querySelector('.carousel__track');
-  const prev = root.querySelector('.carousel__arrow--prev');
-  const next = root.querySelector('.carousel__arrow--next');
-  const dotsWrap = root.querySelector('.carousel__dots');
+  const viewport = root.querySelector('[data-carousel-viewport]');
+  const track = root.querySelector('[data-carousel-track]');
+  const prev = root.querySelector('[data-carousel-prev]');
+  const next = root.querySelector('[data-carousel-next]');
+  const dotsWrap = root.querySelector('[data-carousel-dots]');
   const mode = root.dataset.mode || 'cards';
-  const isLooping = mode === 'center';  // 가운데 카드 모드는 무한 루프
+  const isLooping = mode === 'center';
 
   const originalCount = track.children.length;
   if (!originalCount) return;
 
-  // 무한 루프용 카드 클론: [복제들, 원본, 복제들]
   if (isLooping) {
     const originals = [...track.children];
     originals.forEach((c) => {
-      const cl = c.cloneNode(true); cl.classList.add('is-clone');
+      const cl = c.cloneNode(true);
+      cl.classList.add('is-clone');
       track.appendChild(cl);
     });
-    originals.slice().reverse().forEach((c) => {
-      const cl = c.cloneNode(true); cl.classList.add('is-clone');
-      track.insertBefore(cl, track.firstChild);
-    });
+    originals
+      .slice()
+      .reverse()
+      .forEach((c) => {
+        const cl = c.cloneNode(true);
+        cl.classList.add('is-clone');
+        track.insertBefore(cl, track.firstChild);
+      });
   }
 
   const cards = [...track.children];
   let index = isLooping
     ? originalCount + Math.floor((originalCount - 1) / 2)
-    : (mode === 'center' ? Math.floor((originalCount - 1) / 2) : 0);
+    : mode === 'center'
+      ? Math.floor((originalCount - 1) / 2)
+      : 0;
   let isAnimating = false;
 
-  const getGap = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+  const getGap = () =>
+    parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
   const getStep = () => cards[0].getBoundingClientRect().width + getGap();
   const visibleCount = () => {
     const step = getStep();
@@ -121,7 +145,7 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   const buildDots = () => {
     if (!dotsWrap) return;
     dotsWrap.innerHTML = '';
-    const count = isLooping ? originalCount : (maxIndex() + 1);
+    const count = isLooping ? originalCount : maxIndex() + 1;
     for (let i = 0; i < count; i++) {
       const b = document.createElement('button');
       b.type = 'button';
@@ -162,7 +186,6 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     }
   };
 
-  // 무한 루프: 트랜지션 종료 시 복제 영역이면 원본 영역으로 무전환 스냅
   if (isLooping) {
     track.addEventListener('transitionend', (e) => {
       if (e.propertyName !== 'transform') return;
@@ -170,40 +193,51 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       if (index >= 2 * originalCount) index -= originalCount;
       else if (index < originalCount) index += originalCount;
       else return;
-      // 트랙과 카드의 모든 트랜지션을 일시 차단해 스냅을 보이지 않게
       track.style.transition = 'none';
-      cards.forEach((c) => { c.style.transition = 'none'; });
+      cards.forEach((c) => {
+        c.style.transition = 'none';
+      });
       applyTransform();
-      void track.offsetHeight;  // reflow
+      void track.offsetHeight;
       requestAnimationFrame(() => {
         track.style.transition = '';
-        cards.forEach((c) => { c.style.transition = ''; });
+        cards.forEach((c) => {
+          c.style.transition = '';
+        });
       });
     });
   }
 
-  prev && prev.addEventListener('click', () => {
-    if (isAnimating) return;
-    isAnimating = isLooping;
-    index--;
-    if (!isLooping && index < 0) index = maxIndex();
-    render();
-  });
-  next && next.addEventListener('click', () => {
-    if (isAnimating) return;
-    isAnimating = isLooping;
-    index++;
-    if (!isLooping && index > maxIndex()) index = 0;
-    render();
-  });
+  prev &&
+    prev.addEventListener('click', () => {
+      if (isAnimating) return;
+      isAnimating = isLooping;
+      index--;
+      if (!isLooping && index < 0) index = maxIndex();
+      render();
+    });
+  next &&
+    next.addEventListener('click', () => {
+      if (isAnimating) return;
+      isAnimating = isLooping;
+      index++;
+      if (!isLooping && index > maxIndex()) index = 0;
+      render();
+    });
 
   let rt;
   window.addEventListener('resize', () => {
     clearTimeout(rt);
-    rt = setTimeout(() => { buildDots(); render(); }, 150);
+    rt = setTimeout(() => {
+      buildDots();
+      render();
+    }, 150);
   });
 
   buildDots();
   render();
-  window.addEventListener('load', () => { buildDots(); render(); });
+  window.addEventListener('load', () => {
+    buildDots();
+    render();
+  });
 });

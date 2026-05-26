@@ -1,0 +1,270 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   웹폰트 — KoPubBatang (로컬), Pretendard / Kodchasan (CDN)
+   ============================================================ */
+@font-face {
+  font-family: 'KoPubBatang';
+  src: url('/fonts/KoPubBatang-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'KoPubBatang';
+  src: url('/fonts/KoPubBatang-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'KoPubBatang';
+  src: url('/fonts/KoPubBatang-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   디자인 토큰 — Tailwind v4 @theme
+   ============================================================ */
+@theme {
+  --color-navy-900: #0a1424;
+  --color-navy-850: #0e1b30;
+  --color-navy-800: #12233f;
+  --color-navy-700: #1a2d4f;
+  --color-navy-600: #243b66;
+  --color-gold-500: #e6b54c;
+  --color-gold-600: #d39b2b;
+  --color-brand-blue: #2c5fb5;
+  --color-brand-bright: #2563eb;
+  --color-brand-link: #2f6fe0;
+  --color-brand-soft: #e8eefb;
+  --color-soft-bg: #eef1f7;
+  --color-light-bg: #fafbfc;
+  --color-line: #e5e8ef;
+  --color-brand-red: #e0533d;
+  --color-ink: #16233f;
+  --color-ink-soft: #5a6478;
+  --color-ink-mute: #8b94a8;
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-kodchasan: 'Kodchasan', sans-serif;
+  --font-batang: 'KoPubBatang', serif;
+
+  --animate-pulse-red: pulse-red 1.6s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 77, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: #1a1f2e;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  /* skip-to-content focus */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-bright);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================
+   재사용 유틸 — Tailwind만으로 표현이 길어지거나 불가능한 패턴
+   ============================================================ */
+@layer components {
+  /* 다크 섹션 배경 (radial + linear) */
+  .bg-section-dark {
+    background:
+      radial-gradient(1100px 500px at 70% -10%, rgba(56, 92, 160, 0.3), transparent 60%),
+      linear-gradient(180deg, #10203a 0%, var(--color-navy-900) 100%);
+  }
+
+  /* 블루 그라데이션 텍스트 */
+  .text-grad-blue {
+    background: linear-gradient(180deg, #002f5e 0%, #2576c9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #2576c9;
+  }
+
+  /* 체크 아이콘 (이미지) */
+  .icon-check {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    background: url('/images/check-blue.png') center / contain no-repeat;
+    color: transparent;
+    flex: 0 0 auto;
+  }
+
+  /* 3단 계단 클립 */
+  .stair-clip {
+    clip-path: polygon(8% 100%, 8% 60%, 33% 60%, 33% 30%, 66% 30%, 66% 0%, 92% 0%, 92% 100%);
+  }
+
+  /* 점선 + 끝점 (flow step 아래) */
+  .flow-dot::after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 1px);
+    width: 2px;
+    bottom: -22px;
+    height: 18px;
+    border-left: 2px dotted #b5c0d6;
+  }
+  .flow-dot::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-brand-bright);
+    bottom: -34px;
+  }
+
+  /* review step 사이 점선 + 도트 */
+  .review-dot {
+    align-self: center;
+    flex: 0 0 auto;
+    width: 80px;
+    height: 12px;
+    position: relative;
+    background: radial-gradient(circle, #c2ccdb 1.6px, transparent 2.2px) 0 50% / 12px 12px repeat-x;
+  }
+  .review-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -2px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-brand-bright);
+  }
+
+  /* worry 카드 좌측 막대 */
+  .worry-card {
+    position: relative;
+  }
+  .worry-card::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    bottom: 14px;
+    width: 6px;
+    border-radius: 3px;
+    background: var(--color-navy-800);
+  }
+
+  /* 히어로 배경 페인트 + overlay */
+  .hero-bg {
+    background: #0b1526 url('/images/hero-bg.png') center / cover no-repeat;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(7, 15, 32, 0.55) 0%, rgba(7, 15, 32, 0.22) 42%, rgba(7, 15, 32, 0) 68%);
+  }
+
+  /* FAQ details 토글 아이콘 */
+  .faq-item > summary {
+    list-style: none;
+  }
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item > summary::after {
+    content: '⌄';
+    font-size: 20px;
+    color: #9aa6bd;
+    transition: transform 0.2s;
+    margin-left: 14px;
+  }
+  .faq-item[open] > summary::after {
+    transform: rotate(180deg);
+  }
+
+  /* 헤더 — 스크롤 시 클래스 토글 */
+  .header-scrolled {
+    background: #08192b;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  }
+
+  /* 흰배경 로고 어둡게 (location 섹션) */
+  .logo-dark img {
+    filter: brightness(0) saturate(0);
+    opacity: 0.85;
+  }
+
+  /* 캐러셀 카드 가운데 강조 */
+  .carousel-center .pick-card {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .carousel-center .pick-card.is-near {
+    opacity: 0.55;
+    pointer-events: auto;
+  }
+  .carousel-center .pick-card.is-center {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background: #fff;
+    border-color: #d7deeb;
+    box-shadow: 0 16px 40px rgba(20, 40, 80, 0.12);
+  }
+
+  /* 캐러셀 dots */
+  .carousel-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #cdd5e2;
+    transition: all 0.2s;
+  }
+  .carousel-dots button.is-on {
+    width: 22px;
+    border-radius: 5px;
+    background: var(--color-brand-bright);
+  }
+}
+
+/* ============================================================
+   모바일 — Tailwind utility로 처리하기 번거로운 일괄 조정
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero-photo-md-hide {
+    display: none;
+  }
+}

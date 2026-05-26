@@ -1,0 +1,17 @@
+{
+  "name": "uijung-landing",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "의정종합법률사무소 — 개인회생 랜딩페이지",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.14",
+    "tailwindcss": "^4.1.14",
+    "vite": "^6.3.5"
+  }
+}
