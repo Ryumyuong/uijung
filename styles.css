@@ -343,9 +343,14 @@ ul { list-style: none; }
 .worry .sec-desc { margin: 0 auto 40px; }
 .worry__list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
 .worry__list li {
-  background: #fff; border-left: 4px solid var(--navy-800); border-radius: 10px;
-  padding: 20px 24px; font-size: 16px; font-weight: 600; color: #2c3450; text-align: center;
-  box-shadow: 0 2px 10px rgba(20,40,80,.05);
+  position: relative;
+  background: #fff; border-radius: 12px;
+  padding: 24px 28px; font-size: 17px; font-weight: 700; color: #1a2540; text-align: center;
+  box-shadow: 0 2px 12px rgba(20,40,80,.05);
+}
+.worry__list li::before {
+  content: ''; position: absolute; left: 16px; top: 14px; bottom: 14px;
+  width: 6px; border-radius: 3px; background: var(--navy-800);
 }
 
 /* ============== 절차 (계단) ============== */
