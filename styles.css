@@ -362,6 +362,14 @@ ul { list-style: none; }
 .flow__step { position: relative; z-index: 1; width: 230px; text-align: center; }
 .flow__step--2 { margin-bottom: 70px; }
 .flow__step--3 { margin-bottom: 140px; }
+/* 일러스트와 바닥 사이 점선 커넥터 + 블루 점 */
+.flow__step::after { content: ''; position: absolute; left: calc(50% - 1px); width: 2px; }
+.flow__step::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--blue-bright); }
+.flow__step--2::after { bottom: -52px; height: 28px; border-left: 2px dotted #b5c0d6; }
+.flow__step--3::after { bottom: -120px; height: 92px; border-left: 2px dotted #b5c0d6; }
+.flow__step--1::before { bottom: -14px; }
+.flow__step--2::before { bottom: -66px; }
+.flow__step--3::before { bottom: -134px; }
 .flow__badge { display: inline-block; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 6px; margin-bottom: 14px; }
 .flow__step h3 { font-size: 19px; font-weight: 800; color: var(--navy-800); margin-bottom: 10px; }
 .flow__step p { font-size: 13.5px; color: var(--text-soft); line-height: 1.7; margin-bottom: 18px; }
