@@ -58,7 +58,7 @@ ul { list-style: none; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .container.narrow { max-width: 920px; }
 .center { text-align: center; }
-.section { padding: 110px 0; scroll-margin-top: 80px; }
+.section { padding: 150px 0; scroll-margin-top: 80px; }
 .section--light { background: #fff; }
 .section--soft { background: var(--soft-bg); }
 .section--dark {
@@ -553,7 +553,7 @@ ul { list-style: none; }
 }
 
 @media (max-width: 900px) {
-  .section { padding: 72px 0; }
+  .section { padding: 96px 0; }
   .header__inner { height: 64px; }
   .nav { display: none; }
   .logo__txt small { display: none; }
