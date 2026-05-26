@@ -358,29 +358,29 @@ ul { list-style: none; }
 .flow__checks li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #455168; }
 .flow__stairs { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 40px; margin-bottom: 60px; }
 .flow__stairs::before {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 190px;
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 140px;
   background: #eef1f6; z-index: 0;
-  /* 3단 계단(좌측 낮음 → 우측 높음): 50 / 120 / 190 = step 마진과 일치 */
+  /* 3단 계단(좌측 낮음 → 우측 높음): 40 / 90 / 140 = step 마진과 일치 */
   clip-path: polygon(
-    8% 100%, 8% 73.7%,
-    33% 73.7%, 33% 36.8%,
-    66% 36.8%, 66% 0%,
+    8% 100%, 8% 71.4%,
+    33% 71.4%, 33% 35.7%,
+    66% 35.7%, 66% 0%,
     92% 0%, 92% 100%
   );
 }
 .flow__step { position: relative; z-index: 1; width: 230px; text-align: center; }
-.flow__step--1 { margin-bottom: 50px; }
-.flow__step--2 { margin-bottom: 120px; }
-.flow__step--3 { margin-bottom: 190px; }
+.flow__step--1 { margin-bottom: 40px; }
+.flow__step--2 { margin-bottom: 90px; }
+.flow__step--3 { margin-bottom: 140px; }
 /* 일러스트와 계단 바닥 사이 점선 커넥터 + 블루 점 */
 .flow__step::after { content: ''; position: absolute; left: calc(50% - 1px); width: 2px; }
 .flow__step::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--blue-bright); }
-.flow__step--1::after { bottom: -36px; height: 32px; border-left: 2px dotted #b5c0d6; }
-.flow__step--2::after { bottom: -106px; height: 100px; border-left: 2px dotted #b5c0d6; }
-.flow__step--3::after { bottom: -176px; height: 168px; border-left: 2px dotted #b5c0d6; }
-.flow__step--1::before { bottom: -50px; }
-.flow__step--2::before { bottom: -120px; }
-.flow__step--3::before { bottom: -190px; }
+.flow__step--1::after { bottom: -28px; height: 24px; border-left: 2px dotted #b5c0d6; }
+.flow__step--2::after { bottom: -78px; height: 74px; border-left: 2px dotted #b5c0d6; }
+.flow__step--3::after { bottom: -128px; height: 124px; border-left: 2px dotted #b5c0d6; }
+.flow__step--1::before { bottom: -40px; }
+.flow__step--2::before { bottom: -90px; }
+.flow__step--3::before { bottom: -140px; }
 .flow__badge { display: inline-block; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 6px; margin-bottom: 14px; }
 .flow__step h3 { font-size: 19px; font-weight: 800; color: var(--navy-800); margin-bottom: 10px; }
 .flow__step p { font-size: 13.5px; color: var(--text-soft); line-height: 1.7; margin-bottom: 18px; }
