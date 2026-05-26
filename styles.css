@@ -136,8 +136,8 @@ ul { list-style: none; }
 .section--dark .ph { background: linear-gradient(135deg, #1b2c49, #142239); color: #5b7099; }
 
 /* ============== HELPERS ============== */
-.ck { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--blue-bright); color: #fff; font-size: 14px; flex: 0 0 auto; }
-.ck--green { background: #2f9e8f; }
+.ck { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: url('./images/check-blue.png') center/contain no-repeat; color: transparent; flex: 0 0 auto; }
+.ck--green { background: #2f9e8f; color: #fff; border-radius: 50%; font-size: 14px; }
 .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 6px; }
 .tag--gray { background: #5b6172; color: #fff; }
 .tag--blue { background: var(--blue-bright); color: #fff; }
