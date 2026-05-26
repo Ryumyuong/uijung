@@ -182,7 +182,7 @@ ul { list-style: none; }
 
 /* ============== HERO ============== */
 /* 히어로 좌우 빈 공간(다크) — 1512 초과 화면에서 배경 */
-.hero-wrap { background: #070d18; }
+.hero-wrap { background: #161B25; }
 .hero {
   position: relative; overflow: hidden; color: #fff;
   width: 100%; max-width: 1512px; margin: 0 auto;   /* 최대 1512px, 중앙 정렬 */
