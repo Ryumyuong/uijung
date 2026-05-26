@@ -89,7 +89,7 @@ ul { list-style: none; }
   color: var(--text); margin-bottom: 18px;
 }
 .section--dark .sec-title { color: #fff; }
-.sec-sub { font-size: clamp(15px, 2vw, 19px); font-weight: 600; color: #c9d4e6; }
+.sec-sub { font-size: clamp(18px, 2.5vw, 26px); font-weight: 600; color: #fff; }
 .sec-desc { color: var(--text-soft); font-size: clamp(14px, 1.6vw, 16px); line-height: 1.85; }
 .sec-desc--light { color: #aab6cb; }
 .sec-eyebrow-ghost {
