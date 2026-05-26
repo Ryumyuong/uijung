@@ -233,7 +233,7 @@ ul { list-style: none; }
 /* ============== INTRO ============== */
 .intro__badge {
   display: flex; align-items: center; gap: 22px;
-  background: #f1f3f7; border-radius: 18px; padding: 28px 50px;
+  background: #EDEEEF; border-radius: 18px; padding: 28px 90px;
   width: fit-content; margin: 40px auto 36px;
 }
 .intro__emblem { width: 140px; height: auto; }
