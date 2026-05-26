@@ -152,7 +152,7 @@ ul { list-style: none; }
   background: #08192B;
   box-shadow: 0 6px 20px rgba(0,0,0,.28);
 }
-.header__inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 20px; padding: 0 clamp(24px, 5vw, 96px); }
+.header__inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 20px; max-width: 1512px; margin: 0 auto; padding: 0 clamp(24px, 5.4vw, 82px); }
 .logo { display: flex; align-items: center; }
 .logo__img { height: 38px; width: auto; display: block; }
 .logo__img--footer { height: 34px; }
@@ -181,9 +181,14 @@ ul { list-style: none; }
 .quick__top { border: 0; }
 
 /* ============== HERO ============== */
+/* 히어로 좌우 빈 공간(다크) — 1512 초과 화면에서 배경 */
+.hero-wrap { background: #070d18; }
 .hero {
   position: relative; overflow: hidden; color: #fff;
-  min-height: 760px; display: flex; align-items: center;
+  width: 100%; max-width: 1512px; margin: 0 auto;   /* 최대 1512px, 중앙 정렬 */
+  aspect-ratio: 1512 / 844;                          /* 원본 비율 1512 × 844 */
+  container-type: inline-size;                        /* 내부 크기를 히어로 폭 기준(cqw)으로 */
+  display: flex; align-items: center;
 }
 .hero__bg {
   position: absolute; inset: 0; z-index: 0;
@@ -194,14 +199,14 @@ ul { list-style: none; }
   background: linear-gradient(90deg, rgba(7,15,32,.55) 0%, rgba(7,15,32,.22) 42%, rgba(7,15,32,0) 68%);
 }
 .hero__photo {
-  position: absolute; right: clamp(12px, 4vw, 80px); bottom: 0; z-index: 3;
-  height: 90%; width: auto; max-height: 700px;
+  position: absolute; right: clamp(8px, 2cqw, 32px); bottom: 0; z-index: 3;
+  height: 79%; width: auto;
   filter: drop-shadow(-10px 0 30px rgba(0,0,0,.35));
 }
-.hero__inner { position: relative; z-index: 3; width: 100%; padding: 130px clamp(24px, 5vw, 96px) 200px; }
-.hero__tag { font-size: 15px; font-weight: 600; color: #9fb6dc; margin-bottom: 22px; }
-.hero__title { font-size: clamp(36px, 5.4vw, 62px); font-weight: 900; line-height: 1.18; letter-spacing: -.02em; margin-bottom: 28px; }
-.hero__desc { font-size: clamp(14px, 1.7vw, 17px); line-height: 1.95; color: #c4d0e3; max-width: 640px; }
+.hero__inner { position: relative; z-index: 3; width: 100%; padding: 0 clamp(24px, 5.4cqw, 90px) clamp(70px, 11cqw, 150px); }
+.hero__tag { font-size: clamp(12px, 1.3cqw, 20px); font-weight: 600; color: #9fb6dc; margin-bottom: clamp(14px, 2cqw, 30px); }
+.hero__title { font-size: clamp(28px, 4.6cqw, 72px); font-weight: 900; line-height: 1.18; letter-spacing: -.02em; margin-bottom: clamp(16px, 2.5cqw, 40px); }
+.hero__desc { font-size: clamp(13px, 1.5cqw, 23px); line-height: 1.95; color: #c4d0e3; max-width: clamp(300px, 44cqw, 680px); }
 .hero__bar {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
   background: rgba(10,19,36,.72);
@@ -210,15 +215,15 @@ ul { list-style: none; }
 }
 .hero__bar-inner {
   display: flex; align-items: center; flex-wrap: wrap;
-  padding: 26px clamp(24px, 5vw, 96px);
+  padding: clamp(16px, 2.3cqw, 36px) clamp(24px, 5.4cqw, 90px);
 }
-.hero__bar-lead { padding-right: clamp(24px, 3vw, 44px); }
-.hero__bar-cap { display: block; font-size: 13px; font-weight: 700; color: var(--gold-500); }
-.hero__bar-lead strong { font-size: 26px; font-weight: 800; color: #fff; }
-.hero__bar-div { width: 1px; height: 44px; background: rgba(255,255,255,.18); margin-right: clamp(24px, 3vw, 44px); }
-.hero__bar-item { padding: 0 clamp(22px, 3.4vw, 56px); }
-.hero__bar-item b { display: block; font-size: 16px; font-weight: 800; color: #fff; }
-.hero__bar-item span { font-size: 13px; color: #aebacf; }
+.hero__bar-lead { padding-right: clamp(20px, 3cqw, 48px); }
+.hero__bar-cap { display: block; font-size: clamp(11px, 1.2cqw, 18px); font-weight: 700; color: var(--gold-500); }
+.hero__bar-lead strong { font-size: clamp(18px, 2.2cqw, 34px); font-weight: 800; color: #fff; }
+.hero__bar-div { width: 1px; height: clamp(34px, 4cqw, 60px); background: rgba(255,255,255,.18); margin-right: clamp(20px, 3cqw, 48px); }
+.hero__bar-item { padding: 0 clamp(18px, 3.4cqw, 52px); }
+.hero__bar-item b { display: block; font-size: clamp(13px, 1.45cqw, 23px); font-weight: 800; color: #fff; }
+.hero__bar-item span { font-size: clamp(11px, 1.2cqw, 18px); color: #aebacf; }
 
 /* ============== INTRO ============== */
 .intro__badge {
@@ -533,7 +538,6 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .nav { gap: 22px; }
   .nav a { font-size: 14px; }
-  .hero__photo { height: 74%; width: auto; }
   .lawyer__row { grid-template-columns: 300px 1fr; gap: 32px; }
 }
 
@@ -542,7 +546,7 @@ ul { list-style: none; }
   .header__inner { height: 64px; }
   .nav { display: none; }
   .logo__txt small { display: none; }
-  .hero { min-height: 520px; }
+  .hero { aspect-ratio: auto; min-height: 520px; }
   .hero__photo { display: none; }
   .hero__inner { padding: 100px 24px 40px; }
   .hero__bar { position: static; }
