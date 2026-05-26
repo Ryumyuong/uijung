@@ -273,7 +273,7 @@ ul { list-style: none; }
 .payquote__note { color: #7f8ca6; font-size: 12px; margin-top: 16px; }
 
 /* ============== 검토 절차 ============== */
-.review__icon { width: 66px; height: auto; margin: 0 auto 16px; }
+.review__icon { width: 120px; height: auto; margin: 0 auto 16px; }
 .review .sec-title { margin-bottom: 60px; }
 .review__steps { display: flex; align-items: stretch; justify-content: center; gap: 0; flex-wrap: wrap; }
 .review__card {
