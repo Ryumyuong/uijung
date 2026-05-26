@@ -278,7 +278,7 @@ ul { list-style: none; }
 .review__steps { display: flex; align-items: stretch; justify-content: center; gap: 0; flex-wrap: wrap; }
 .review__card {
   flex: 1; min-width: 240px; max-width: 310px; text-align: center; position: relative;
-  background: linear-gradient(180deg, #f5f8fc 0%, #eaf0f8 100%);
+  background: #EBEEF1;
   border: 1px solid #e3e9f2; border-radius: 18px;
   padding: 36px 28px 32px;
   box-shadow: 0 8px 18px rgba(20,40,80,.06);
