@@ -277,23 +277,27 @@ ul { list-style: none; }
 .review .sec-title { margin-bottom: 60px; }
 .review__steps { display: flex; align-items: stretch; justify-content: center; gap: 0; flex-wrap: wrap; }
 .review__card {
-  flex: 1; min-width: 230px; max-width: 290px; background: #f6f8fb; border: 1px solid #e8ecf3;
-  border-radius: 16px; padding: 40px 26px 30px; position: relative; text-align: center;
+  flex: 1; min-width: 240px; max-width: 310px; text-align: center; position: relative;
+  background: linear-gradient(180deg, #f5f8fc 0%, #eaf0f8 100%);
+  border: 1px solid #e3e9f2; border-radius: 18px;
+  padding: 36px 28px 32px;
+  box-shadow: 0 8px 18px rgba(20,40,80,.06);
 }
 .review__num {
-  position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
-  width: 36px; height: 36px; border-radius: 50%; background: var(--navy-800); color: #fff;
-  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--navy-800); color: #fff; font-weight: 800; font-size: 16px;
+  margin: 0 auto 16px;
 }
-.review__card h3 { font-size: 21px; font-weight: 800; color: var(--navy-800); margin-bottom: 14px; line-height: 1.35; }
-.review__card p { font-size: 14px; color: var(--text-soft); line-height: 1.7; }
+.review__card h3 { font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; color: var(--navy-800); margin-bottom: 14px; line-height: 1.35; }
+.review__card p { font-size: clamp(13px, 1.1vw, 15px); color: var(--text-soft); line-height: 1.7; }
 .review__dot {
-  align-self: center; flex: 0 0 auto; width: 60px; height: 12px; position: relative;
-  background: radial-gradient(circle, #c2ccdb 1.5px, transparent 2px) 0 50% / 11px 11px repeat-x;
+  align-self: center; flex: 0 0 auto; width: 80px; height: 12px; position: relative;
+  background: radial-gradient(circle, #c2ccdb 1.6px, transparent 2.2px) 0 50% / 12px 12px repeat-x;
 }
 .review__dot::before {
-  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 10px; height: 10px; border-radius: 50%; background: var(--blue-bright);
+  content: ''; position: absolute; top: 50%; right: -2px; transform: translateY(-50%);
+  width: 12px; height: 12px; border-radius: 50%; background: var(--blue-bright);
 }
 
 /* ============== CTA 바 ============== */
