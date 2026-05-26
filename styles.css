@@ -302,7 +302,7 @@ ul { list-style: none; }
 
 /* ============== CTA 바 ============== */
 .ctabar { padding: 56px 0; }
-.ctabar__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.ctabar__inner { display: flex; align-items: center; justify-content: center; gap: 80px; flex-wrap: wrap; }
 .ctabar__list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 80px; }
 .ctabar__list li { display: flex; align-items: center; gap: 14px; font-size: 17px; font-weight: 600; color: #ffffff; }
 .ctabar__btns { display: flex; flex-direction: column; gap: 10px; }
