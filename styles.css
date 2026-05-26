@@ -136,7 +136,7 @@ ul { list-style: none; }
 .section--dark .ph { background: linear-gradient(135deg, #1b2c49, #142239); color: #5b7099; }
 
 /* ============== HELPERS ============== */
-.ck { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--blue-bright); color: #fff; font-size: 11px; }
+.ck { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--blue-bright); color: #fff; font-size: 14px; flex: 0 0 auto; }
 .ck--green { background: #2f9e8f; }
 .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 6px; }
 .tag--gray { background: #5b6172; color: #fff; }
@@ -301,12 +301,12 @@ ul { list-style: none; }
 }
 
 /* ============== CTA 바 ============== */
-.ctabar { padding: 40px 0; }
-.ctabar__inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
-.ctabar__list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; }
-.ctabar__list li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: #e6ecf6; }
-.ctabar__btns { display: flex; gap: 12px; }
-.ctabar__btns .btn { padding: 13px 22px; font-size: 14px; }
+.ctabar { padding: 56px 0; }
+.ctabar__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.ctabar__list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 80px; }
+.ctabar__list li { display: flex; align-items: center; gap: 14px; font-size: 17px; font-weight: 600; color: #ffffff; }
+.ctabar__btns { display: flex; flex-direction: column; gap: 10px; }
+.ctabar__btns .btn { padding: 14px 26px; font-size: 15px; min-width: 200px; }
 
 /* ============== CAROUSEL (공통) ============== */
 .carousel { position: relative; margin-top: 50px; padding: 0 56px; }
