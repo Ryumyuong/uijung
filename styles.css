@@ -182,11 +182,11 @@ ul { list-style: none; }
 
 /* ============== HERO ============== */
 /* 히어로 좌우 빈 공간(다크) — 1512 초과 화면에서 배경 */
-.hero-wrap { background: #161B25; }
+.hero-wrap { position: relative; overflow: hidden; background: #161B25; }
 .hero {
-  position: relative; overflow: hidden; color: #fff;
-  width: 100%; max-width: 1512px; margin: 0 auto;   /* 최대 1512px, 중앙 정렬 */
-  aspect-ratio: 1512 / 844;                          /* 원본 비율 1512 × 844 */
+  position: relative; color: #fff;
+  width: 100%; max-width: 1512px; margin: 0 auto;   /* 콘텐츠 최대 1512px, 중앙 정렬 */
+  aspect-ratio: 1512 / 844;
   container-type: inline-size;                        /* 내부 크기를 히어로 폭 기준(cqw)으로 */
   display: flex; align-items: center;
 }
@@ -208,13 +208,15 @@ ul { list-style: none; }
 .hero__title { font-size: clamp(28px, 4.6cqw, 72px); font-weight: 900; line-height: 1.18; letter-spacing: -.02em; margin-bottom: clamp(16px, 2.5cqw, 40px); }
 .hero__desc { font-size: clamp(13px, 1.5cqw, 23px); line-height: 1.95; color: #c4d0e3; max-width: clamp(300px, 44cqw, 680px); }
 .hero__bar {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100vw; z-index: 2;                 /* 정보 바 배경은 화면 전체 폭 */
   background: rgba(10,19,36,.72);
   border-top: 1px solid rgba(255,255,255,.10);
   backdrop-filter: blur(4px);
 }
 .hero__bar-inner {
   display: flex; align-items: center; flex-wrap: wrap;
+  max-width: 1512px; margin: 0 auto;        /* 내용은 1512 중앙 정렬 */
   padding: clamp(16px, 2.3cqw, 36px) clamp(24px, 5.4cqw, 90px);
 }
 .hero__bar-lead { padding-right: clamp(20px, 3cqw, 48px); }
@@ -546,10 +548,10 @@ ul { list-style: none; }
   .header__inner { height: 64px; }
   .nav { display: none; }
   .logo__txt small { display: none; }
-  .hero { aspect-ratio: auto; min-height: 520px; }
+  .hero { aspect-ratio: auto; min-height: 520px; display: block; }
   .hero__photo { display: none; }
   .hero__inner { padding: 100px 24px 40px; }
-  .hero__bar { position: static; }
+  .hero__bar { position: static; width: auto; transform: none; }
   .hero__bar-inner { padding: 18px 24px; gap: 12px 0; }
   .hero__bar-div { display: none; }
   .live__stats { grid-template-columns: 1fr 1fr; }
