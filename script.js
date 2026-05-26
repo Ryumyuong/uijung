@@ -170,10 +170,15 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       if (index >= 2 * originalCount) index -= originalCount;
       else if (index < originalCount) index += originalCount;
       else return;
+      // 트랙과 카드의 모든 트랜지션을 일시 차단해 스냅을 보이지 않게
       track.style.transition = 'none';
+      cards.forEach((c) => { c.style.transition = 'none'; });
       applyTransform();
       void track.offsetHeight;  // reflow
-      track.style.transition = '';
+      requestAnimationFrame(() => {
+        track.style.transition = '';
+        cards.forEach((c) => { c.style.transition = ''; });
+      });
     });
   }
 
