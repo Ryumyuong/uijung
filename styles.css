@@ -328,10 +328,10 @@ ul { list-style: none; }
 .carousel__dots button.is-on { width: 22px; border-radius: 5px; background: var(--blue-bright); }
 
 /* 강점 카드 (center 모드) */
-.pick__card { width: 230px; background: #f5f7fb; border: 1px solid #e8ecf3; border-radius: 16px; padding: 26px 20px; text-align: center; opacity: .55; transform: scale(.92); transition: all .4s; }
+.pick__card { width: 260px; background: #f5f7fb; border: 1px solid #e8ecf3; border-radius: 18px; padding: 30px 22px 26px; text-align: center; opacity: .55; transform: scale(.92); transition: all .4s; }
 .pick__card.is-center { opacity: 1; transform: scale(1); background: #fff; border-color: #d7deeb; box-shadow: 0 16px 40px rgba(20,40,80,.12); }
-.pick__img { height: 150px; width: auto; object-fit: contain; margin: 0 auto 18px; }
-.pick__cap { font-size: 16px; font-weight: 700; color: var(--navy-800); line-height: 1.4; }
+.pick__img { height: 160px; width: auto; object-fit: contain; margin: 0 auto 22px; }
+.pick__cap { font-size: 17px; font-weight: 700; color: var(--navy-800); line-height: 1.45; padding-top: 22px; border-top: 1px solid #e2e8f0; }
 .pick__card:not(.is-center) .pick__cap { color: #9aa6bd; }
 
 /* ============== 망설이는 이유 ============== */
