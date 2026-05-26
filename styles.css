@@ -232,15 +232,16 @@ ul { list-style: none; }
 
 /* ============== INTRO ============== */
 .intro__badge {
-  display: inline-flex; align-items: center; gap: 22px;
-  background: #f1f3f7; border-radius: 18px; padding: 28px 50px; margin: 40px 0 36px;
+  display: flex; align-items: center; gap: 22px;
+  background: #f1f3f7; border-radius: 18px; padding: 28px 50px;
+  width: fit-content; margin: 40px auto 36px;
 }
 .intro__emblem { width: 58px; height: auto; }
 .intro__badge p { font-size: 19px; font-weight: 600; line-height: 1.5; text-align: left; }
 .intro__search {
-  display: inline-flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; gap: 14px;
   width: min(440px, 90%); border: 2px solid var(--navy-800); border-radius: 10px;
-  padding: 0 0 0 22px; height: 56px; overflow: hidden; margin-bottom: 26px;
+  padding: 0 0 0 22px; height: 56px; overflow: hidden; margin: 0 auto 26px;
 }
 .intro__search-text { font-size: 18px; font-weight: 600; }
 .intro__search-caret { color: #9aa6bd; margin-left: auto; }
