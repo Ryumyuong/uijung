@@ -243,11 +243,11 @@ ul { list-style: none; }
   width: min(320px, 90%); border: 2px solid var(--navy-800); border-radius: 0;
   padding: 0 0 0 22px; height: 56px; overflow: hidden; margin: 0 auto 26px;
 }
-.intro__search-text { font-size: 18px; font-weight: 600; }
-.intro__search-caret { color: #9aa6bd; margin-left: auto; }
+.intro__search-text { font-size: 18px; font-weight: 600; flex: 1; text-align: center; }
+.intro__search-caret { color: #9aa6bd; }
 .intro__search-btn { width: 56px; height: 56px; background: var(--navy-800); color: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
 .intro__search-btn img { width: 22px; height: 22px; }
-.intro__desc { color: var(--text-soft); font-size: 15px; line-height: 1.85; }
+.intro__desc { color: #0E243C; font-size: 15px; font-weight: 600; line-height: 1.85; }
 
 /* ============== 월 납부 차트 ============== */
 .paysec .sec-title { margin-bottom: 8px; }
