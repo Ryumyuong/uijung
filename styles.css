@@ -182,7 +182,11 @@ ul { list-style: none; }
 
 /* ============== HERO ============== */
 /* 히어로 좌우 빈 공간(다크) — 1512 초과 화면에서 배경 */
-.hero-wrap { position: relative; overflow: hidden; background: #161B25; }
+.hero-wrap {
+  --hero-gap: clamp(40px, 5vw, 80px);   /* 첫 섹션 위·아래 여백 */
+  position: relative; overflow: hidden; background: #161B25;
+  padding-top: var(--hero-gap); padding-bottom: var(--hero-gap);
+}
 .hero {
   position: relative; color: #fff;
   width: 100%; max-width: 1512px; margin: 0 auto;   /* 콘텐츠 최대 1512px, 중앙 정렬 */
@@ -191,7 +195,7 @@ ul { list-style: none; }
   display: flex; align-items: center;
 }
 .hero__bg {
-  position: absolute; inset: 0; z-index: 0;
+  position: absolute; top: var(--hero-gap); bottom: var(--hero-gap); left: 0; right: 0; z-index: 0;
   background: #0b1526 url('./images/hero-bg.png') center / cover no-repeat;
 }
 .hero__bg::after {
