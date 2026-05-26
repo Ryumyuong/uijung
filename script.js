@@ -82,59 +82,115 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   const prev = root.querySelector('.carousel__arrow--prev');
   const next = root.querySelector('.carousel__arrow--next');
   const dotsWrap = root.querySelector('.carousel__dots');
-  const cards = [...track.children];
   const mode = root.dataset.mode || 'cards';
-  if (!cards.length) return;
+  const isLooping = mode === 'center';  // 가운데 카드 모드는 무한 루프
 
-  let index = mode === 'center' ? Math.floor((cards.length - 1) / 2) : 0;
+  const originalCount = track.children.length;
+  if (!originalCount) return;
+
+  // 무한 루프용 카드 클론: [복제들, 원본, 복제들]
+  if (isLooping) {
+    const originals = [...track.children];
+    originals.forEach((c) => {
+      const cl = c.cloneNode(true); cl.classList.add('is-clone');
+      track.appendChild(cl);
+    });
+    originals.slice().reverse().forEach((c) => {
+      const cl = c.cloneNode(true); cl.classList.add('is-clone');
+      track.insertBefore(cl, track.firstChild);
+    });
+  }
+
+  const cards = [...track.children];
+  let index = isLooping
+    ? originalCount + Math.floor((originalCount - 1) / 2)
+    : (mode === 'center' ? Math.floor((originalCount - 1) / 2) : 0);
+  let isAnimating = false;
 
   const getGap = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
   const getStep = () => cards[0].getBoundingClientRect().width + getGap();
-
   const visibleCount = () => {
     const step = getStep();
     return Math.max(1, Math.floor((viewport.getBoundingClientRect().width + getGap()) / step));
   };
-
   const maxIndex = () => {
     if (mode === 'center') return cards.length - 1;
     return Math.max(0, cards.length - visibleCount());
   };
 
-  // 점 생성
   const buildDots = () => {
     if (!dotsWrap) return;
     dotsWrap.innerHTML = '';
-    const count = maxIndex() + 1;
+    const count = isLooping ? originalCount : (maxIndex() + 1);
     for (let i = 0; i < count; i++) {
       const b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', `${i + 1}번째`);
-      b.addEventListener('click', () => { index = i; render(); });
+      b.addEventListener('click', () => {
+        index = isLooping ? originalCount + i : i;
+        render();
+      });
       dotsWrap.appendChild(b);
     }
   };
 
-  const render = () => {
+  const applyTransform = () => {
     const step = getStep();
-    index = Math.max(0, Math.min(index, maxIndex()));
     let x;
     if (mode === 'center') {
       const vpW = viewport.getBoundingClientRect().width;
       const cardW = cards[0].getBoundingClientRect().width;
       x = -(index * step) + (vpW / 2 - cardW / 2);
-      cards.forEach((c, i) => c.classList.toggle('is-center', i === index));
+      cards.forEach((c, i) => {
+        c.classList.toggle('is-center', i === index);
+        c.classList.toggle('is-near', i === index - 1 || i === index + 1);
+      });
     } else {
       x = -(index * step);
     }
     track.style.transform = `translateX(${x}px)`;
+  };
+
+  const render = () => {
+    if (!isLooping) index = Math.max(0, Math.min(index, maxIndex()));
+    applyTransform();
     if (dotsWrap) {
-      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('is-on', i === index));
+      const activeDot = isLooping
+        ? (((index - originalCount) % originalCount) + originalCount) % originalCount
+        : index;
+      [...dotsWrap.children].forEach((d, i) => d.classList.toggle('is-on', i === activeDot));
     }
   };
 
-  prev && prev.addEventListener('click', () => { index--; if (index < 0) index = maxIndex(); render(); });
-  next && next.addEventListener('click', () => { index++; if (index > maxIndex()) index = 0; render(); });
+  // 무한 루프: 트랜지션 종료 시 복제 영역이면 원본 영역으로 무전환 스냅
+  if (isLooping) {
+    track.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'transform') return;
+      isAnimating = false;
+      if (index >= 2 * originalCount) index -= originalCount;
+      else if (index < originalCount) index += originalCount;
+      else return;
+      track.style.transition = 'none';
+      applyTransform();
+      void track.offsetHeight;  // reflow
+      track.style.transition = '';
+    });
+  }
+
+  prev && prev.addEventListener('click', () => {
+    if (isAnimating) return;
+    isAnimating = isLooping;
+    index--;
+    if (!isLooping && index < 0) index = maxIndex();
+    render();
+  });
+  next && next.addEventListener('click', () => {
+    if (isAnimating) return;
+    isAnimating = isLooping;
+    index++;
+    if (!isLooping && index > maxIndex()) index = 0;
+    render();
+  });
 
   let rt;
   window.addEventListener('resize', () => {
@@ -144,6 +200,5 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
 
   buildDots();
   render();
-  // 폰트/이미지 로딩 후 폭 재계산
   window.addEventListener('load', () => { buildDots(); render(); });
 });

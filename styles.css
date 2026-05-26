@@ -310,6 +310,11 @@ ul { list-style: none; }
 
 /* ============== CAROUSEL (공통) ============== */
 .carousel { position: relative; margin-top: 50px; padding: 0 56px; }
+.carousel[data-mode="center"] { max-width: 940px; margin-left: auto; margin-right: auto; }
+/* 중앙/인접 외 카드는 숨김(루프 카드 노출 방지) */
+.carousel[data-mode="center"] .pick__card { opacity: 0; pointer-events: none; }
+.carousel[data-mode="center"] .pick__card.is-near { opacity: .55; pointer-events: auto; }
+.carousel[data-mode="center"] .pick__card.is-center { opacity: 1; pointer-events: auto; }
 .carousel__viewport { overflow: hidden; }
 .carousel__track { display: flex; gap: 24px; transition: transform .5s cubic-bezier(.4,0,.2,1); }
 .carousel__track > * { flex: 0 0 auto; }
