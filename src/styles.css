@@ -215,12 +215,6 @@
     transform: rotate(180deg);
   }
 
-  /* 헤더 — 스크롤 시 클래스 토글 */
-  .header-scrolled {
-    background: #121d2a;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
-  }
-
   /* 흰배경 로고 어둡게 (location 섹션) */
   .logo-dark img {
     filter: brightness(0) saturate(0);
@@ -247,6 +241,12 @@
    @layer utilities로 utilities 이후에 캐스케이드되도록 함
    ============================================================ */
 @layer utilities {
+  /* 헤더 스크롤 시 배경 — bg-transparent utility를 덮어쓰기 위해 utilities 레이어에 배치 */
+  .header-scrolled {
+    background: #121d2a;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  }
+
   .carousel-center .pick-card {
     opacity: 0;
     pointer-events: none;
