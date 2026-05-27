@@ -752,132 +752,114 @@
             class="mb-10 grid grid-cols-2 gap-[18px] text-left max-[900px]:grid-cols-1"
           >
             <div
-              class="rounded-2xl border border-white/10 bg-[rgba(8,16,32,0.45)] p-6"
+              class="rounded-2xl border border-white/10 bg-[rgba(8,16,32,0.45)] p-7"
             >
-              <div class="mb-[18px] flex items-center justify-between">
-                <span
-                  class="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5 text-xs font-bold text-white"
-                >
-                  <span
-                    class="h-2 w-2 rounded-full bg-[#ff4d4d] [animation:pulse-red_1.6s_infinite]"
-                  ></span
-                  >실시간 접수피드
-                </span>
-                <span class="flex items-center gap-1.5 text-xs text-[#9fffb0]">
-                  <span class="h-[7px] w-[7px] rounded-full bg-[#38d27a]"></span>자동 갱신 중
+              <div class="mb-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex h-[23px] items-center rounded-[11.5px] bg-[#4FA7B2] px-2.5 text-[12px] font-extrabold text-white">LIVE</span>
+                  <h3 class="text-[20px] font-extrabold text-white">실시간 접수 피드</h3>
+                </div>
+                <span class="flex items-center gap-1.5 text-[13px] text-[#9fffb0]">
+                  <span class="h-2 w-2 rounded-full bg-[#38d27a]"></span>자동 갱신 중
                 </span>
               </div>
               <ul class="flex flex-col gap-2.5">
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-[rgba(230,181,76,0.35)] bg-[rgba(230,181,76,0.10)] px-[18px] py-4"
+                  class="flex items-center justify-between gap-3 rounded-xl border border-[#4FA7B2] bg-[rgba(79,167,178,0.06)] px-5 py-4"
                 >
                   <div>
-                    <b class="text-[15px] font-bold text-white">40대 직장인</b>
-                    <span class="text-sm text-[#b9c4d8]">주택담보대출</span>
-                    <small class="mt-0.5 block text-xs text-[#7f8ca6]">1분 전</small>
+                    <p class="mb-0.5">
+                      <b class="text-[18px] font-extrabold text-white">40대 직장인</b>
+                      <span class="text-[16px] text-[#c4cfdf]"> | 주택담보대출</span>
+                    </p>
+                    <small class="block text-[13px] text-[#7f8ca6]">1분 전</small>
                   </div>
-                  <span class="whitespace-nowrap text-xs font-bold text-gold-500">상담접수중</span>
+                  <span class="inline-flex items-center rounded-full bg-[rgba(214,174,89,0.18)] px-3 py-1 text-[13px] font-bold text-[#E6B54C]">상담접수중</span>
                 </li>
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/5 px-[18px] py-4"
+                  class="flex items-center justify-between gap-3 rounded-xl border border-white/30 bg-white/[0.02] px-5 py-4"
                 >
                   <div>
-                    <b class="text-[15px] font-bold text-white">30대 직장인</b>
-                    <span class="text-sm text-[#b9c4d8]">자영업자</span>
-                    <small class="mt-0.5 block text-xs text-[#7f8ca6]">12분 전</small>
+                    <p class="mb-0.5">
+                      <b class="text-[18px] font-extrabold text-white/80">30대 직장인</b>
+                      <span class="text-[16px] text-[#9aa5b8]"> | 자영업자</span>
+                    </p>
+                    <small class="block text-[13px] text-[#7f8ca6]">12분 전</small>
                   </div>
-                  <span class="whitespace-nowrap text-xs font-bold text-[#9fb0c8]">상담접수완료</span>
+                  <span class="inline-flex items-center rounded-full bg-[rgba(56,210,122,0.15)] px-3 py-1 text-[13px] font-bold text-[#7ee0a3]">상담접수완료</span>
                 </li>
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/5 px-[18px] py-4"
+                  class="flex items-center justify-between gap-3 rounded-xl border border-white/30 bg-white/[0.02] px-5 py-4"
                 >
                   <div>
-                    <b class="text-[15px] font-bold text-white">50대 가장</b>
-                    <span class="text-sm text-[#b9c4d8]">배우자 모르게</span>
-                    <small class="mt-0.5 block text-xs text-[#7f8ca6]">1분 전</small>
+                    <p class="mb-0.5">
+                      <b class="text-[18px] font-extrabold text-white/80">50대 가장</b>
+                      <span class="text-[16px] text-[#9aa5b8]"> | 배우자 모르게</span>
+                    </p>
+                    <small class="block text-[13px] text-[#7f8ca6]">1분 전</small>
                   </div>
-                  <span class="whitespace-nowrap text-xs font-bold text-[#9fb0c8]">상담접수완료</span>
+                  <span class="inline-flex items-center rounded-full bg-[rgba(56,210,122,0.15)] px-3 py-1 text-[13px] font-bold text-[#7ee0a3]">상담접수완료</span>
                 </li>
               </ul>
             </div>
-            <div class="rounded-2xl border border-white/10 bg-[rgba(8,16,32,0.45)] p-6">
-              <h3 class="mb-5 text-[17px] font-extrabold text-white">주요 상담 유형</h3>
-              <ul class="flex flex-col gap-3.5">
-                <li
-                  class="grid grid-cols-[110px_1fr_42px] items-center gap-3 text-[13px] text-[#c3cee0]"
-                >
-                  <span>주택담보</span>
-                  <div class="h-2 overflow-hidden rounded-md bg-white/10">
-                    <i
-                      class="block h-full rounded-md bg-[linear-gradient(90deg,#3a7bf0,#2257c4)]"
-                      style="width: 32%"
-                    ></i>
+            <div class="rounded-2xl border border-white/10 bg-[rgba(8,16,32,0.45)] p-7">
+              <h3 class="mb-6 text-[20px] font-extrabold text-white">주요 상담 유형</h3>
+              <ul class="flex flex-col gap-4">
+                <li>
+                  <div class="mb-1.5 flex items-center justify-between text-[15px]">
+                    <span class="text-white">주택담보</span>
+                    <b class="font-bold text-[#0359EE]">32%</b>
                   </div>
-                  <b class="text-right font-bold text-white">32%</b>
+                  <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
+                    <i class="block h-full rounded-full bg-[#0359EE]" style="width: 32%"></i>
+                  </div>
                 </li>
-                <li
-                  class="grid grid-cols-[110px_1fr_42px] items-center gap-3 text-[13px] text-[#c3cee0]"
-                >
-                  <span>최근대출</span>
-                  <div class="h-2 overflow-hidden rounded-md bg-white/10">
-                    <i
-                      class="block h-full rounded-md bg-[linear-gradient(90deg,#3a7bf0,#2257c4)]"
-                      style="width: 24%"
-                    ></i>
+                <li>
+                  <div class="mb-1.5 flex items-center justify-between text-[15px]">
+                    <span class="text-white">최근대출</span>
+                    <b class="font-bold text-[#0359EE]">24%</b>
                   </div>
-                  <b class="text-right font-bold text-white">24%</b>
+                  <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
+                    <i class="block h-full rounded-full bg-[#0359EE]" style="width: 24%"></i>
+                  </div>
                 </li>
-                <li
-                  class="grid grid-cols-[110px_1fr_42px] items-center gap-3 text-[13px] text-[#c3cee0]"
-                >
-                  <span>재회생</span>
-                  <div class="h-2 overflow-hidden rounded-md bg-white/10">
-                    <i
-                      class="block h-full rounded-md bg-[linear-gradient(90deg,#3a7bf0,#2257c4)]"
-                      style="width: 18%"
-                    ></i>
+                <li>
+                  <div class="mb-1.5 flex items-center justify-between text-[15px]">
+                    <span class="text-white">재회생</span>
+                    <b class="font-bold text-[#0359EE]">18%</b>
                   </div>
-                  <b class="text-right font-bold text-white">18%</b>
+                  <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
+                    <i class="block h-full rounded-full bg-[#0359EE]" style="width: 18%"></i>
+                  </div>
                 </li>
-                <li
-                  class="grid grid-cols-[110px_1fr_42px] items-center gap-3 text-[13px] text-[#c3cee0]"
-                >
-                  <span>배우자 모르게</span>
-                  <div class="h-2 overflow-hidden rounded-md bg-white/10">
-                    <i
-                      class="block h-full rounded-md bg-[linear-gradient(90deg,#3a7bf0,#2257c4)]"
-                      style="width: 15%"
-                    ></i>
+                <li>
+                  <div class="mb-1.5 flex items-center justify-between text-[15px]">
+                    <span class="text-white">배우자 모르게</span>
+                    <b class="font-bold text-[#0359EE]">15%</b>
                   </div>
-                  <b class="text-right font-bold text-white">15%</b>
+                  <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
+                    <i class="block h-full rounded-full bg-[#0359EE]" style="width: 15%"></i>
+                  </div>
                 </li>
-                <li
-                  class="grid grid-cols-[110px_1fr_42px] items-center gap-3 text-[13px] text-[#c3cee0]"
-                >
-                  <span>도박/주식/코인</span>
-                  <div class="h-2 overflow-hidden rounded-md bg-white/10">
-                    <i
-                      class="block h-full rounded-md bg-[linear-gradient(90deg,#3a7bf0,#2257c4)]"
-                      style="width: 11%"
-                    ></i>
+                <li>
+                  <div class="mb-1.5 flex items-center justify-between text-[15px]">
+                    <span class="text-white">도박/주식/코인</span>
+                    <b class="font-bold text-[#0359EE]">11%</b>
                   </div>
-                  <b class="text-right font-bold text-white">11%</b>
+                  <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
+                    <i class="block h-full rounded-full bg-[#0359EE]" style="width: 11%"></i>
+                  </div>
                 </li>
               </ul>
               <div
-                class="mt-[22px] flex flex-wrap items-center gap-4 rounded-xl bg-white/5 px-4 py-3.5"
+                class="mt-6 grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-2 rounded-[6px] bg-white/10 px-5 py-4"
               >
-                <span
-                  class="rounded-md bg-[rgba(230,181,76,0.12)] px-3 py-1.5 text-xs font-bold text-gold-500"
-                  >상담진행방식</span
-                >
-                <div
-                  class="grid grid-cols-2 gap-x-[18px] gap-y-1.5 text-[13px] text-[#b9c4d8]"
-                >
-                  <span>전화상담 <b class="text-white">42%</b></span>
-                  <span>카톡상담 <b class="text-white">38%</b></span>
-                  <span>비대면 접수 <b class="text-white">16%</b></span>
-                  <span>방문상담 <b class="text-white">6%</b></span>
+                <span class="text-[15px] font-bold text-[#4FA7B2]">상담진행방식</span>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[14px] text-white">
+                  <span>전화상담 <span class="text-white/40">|</span> <b class="font-bold">42%</b></span>
+                  <span>카톡상담 <span class="text-white/40">|</span> <b class="font-bold">38%</b></span>
+                  <span>비대면 접수 <span class="text-white/40">|</span> <b class="font-bold">16%</b></span>
+                  <span>방문상담 <span class="text-white/40">|</span> <b class="font-bold">8%</b></span>
                 </div>
               </div>
             </div>
