@@ -132,7 +132,8 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
 
   const getGap = () =>
     parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
-  const getStep = () => cards[0].getBoundingClientRect().width + getGap();
+  // 카드에 scale 변형이 걸려있어도 레이아웃 기준 너비로 step 계산
+  const getStep = () => cards[0].offsetWidth + getGap();
   const visibleCount = () => {
     const step = getStep();
     return Math.max(1, Math.floor((viewport.getBoundingClientRect().width + getGap()) / step));
@@ -163,7 +164,7 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     let x;
     if (mode === 'center') {
       const vpW = viewport.getBoundingClientRect().width;
-      const cardW = cards[0].getBoundingClientRect().width;
+      const cardW = cards[0].offsetWidth;
       x = -(index * step) + (vpW / 2 - cardW / 2);
       cards.forEach((c, i) => {
         c.classList.toggle('is-center', i === index);
