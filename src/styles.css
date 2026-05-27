@@ -243,24 +243,26 @@
 }
 
 /* ============================================================
-   캐러셀 카드 상태 — Tailwind utilities(opacity-*/scale-*)를 덮어써야 하므로
-   @layer 밖에 두어 utilities 이후에 캐스케이드되도록 함
+   캐러셀 카드 상태 — HTML의 opacity-55/scale-[0.92] utility를 덮어써야 하므로
+   @layer utilities로 utilities 이후에 캐스케이드되도록 함
    ============================================================ */
-.carousel-center .pick-card {
-  opacity: 0;
-  pointer-events: none;
-}
-.carousel-center .pick-card.is-near {
-  opacity: 0.55;
-  pointer-events: auto;
-}
-.carousel-center .pick-card.is-center {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-  background: #fff;
-  border-color: #d7deeb;
-  box-shadow: 0 16px 40px rgba(20, 40, 80, 0.12);
+@layer utilities {
+  .carousel-center .pick-card {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .carousel-center .pick-card.is-near {
+    opacity: 0.55;
+    pointer-events: auto;
+  }
+  .carousel-center .pick-card.is-center {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background: #fff;
+    border-color: #d7deeb;
+    box-shadow: 0 16px 40px rgba(20, 40, 80, 0.12);
+  }
 }
 
 /* ============================================================
