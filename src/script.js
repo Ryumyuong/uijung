@@ -22,15 +22,168 @@ faqItems.forEach((d) => {
   });
 });
 
-/* ---------- 변제금 진단: 선택지 토글 ---------- */
-document.querySelectorAll('[data-diag-opts]').forEach((group) => {
-  group.querySelectorAll('[data-diag-opt]').forEach((opt) => {
-    opt.addEventListener('click', () => {
-      group.querySelectorAll('[data-diag-opt]').forEach((o) => o.classList.remove('is-on'));
-      opt.classList.add('is-on');
+/* ============================================================
+   변제금 진단 4-step 위저드
+   계산 로직: dongseong 방식
+   - incomeMonthly = max(income - livingCost, 30) [만원]
+   - 36개월 안에 전액 변제 가능 → 분기 B (회생 부적합)
+   - 그 외 → max(incomeMonthly, ceil(debt × 0.15 / 36))으로 월 변제액 산정
+   ============================================================ */
+(() => {
+  const root = document.querySelector('[data-diag-steps]');
+  if (!root) return;
+
+  const stepLabel = document.getElementById('diagStepLabel');
+  const progress = document.getElementById('diagProgress');
+  const stepEls = [...root.querySelectorAll('[data-diag-step]')];
+  const resultEl = root.querySelector('[data-diag-result]');
+  const resultBody = root.querySelector('[data-diag-result-body]');
+  const finalForm = root.querySelector('[data-diag-final]');
+  const TOTAL = 4;
+  const DEFAULT_LIVING_COST = 215; // 2인 기준 (만원)
+
+  const state = { step: 1, debt: null, income: null, situations: [] };
+
+  const setProgress = (n) => {
+    if (stepLabel) stepLabel.textContent = `${n}/${TOTAL}단계`;
+    if (progress) progress.style.width = `${(n / TOTAL) * 100}%`;
+  };
+
+  const showStep = (n) => {
+    state.step = n;
+    stepEls.forEach((el) => {
+      el.hidden = el.dataset.diagStep !== String(n);
+    });
+    if (resultEl) resultEl.hidden = true;
+    setProgress(n);
+  };
+
+  const calculate = (debt, income, livingCost) => {
+    const incomeMonthly = Math.max(income - livingCost, 30);
+    if (incomeMonthly * 36 >= debt) return { branch: 'B' };
+    const debtFloorMonthly = Math.ceil((debt * 0.15) / 36);
+    const monthlyPayment = Math.max(incomeMonthly, debtFloorMonthly);
+    return {
+      branch: 'A',
+      monthlyPayment,
+      totalPayment: monthlyPayment * 36,
+      originalDebt: debt,
+    };
+  };
+
+  const fmt = (n) => n.toLocaleString('ko-KR');
+
+  const showResult = () => {
+    stepEls.forEach((el) => {
+      el.hidden = true;
+    });
+    setProgress(TOTAL);
+    if (!resultEl || !resultBody) return;
+    resultEl.hidden = false;
+
+    const r = calculate(state.debt, state.income, DEFAULT_LIVING_COST);
+
+    if (r.branch === 'B') {
+      resultBody.innerHTML = `
+        <div class="rounded-[14px] bg-[#fff8e8] p-6">
+          <p class="mb-2 text-[16px] font-bold text-navy-800">회생보다 더 적합한 방향이 있습니다</p>
+          <p class="text-[14px] leading-[1.7] text-ink-soft">
+            현재 채무 규모 대비 소득이 충분합니다.<br/>
+            개인회생 외 다른 해결 방안을 안내해드립니다.
+          </p>
+        </div>
+        <p class="mt-3 text-xs text-ink-mute">*전문 상담을 통해 더 적합한 해결 방향을 안내해드립니다</p>
+      `;
+    } else {
+      const reduction = Math.round(((r.originalDebt - r.totalPayment) / r.originalDebt) * 100);
+      resultBody.innerHTML = `
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-[14px] bg-[#f6f8fb] p-5 text-center">
+            <div class="mb-1 text-[12px] font-semibold text-ink-soft">예상 월 변제액</div>
+            <div class="text-[26px] font-extrabold text-navy-800">${fmt(r.monthlyPayment)}<span class="text-[14px] font-bold">만원</span></div>
+          </div>
+          <div class="rounded-[14px] bg-[#0B233B] p-5 text-center text-white">
+            <div class="mb-1 text-[12px] font-semibold text-[#9fb6dc]">36개월 총 변제액</div>
+            <div class="text-[26px] font-extrabold text-[#E6B54C]">${fmt(r.totalPayment)}<span class="text-[14px] font-bold">만원</span></div>
+          </div>
+        </div>
+        <p class="mt-3 text-[14px] leading-[1.7] text-ink-soft">
+          원 채무 <b class="font-extrabold text-navy-800">${fmt(r.originalDebt)}만원</b>을 36개월 동안 분할 변제 (약 <b class="text-[#0359EE]">${reduction}% 감면</b>)
+        </p>
+        <p class="mt-2 text-xs text-ink-mute">*예상 금액이며, 정확한 금액은 전문 상담을 통해 확인하세요</p>
+      `;
+    }
+  };
+
+  // 옵션 선택 (Step 1, 2) — 클릭 시 값 저장 + 0.2초 후 자동으로 다음 단계
+  root.querySelectorAll('[data-diag-opts]').forEach((group) => {
+    const key = group.dataset.diagKey;
+    group.querySelectorAll('[data-diag-opt]').forEach((opt) => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('[data-diag-opt]').forEach((o) => o.classList.remove('is-on'));
+        opt.classList.add('is-on');
+        if (key) state[key] = parseInt(opt.dataset.value, 10);
+        // Step 1, 2는 옵션 선택 시 자동 다음 단계
+        if (state.step < 3) {
+          setTimeout(() => showStep(state.step + 1), 200);
+        }
+      });
     });
   });
-});
+
+  // 이전 단계
+  root.querySelectorAll('[data-diag-prev]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (state.step > 1) showStep(state.step - 1);
+    });
+  });
+
+  // 다음 단계 (Step 3 → 4)
+  root.querySelectorAll('[data-diag-next]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state.situations = [...root.querySelectorAll('[data-diag-situation]:checked')].map(
+        (c) => c.value
+      );
+      showStep(4);
+    });
+  });
+
+  // 최종 제출 (Step 4) → 계산 + 결과 표시
+  if (finalForm) {
+    finalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = finalForm.name.value.trim();
+      const phone = finalForm.phone.value.trim();
+      const agree = finalForm.agree.checked;
+      if (!name || !phone) {
+        alert('이름과 연락처를 입력해 주세요.');
+        return;
+      }
+      if (!agree) {
+        alert('개인정보 수집 및 이용에 동의해 주세요.');
+        return;
+      }
+      // TODO: 실제 접수 API 연동
+      showResult();
+    });
+  }
+
+  // 처음부터 다시
+  const restartBtn = root.querySelector('[data-diag-restart]');
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      state.debt = null;
+      state.income = null;
+      state.situations = [];
+      root.querySelectorAll('[data-diag-opt].is-on').forEach((o) => o.classList.remove('is-on'));
+      root.querySelectorAll('[data-diag-situation]:checked').forEach((c) => (c.checked = false));
+      if (finalForm) finalForm.reset();
+      showStep(1);
+    });
+  }
+
+  showStep(1);
+})();
 
 /* ---------- 상단 이동(TOP) ---------- */
 const quickTop = document.getElementById('quickTop');
