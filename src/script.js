@@ -244,15 +244,28 @@ const quickDiagBtn = document.getElementById('quickDiagBtn');
 const quickDiagForm = document.getElementById('quickDiagForm');
 if (quickDiagBtn && quickDiagForm) {
   const q = (n) => quickDiagForm.querySelector(`[name="${n}"]`);
-  quickDiagBtn.addEventListener('click', () => {
-    // 기본 동작(#diagnosis로 스크롤)은 그대로 두고, 입력값만 시트로 전송
+  quickDiagBtn.addEventListener('click', (e) => {
+    const name = (q('이름')?.value || '').trim();
+    const phone = (q('연락처')?.value || '').trim();
+    const agree = q('동의')?.checked;
+    if (!name || !phone) {
+      e.preventDefault();
+      alert('이름과 연락처를 입력해 주세요.');
+      return;
+    }
+    if (!agree) {
+      e.preventDefault();
+      alert('개인정보 수집 및 활용에 동의해 주세요.');
+      return;
+    }
+    // 검증 통과 시: 시트로 전송 + 기본 동작(#diagnosis 스크롤) 진행
     sendToSheet('하단진단', {
       상담분야: q('상담분야')?.value || '',
       신용채무액: q('신용채무액')?.value || '',
       세전연봉: q('세전연봉')?.value || '',
-      이름: (q('이름')?.value || '').trim(),
-      연락처: (q('연락처')?.value || '').trim(),
-      동의: q('동의')?.checked ? 'Y' : 'N',
+      이름: name,
+      연락처: phone,
+      동의: 'Y',
     });
   });
 }
