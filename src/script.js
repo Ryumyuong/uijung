@@ -507,6 +507,8 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     });
 
   // 자동 슬라이드 (data-autoplay="ms")
+  let autoStart = () => {};
+  let autoStop = () => {};
   const autoplayMs = parseInt(root.dataset.autoplay || '0', 10);
   if (autoplayMs > 0) {
     let timer = null;
@@ -517,18 +519,89 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       if (!isLooping && index > maxIndex()) index = 0;
       render();
     };
-    const startAuto = () => {
+    autoStart = () => {
       if (!timer) timer = setInterval(advance, autoplayMs);
     };
-    const stopAuto = () => {
+    autoStop = () => {
       if (timer) {
         clearInterval(timer);
         timer = null;
       }
     };
-    root.addEventListener('mouseenter', stopAuto);
-    root.addEventListener('mouseleave', startAuto);
-    startAuto();
+    root.addEventListener('mouseenter', autoStop);
+    root.addEventListener('mouseleave', autoStart);
+    autoStart();
+  }
+
+  // 마우스/터치 드래그(스와이프)
+  {
+    let dragging = false;
+    let startX = 0;
+    let baseX = 0;
+    let moved = 0;
+    const getBaseX = () => {
+      const m = getComputedStyle(track).transform;
+      if (m && m !== 'none') {
+        try {
+          return new DOMMatrixReadOnly(m).m41;
+        } catch (_) {}
+      }
+      return 0;
+    };
+    viewport.style.touchAction = 'pan-y';
+    viewport.style.cursor = 'grab';
+    viewport.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      moved = 0;
+      startX = e.clientX;
+      baseX = getBaseX();
+      track.style.transition = 'none';
+      autoStop();
+      viewport.setPointerCapture(e.pointerId);
+    });
+    viewport.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      track.style.transform = `translateX(${baseX + dx}px)`;
+    });
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      try {
+        viewport.releasePointerCapture(e.pointerId);
+      } catch (_) {}
+      track.style.transition = '';
+      const dx = e.clientX - startX;
+      const threshold = 40;
+      if (!isAnimating && dx <= -threshold) {
+        isAnimating = isLooping;
+        index++;
+        if (!isLooping && index > maxIndex()) index = 0;
+        render();
+      } else if (!isAnimating && dx >= threshold) {
+        isAnimating = isLooping;
+        index--;
+        if (!isLooping && index < 0) index = maxIndex();
+        render();
+      } else {
+        render(); // 원위치 스냅
+      }
+      autoStart();
+    };
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener(
+      'click',
+      (ev) => {
+        if (moved > 6) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        }
+      },
+      true,
+    );
+    track.addEventListener('dragstart', (ev) => ev.preventDefault());
   }
 
   let rt;
