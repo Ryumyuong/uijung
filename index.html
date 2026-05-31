@@ -1428,24 +1428,29 @@
             상담받은 분들이<br />
             <span class="bg-[linear-gradient(90deg,#2576c9_0%,#002f5e_100%)] bg-clip-text text-transparent">가장 많이 말한 변화</span>
           </h2>
-          <div
-            class="mb-[30px] flex items-center justify-center gap-6 max-[900px]:flex-col"
-          >
-            <img
-              src="/images/voice-1.png"
-              alt="박OO · 50대 자영업자 후기"
-              class="h-auto w-[280px] opacity-50 transition-opacity duration-300 max-[900px]:w-full max-[900px]:max-w-[320px] max-[900px]:opacity-100"
-            />
-            <img
-              src="/images/voice-2.png"
-              alt="이OO · 40대 직장인 후기"
-              class="h-auto w-[340px] opacity-100 [filter:drop-shadow(0_22px_50px_rgba(15,30,60,0.30))] max-[900px]:order-first max-[900px]:w-full max-[900px]:max-w-[340px]"
-            />
-            <img
-              src="/images/voice-3.png"
-              alt="최OO · 30대 직장인 후기"
-              class="h-auto w-[280px] opacity-50 transition-opacity duration-300 max-[900px]:w-full max-[900px]:max-w-[320px] max-[900px]:opacity-100"
-            />
+          <div data-marquee class="relative mb-[30px]">
+            <div
+              data-carousel-viewport
+              class="cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing"
+            >
+              <div data-carousel-track class="flex w-max items-center gap-6 select-none py-2">
+                <img
+                  src="/images/voice-1.png"
+                  alt="박OO · 50대 자영업자 후기"
+                  class="h-auto w-[300px] flex-none"
+                />
+                <img
+                  src="/images/voice-2.png"
+                  alt="이OO · 40대 직장인 후기"
+                  class="h-auto w-[300px] flex-none"
+                />
+                <img
+                  src="/images/voice-3.png"
+                  alt="최OO · 30대 직장인 후기"
+                  class="h-auto w-[300px] flex-none"
+                />
+              </div>
+            </div>
           </div>
           <p class="mb-7 text-[15px] text-ink-mute">
             ※ 개인정보 보호를 위해 상담 내용은 익명화하여 재구성할 수 있습니다.
