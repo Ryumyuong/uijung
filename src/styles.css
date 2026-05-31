@@ -125,7 +125,7 @@
 
   /* 3단 계단 클립 — 윗면(점 위치)은 유지하고 바닥을 컨테이너 아래로 40px 더 내림(h-[115px] -bottom-10과 함께 사용) */
   .stair-clip {
-    clip-path: polygon(8% 100%, 8% 52%, 33% 52%, 33% 26%, 66% 26%, 66% 0%, 92% 0%, 92% 100%);
+    clip-path: polygon(15% 100%, 15% 66%, 38% 66%, 38% 33%, 62% 33%, 62% 0%, 85% 0%, 85% 100%);
   }
 
   /* 점선 + 끝점 (flow step 아래) */
@@ -143,11 +143,14 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--color-brand-bright);
     bottom: -34px;
+    box-shadow:
+      0 0 0 6px rgba(37, 99, 235, 0.15),
+      0 0 16px 3px rgba(37, 99, 235, 0.55);
   }
 
   /* review step 사이 점선 + 도트 */
