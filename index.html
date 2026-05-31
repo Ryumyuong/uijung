@@ -155,6 +155,63 @@
       </button>
     </aside>
 
+    <!-- ============== 하단 고정 진단 바 ============== -->
+    <div class="fixed inset-x-0 bottom-0 z-[80] hidden bg-[#262E4A] shadow-[0_-6px_20px_rgba(0,0,0,0.25)] lg:block">
+      <div class="mx-auto flex max-w-[1512px] items-stretch gap-6 px-8 py-3">
+        <div class="flex flex-none flex-col justify-center leading-[1.25]">
+          <span class="text-[19px] font-extrabold text-white">무서류 · 비대면</span>
+          <span class="text-[19px] font-extrabold text-gold-500">1차 진단 가능</span>
+        </div>
+        <span class="w-px flex-none self-stretch bg-white/15" aria-hidden="true"></span>
+        <form class="grid flex-1 grid-cols-3 items-center gap-x-7 gap-y-2.5">
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[13px] font-medium text-[#aab6cb]">상담분야</span>
+            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[13px] font-semibold text-[#2c3450] focus:outline-none">
+              <option>개인회생</option>
+              <option>개인파산</option>
+              <option>기타 상담</option>
+            </select>
+          </label>
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[13px] font-medium text-[#aab6cb]">신용채무액</span>
+            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[13px] font-semibold text-[#2c3450] focus:outline-none">
+              <option>3,000만 원 이하</option>
+              <option>3,000 ~ 4,000만 원</option>
+              <option selected>4,000 ~ 6,000만 원</option>
+              <option>6,000만 ~ 1억 원</option>
+              <option>1억 원 이상</option>
+            </select>
+          </label>
+          <label class="flex items-center gap-2.5">
+            <span class="w-[132px] flex-none text-[13px] font-medium text-[#aab6cb]">상여포함 세전연봉</span>
+            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[13px] font-semibold text-[#2c3450] focus:outline-none">
+              <option>3,000만 원 이하</option>
+              <option>3,000 ~ 4,000만 원</option>
+              <option selected>4,000 ~ 6,000만 원</option>
+              <option>6,000만 ~ 1억 원</option>
+              <option>1억 원 이상</option>
+            </select>
+          </label>
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[13px] font-medium text-[#aab6cb]">이름</span>
+            <input type="text" placeholder="홍길동" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[13px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+          </label>
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[13px] font-medium text-[#aab6cb]">연락처</span>
+            <input type="tel" placeholder="010-0000-0000" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[13px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+          </label>
+          <label class="flex items-center gap-2.5 text-[13px] text-[#aab6cb]">
+            <input type="checkbox" class="h-4 w-4 accent-brand-bright" />
+            개인정보 수집 및 활용 동의
+          </label>
+        </form>
+        <a href="#diagnosis" class="flex flex-none flex-col items-center justify-center rounded-lg bg-[#161B2E] px-7 text-center leading-tight transition hover:bg-[#0f1322]">
+          <span class="text-[19px] font-extrabold text-white">30초 비밀진단</span>
+          <span class="mt-0.5 text-[12px] text-white/60">상담 비밀보장 · 무서류 가능</span>
+        </a>
+      </div>
+    </div>
+
     <main id="main">
       <!-- ============== HERO ============== -->
       <div class="relative overflow-hidden py-[clamp(40px,5vw,80px)]">
@@ -1835,7 +1892,7 @@
     </main>
 
     <!-- ============== FOOTER ============== -->
-    <footer class="bg-[#07121E] py-14 text-white">
+    <footer class="bg-[#07121E] py-14 text-white lg:pb-[110px]">
       <div class="mx-auto max-w-[1200px] px-6">
         <div class="mb-[22px] flex flex-wrap items-center justify-between gap-3">
           <a href="#top" class="flex items-center" aria-label="맨 위로">
