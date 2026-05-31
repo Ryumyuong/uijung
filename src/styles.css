@@ -263,8 +263,8 @@
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
-    background: #fff;
-    border-color: #d7deeb;
+    background: #f9fafc;
+    border-color: #d5d9df;
     box-shadow: 0 16px 40px rgba(20, 40, 80, 0.12);
   }
 }
