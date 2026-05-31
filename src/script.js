@@ -275,7 +275,7 @@ if (quickDiagBtn && quickDiagForm) {
   if (!('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const STAGGER = 90; // ms
+  const STAGGER = 110; // ms
   const targets = [];
 
   // 그리드/플렉스/리스트처럼 여러 항목이 한 줄에 늘어선 컨테이너
