@@ -15,6 +15,36 @@ function sendToSheet(form, data) {
   }).catch((err) => console.error('sheet 전송 실패:', err));
 }
 
+/* ---------- 개인정보처리방침 팝업 ---------- */
+(() => {
+  const modal = document.querySelector('[data-privacy-modal]');
+  if (!modal) return;
+  const open = () => {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  };
+  document.querySelectorAll('[data-privacy-open]').forEach((btn) =>
+    btn.addEventListener('click', open),
+  );
+  modal.querySelectorAll('[data-privacy-close]').forEach((btn) =>
+    btn.addEventListener('click', close),
+  );
+  // 배경 클릭 시 닫기
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+  // ESC로 닫기
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+  });
+})();
+
 /* ---------- 헤더 스크롤 그림자 ---------- */
 const header = document.querySelector('[data-header]');
 if (header) {
