@@ -270,6 +270,75 @@ if (quickDiagBtn && quickDiagForm) {
   });
 }
 
+/* ---------- 스크롤 등장 애니메이션 (아래→위, 같은 행은 왼→오 순차) ---------- */
+(() => {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const STAGGER = 90; // ms
+  const targets = [];
+
+  // 그리드/플렉스/리스트처럼 여러 항목이 한 줄에 늘어선 컨테이너
+  const isRow = (el) => {
+    if (el.children.length < 2) return false;
+    if (el.tagName === 'UL' || el.tagName === 'OL') return true;
+    const d = getComputedStyle(el).display;
+    return d === 'flex' || d === 'inline-flex' || d === 'grid' || d === 'inline-grid';
+  };
+  // 애니메이션에서 제외할 요소 (장식/절대배치/투명도 지정 등)
+  const skip = (el) =>
+    el.hasAttribute('aria-hidden') ||
+    [...el.classList].some(
+      (c) =>
+        c.startsWith('opacity-') ||
+        c.includes('translate') ||
+        c.includes('absolute') ||
+        c === 'fixed' ||
+        c.startsWith('hero-'),
+    );
+
+  document.querySelectorAll('main > section, main > div').forEach((sec) => {
+    if (sec.querySelector('#hero-title')) return; // 히어로 섹션 제외
+    const inner = sec.querySelector(':scope > div') || sec;
+    [...inner.children].forEach((child) => {
+      if (skip(child)) return;
+      if (isRow(child)) {
+        [...child.children].forEach((g) => {
+          if (!skip(g)) targets.push(g);
+        });
+      } else {
+        targets.push(child);
+      }
+    });
+  });
+
+  targets.forEach((el) => el.classList.add('reveal'));
+
+  // 같은 부모 안에서의 순서(DOM 순서 = 왼→오 / 위→아래)대로 딜레이 부여
+  targets.forEach((el) => {
+    let idx = 0;
+    let p = el.previousElementSibling;
+    while (p) {
+      if (p.classList.contains('reveal')) idx++;
+      p = p.previousElementSibling;
+    }
+    el.style.transitionDelay = `${Math.min(idx, 12) * STAGGER}ms`;
+  });
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -8% 0px' },
+  );
+
+  targets.forEach((el) => io.observe(el));
+})();
+
 /* ---------- 숫자 카운트업 (LIVE 현황) ---------- */
 (() => {
   const targets = document.querySelectorAll('[data-count]');
