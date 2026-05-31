@@ -395,3 +395,123 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     render();
   });
 });
+
+/* ============================================================
+   마퀴 캐러셀 (data-marquee)
+   무한 루프 + 자동 슬라이드 + 마우스/터치 드래그
+   ============================================================ */
+document.querySelectorAll('[data-marquee]').forEach((root) => {
+  const viewport = root.querySelector('[data-carousel-viewport]');
+  const track = root.querySelector('[data-carousel-track]');
+  if (!viewport || !track) return;
+
+  const originals = [...track.children];
+  if (!originals.length) return;
+
+  // 끊김 없는 루프를 위해 원본 세트를 충분히 복제 (뷰포트 + 1세트 이상 확보)
+  const gapOf = () =>
+    parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+  const setWidth = () => {
+    const gap = gapOf();
+    let w = 0;
+    originals.forEach((c) => (w += c.getBoundingClientRect().width + gap));
+    return w;
+  };
+
+  let firstSetWidth = setWidth();
+  const ensureClones = () => {
+    const needed = firstSetWidth + viewport.getBoundingClientRect().width;
+    while (track.getBoundingClientRect().width < needed + firstSetWidth) {
+      originals.forEach((c) => track.appendChild(c.cloneNode(true)));
+    }
+  };
+  ensureClones();
+
+  let offset = 0;
+  const speed = 0.6; // px per frame (≈ 36px/s @60fps)
+  let dragging = false;
+  let paused = false;
+  let startX = 0;
+  let startOffset = 0;
+  let moved = 0;
+
+  const normalize = () => {
+    while (offset <= -firstSetWidth) offset += firstSetWidth;
+    while (offset > 0) offset -= firstSetWidth;
+  };
+  const apply = () => {
+    track.style.transform = `translateX(${offset}px)`;
+  };
+
+  const tick = () => {
+    if (!dragging && !paused) {
+      offset -= speed;
+      normalize();
+      apply();
+    }
+    requestAnimationFrame(tick);
+  };
+
+  // 드래그 (마우스/터치 공통 - Pointer Events)
+  viewport.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    moved = 0;
+    startX = e.clientX;
+    startOffset = offset;
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    moved = Math.max(moved, Math.abs(dx));
+    offset = startOffset + dx;
+    normalize();
+    apply();
+  });
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    try {
+      viewport.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+  };
+  viewport.addEventListener('pointerup', endDrag);
+  viewport.addEventListener('pointercancel', endDrag);
+
+  // 드래그한 경우 카드 링크 클릭 방지
+  track.addEventListener(
+    'click',
+    (e) => {
+      if (moved > 6) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    true,
+  );
+
+  // 이미지 네이티브 드래그(고스트) 방지
+  track.addEventListener('dragstart', (e) => e.preventDefault());
+
+  // 호버 시 일시정지
+  viewport.addEventListener('mouseenter', () => (paused = true));
+  viewport.addEventListener('mouseleave', () => (paused = false));
+
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      firstSetWidth = setWidth();
+      ensureClones();
+      normalize();
+      apply();
+    }, 150);
+  });
+
+  window.addEventListener('load', () => {
+    firstSetWidth = setWidth();
+    ensureClones();
+  });
+
+  requestAnimationFrame(tick);
+});

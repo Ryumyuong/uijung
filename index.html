@@ -1317,42 +1317,37 @@
             <span class="text-grad-blue">얼마나 줄어들 수 있는지 확인하세요</span>
           </h2>
 
-          <div data-carousel data-mode="cards" class="relative mt-12 px-14">
-            <button
-              data-carousel-prev
-              type="button"
-              aria-label="이전 사례 보기"
-              class="absolute left-0 top-1/2 z-[5] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-white text-2xl leading-none text-[#6a748b] shadow-[0_4px_14px_rgba(0,0,0,0.08)] transition hover:bg-navy-800 hover:text-white"
+          <div data-marquee class="relative mt-12">
+            <div
+              data-carousel-viewport
+              class="cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing"
             >
-              ‹
-            </button>
-            <div data-carousel-viewport class="overflow-hidden">
               <div
                 data-carousel-track
-                class="flex gap-6 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                class="flex w-max gap-6 select-none"
               >
-                <a href="#contact" class="w-[270px] flex-none">
+                <a href="#contact" class="w-[406px] flex-none" data-marquee-card>
                   <img
                     src="/images/case-card-1.png"
                     alt="면책 후 재회생 93% 탕감 사례 — 기존 채무 8,900만 원, 월 198만원에서 월 112만원으로"
                     class="h-auto w-full"
                   />
                 </a>
-                <a href="#contact" class="w-[270px] flex-none">
+                <a href="#contact" class="w-[406px] flex-none" data-marquee-card>
                   <img
                     src="/images/case-card-2.png"
                     alt="주택 경매없이 92% 탕감 사례 — 기존 채무 1억 2,400만 원, 월 235만원에서 월 154만원으로"
                     class="h-auto w-full"
                   />
                 </a>
-                <a href="#contact" class="w-[270px] flex-none">
+                <a href="#contact" class="w-[406px] flex-none" data-marquee-card>
                   <img
                     src="/images/case-card-3.png"
                     alt="배우자 모르게 94% 탕감 사례 — 기존 채무 9,800만 원, 월 215만원에서 월 128만원으로"
                     class="h-auto w-full"
                   />
                 </a>
-                <a href="#contact" class="w-[270px] flex-none">
+                <a href="#contact" class="w-[406px] flex-none" data-marquee-card>
                   <img
                     src="/images/case-card-4.png"
                     alt="도박·주식·코인 90% 탕감 사례 — 기존 채무 1억 5,200만 원, 월 280만원에서 월 132만원으로"
@@ -1361,15 +1356,6 @@
                 </a>
               </div>
             </div>
-            <button
-              data-carousel-next
-              type="button"
-              aria-label="다음 사례 보기"
-              class="absolute right-0 top-1/2 z-[5] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-white text-2xl leading-none text-[#6a748b] shadow-[0_4px_14px_rgba(0,0,0,0.08)] transition hover:bg-navy-800 hover:text-white"
-            >
-              ›
-            </button>
-            <div data-carousel-dots class="carousel-dots mt-[30px] flex justify-center gap-2"></div>
           </div>
           <p class="mt-[30px] text-xs text-ink-mute">
             ※ 모든 사례는 이해를 돕기 위한 예시이며, 실제 결과는 개인별 상황과 법원 판단에 따라
