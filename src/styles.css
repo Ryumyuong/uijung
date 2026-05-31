@@ -68,6 +68,35 @@
 }
 
 /* ============================================================
+   후기 캐러셀 (가운데 큰 버전, 양옆 작은 버전·투명도 30%)
+   ============================================================ */
+.voice-card {
+  width: 300px;
+  flex: 0 0 auto;
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.voice-card.is-near {
+  opacity: 0.3;
+}
+.voice-card.is-center {
+  opacity: 1;
+  transform: scale(1);
+}
+.voice-card .v-large {
+  display: none;
+}
+.voice-card.is-center .v-small {
+  display: none;
+}
+.voice-card.is-center .v-large {
+  display: block;
+}
+
+/* ============================================================
    스크롤 등장 애니메이션 (아래→위, 순차)
    ============================================================ */
 .reveal {
