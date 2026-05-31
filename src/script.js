@@ -269,10 +269,14 @@ if (contactForm) {
   });
 }
 
-/* ---------- 하단 고정 진단 바 ---------- */
-const quickDiagBtn = document.getElementById('quickDiagBtn');
-const quickDiagForm = document.getElementById('quickDiagForm');
-if (quickDiagBtn && quickDiagForm) {
+/* ---------- 하단 고정 진단 바 (PC + 모바일) ---------- */
+[
+  ['quickDiagBtn', 'quickDiagForm'],
+  ['quickDiagBtnM', 'quickDiagFormM'],
+].forEach(([btnId, formId]) => {
+  const quickDiagBtn = document.getElementById(btnId);
+  const quickDiagForm = document.getElementById(formId);
+  if (!quickDiagBtn || !quickDiagForm) return;
   const q = (n) => quickDiagForm.querySelector(`[name="${n}"]`);
   quickDiagBtn.addEventListener('click', (e) => {
     const name = (q('이름')?.value || '').trim();
@@ -298,7 +302,7 @@ if (quickDiagBtn && quickDiagForm) {
       동의: 'Y',
     });
   });
-}
+});
 
 /* ---------- 스크롤 등장 애니메이션 (아래→위, 같은 행은 왼→오 순차) ---------- */
 (() => {
