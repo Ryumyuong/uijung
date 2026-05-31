@@ -1758,20 +1758,9 @@
         aria-labelledby="location-title"
       >
         <div class="mx-auto max-w-[1200px] px-6">
-          <div class="mb-9 flex flex-wrap items-center justify-between gap-4">
-            <h2
-              id="location-title"
-              class="text-[clamp(26px,3.6vw,40px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-ink"
-            >
-              오시는 길
-            </h2>
-            <a href="#top" class="logo-dark flex items-center" aria-label="맨 위로">
-              <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[38px] w-auto" />
-            </a>
-          </div>
           <div class="grid grid-cols-2 items-start gap-10 max-[900px]:grid-cols-1">
             <div
-              class="aspect-square overflow-hidden rounded-2xl border border-line"
+              class="aspect-square overflow-hidden rounded-[10px] border border-line"
             >
               <iframe
                 title="의정종합법률사무소 위치"
@@ -1782,9 +1771,21 @@
               ></iframe>
             </div>
             <div>
+              <div class="mb-6 flex items-center justify-between gap-4">
+                <h2
+                  id="location-title"
+                  class="text-[clamp(26px,3.6vw,40px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-ink"
+                >
+                  오시는 길
+                </h2>
+                <a href="#top" class="logo-dark flex items-center" aria-label="맨 위로">
+                  <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[54px] w-auto" />
+                </a>
+              </div>
+              <span class="mb-7 block h-px w-full bg-line" aria-hidden="true"></span>
               <ul class="mb-7 flex flex-col gap-[22px]">
                 <li class="flex gap-3.5">
-                  <span class="w-[30px] flex-none text-lg" aria-hidden="true">📍</span>
+                  <img src="/images/loc-icon-1.png" alt="" aria-hidden="true" class="h-[24px] w-[24px] flex-none" />
                   <div>
                     <b class="text-[17px] font-extrabold text-navy-800">주소</b>
                     <p class="mt-0.5 text-[16px] text-ink-soft">
@@ -1793,7 +1794,7 @@
                   </div>
                 </li>
                 <li class="flex gap-3.5">
-                  <span class="w-[30px] flex-none text-lg" aria-hidden="true">📞</span>
+                  <img src="/images/loc-icon-2.png" alt="" aria-hidden="true" class="h-[24px] w-[24px] flex-none" />
                   <div>
                     <b class="text-[17px] font-extrabold text-navy-800">전화번호</b>
                     <p class="mt-0.5 text-[16px] text-ink-soft">
@@ -1802,14 +1803,14 @@
                   </div>
                 </li>
                 <li class="flex gap-3.5">
-                  <span class="w-[30px] flex-none text-lg" aria-hidden="true">🕐</span>
+                  <img src="/images/loc-icon-3.png" alt="" aria-hidden="true" class="h-[24px] w-[24px] flex-none" />
                   <div>
                     <b class="text-[17px] font-extrabold text-navy-800">운영시간</b>
                     <p class="mt-0.5 text-[16px] text-ink-soft">평일 오전 9시 - 오후 6시</p>
                   </div>
                 </li>
                 <li class="flex gap-3.5">
-                  <span class="w-[30px] flex-none text-lg" aria-hidden="true">🚗</span>
+                  <img src="/images/loc-icon-4.png" alt="" aria-hidden="true" class="h-[24px] w-[24px] flex-none" />
                   <div>
                     <b class="text-[17px] font-extrabold text-navy-800">주차 안내</b>
                     <p class="mt-0.5 text-[16px] text-ink-soft">건물 내 주차 가능</p>
