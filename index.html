@@ -163,10 +163,10 @@
           <span class="text-[24px] font-extrabold text-gold-500">1차 진단 가능</span>
         </div>
         <span class="w-px flex-none self-stretch bg-white/15" aria-hidden="true"></span>
-        <form class="grid flex-1 grid-cols-3 items-center gap-x-7 gap-y-2.5">
+        <form id="quickDiagForm" class="grid flex-1 grid-cols-3 items-center gap-x-7 gap-y-2.5">
           <label class="flex items-center gap-2.5">
             <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">상담분야</span>
-            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
+            <select name="상담분야" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
               <option>개인회생</option>
               <option>개인파산</option>
               <option>기타 상담</option>
@@ -174,7 +174,7 @@
           </label>
           <label class="flex items-center gap-2.5">
             <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">신용채무액</span>
-            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
+            <select name="신용채무액" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
               <option>3,000만 원 이하</option>
               <option>3,000 ~ 4,000만 원</option>
               <option selected>4,000 ~ 6,000만 원</option>
@@ -184,7 +184,7 @@
           </label>
           <label class="flex items-center gap-2.5">
             <span class="w-[132px] flex-none text-[15px] font-medium text-[#aab6cb]">상여포함 세전연봉</span>
-            <select class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
+            <select name="세전연봉" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] font-semibold text-[#2c3450] focus:outline-none">
               <option>3,000만 원 이하</option>
               <option>3,000 ~ 4,000만 원</option>
               <option selected>4,000 ~ 6,000만 원</option>
@@ -194,18 +194,18 @@
           </label>
           <label class="flex items-center gap-2.5">
             <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">이름</span>
-            <input type="text" placeholder="홍길동" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+            <input type="text" name="이름" placeholder="홍길동" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
           </label>
           <label class="flex items-center gap-2.5">
             <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">연락처</span>
-            <input type="tel" placeholder="010-0000-0000" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+            <input type="tel" name="연락처" placeholder="010-0000-0000" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
           </label>
           <label class="flex items-center gap-2.5 text-[15px] text-[#aab6cb]">
-            <input type="checkbox" class="h-4 w-4 accent-brand-bright" />
+            <input type="checkbox" name="동의" class="h-4 w-4 accent-brand-bright" />
             개인정보 수집 및 활용 동의
           </label>
         </form>
-        <a href="#diagnosis" class="flex flex-none flex-col items-center justify-center rounded-lg bg-[#161B2E] px-7 text-center leading-tight transition hover:bg-[#0f1322]">
+        <a href="#diagnosis" id="quickDiagBtn" class="flex flex-none flex-col items-center justify-center rounded-lg bg-[#161B2E] px-7 text-center leading-tight transition hover:bg-[#0f1322]">
           <span class="text-[24px] font-extrabold text-white">30초 비밀진단</span>
           <span class="mt-0.5 text-[12px] text-white/60">상담 비밀보장 · 무서류 가능</span>
         </a>

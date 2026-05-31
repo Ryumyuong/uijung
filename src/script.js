@@ -2,6 +2,19 @@
    의정종합법률사무소 — 인터랙션
    ============================================================ */
 
+/* ---------- 구글 스프레드시트(GAS) 전송 ---------- */
+const GAS_URL =
+  'https://script.google.com/macros/s/AKfycbx9Qx_5jVJZWzz-BYcZFFiw0ySkPvckr9oYH8XxQK0DyFebTrJul9bP0vw7hDl00QD9/exec';
+
+function sendToSheet(form, data) {
+  // text/plain 으로 보내 CORS 프리플라이트 회피 (제출만, 응답은 읽지 않음)
+  return fetch(GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ form, ...data }),
+  }).catch((err) => console.error('sheet 전송 실패:', err));
+}
+
 /* ---------- 헤더 스크롤 그림자 ---------- */
 const header = document.querySelector('[data-header]');
 if (header) {
@@ -163,7 +176,14 @@ faqItems.forEach((d) => {
         alert('개인정보 수집 및 이용에 동의해 주세요.');
         return;
       }
-      // TODO: 실제 접수 API 연동
+      sendToSheet('진단신청', {
+        이름: name,
+        연락처: phone,
+        채무금액: state.debt,
+        월소득: state.income,
+        주요상황: state.situations.join(', '),
+        동의: 'Y',
+      });
       showResult();
     });
   }
@@ -207,8 +227,33 @@ if (contactForm) {
       alert('개인정보 수집 및 이용에 동의해 주세요.');
       return;
     }
+    sendToSheet('상담신청', {
+      이름: name,
+      연락처: phone,
+      채무금액: contactForm.debt.value.trim(),
+      통화가능시간: contactForm.time.value.trim(),
+      동의: 'Y',
+    });
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
     contactForm.reset();
+  });
+}
+
+/* ---------- 하단 고정 진단 바 ---------- */
+const quickDiagBtn = document.getElementById('quickDiagBtn');
+const quickDiagForm = document.getElementById('quickDiagForm');
+if (quickDiagBtn && quickDiagForm) {
+  const q = (n) => quickDiagForm.querySelector(`[name="${n}"]`);
+  quickDiagBtn.addEventListener('click', () => {
+    // 기본 동작(#diagnosis로 스크롤)은 그대로 두고, 입력값만 시트로 전송
+    sendToSheet('하단진단', {
+      상담분야: q('상담분야')?.value || '',
+      신용채무액: q('신용채무액')?.value || '',
+      세전연봉: q('세전연봉')?.value || '',
+      이름: (q('이름')?.value || '').trim(),
+      연락처: (q('연락처')?.value || '').trim(),
+      동의: q('동의')?.checked ? 'Y' : 'N',
+    });
   });
 }
 
