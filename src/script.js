@@ -398,7 +398,7 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
 
 /* ============================================================
    마퀴 캐러셀 (data-marquee)
-   무한 루프 + 자동 슬라이드 + 마우스/터치 드래그
+   무한 루프 + 3초마다 1카드씩 자동 이동 + 마우스/터치 드래그
    ============================================================ */
 document.querySelectorAll('[data-marquee]').forEach((root) => {
   const viewport = root.querySelector('[data-carousel-viewport]');
@@ -406,50 +406,64 @@ document.querySelectorAll('[data-marquee]').forEach((root) => {
   if (!viewport || !track) return;
 
   const originals = [...track.children];
-  if (!originals.length) return;
+  const N = originals.length;
+  if (!N) return;
 
-  // 끊김 없는 루프를 위해 원본 세트를 충분히 복제 (뷰포트 + 1세트 이상 확보)
+  const EASE = 'transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)';
+  const INTERVAL = 3000;
+
+  // 앞뒤로 원본 세트 복제 (양방향 무한 루프)
+  originals.forEach((c) => track.appendChild(c.cloneNode(true)));
+  originals
+    .slice()
+    .reverse()
+    .forEach((c) => track.insertBefore(c.cloneNode(true), track.firstChild));
+
+  const cards = [...track.children];
+
   const gapOf = () =>
     parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
-  const setWidth = () => {
-    const gap = gapOf();
-    let w = 0;
-    originals.forEach((c) => (w += c.getBoundingClientRect().width + gap));
-    return w;
-  };
+  let step = cards[0].getBoundingClientRect().width + gapOf();
 
-  let firstSetWidth = setWidth();
-  const ensureClones = () => {
-    const needed = firstSetWidth + viewport.getBoundingClientRect().width;
-    while (track.getBoundingClientRect().width < needed + firstSetWidth) {
-      originals.forEach((c) => track.appendChild(c.cloneNode(true)));
-    }
-  };
-  ensureClones();
-
-  let offset = 0;
-  const speed = 0.6; // px per frame (≈ 36px/s @60fps)
+  let index = N; // 가운데(원본) 세트 시작
+  let curX = -index * step;
   let dragging = false;
-  let paused = false;
   let startX = 0;
-  let startOffset = 0;
+  let startCurX = 0;
   let moved = 0;
 
-  const normalize = () => {
-    while (offset <= -firstSetWidth) offset += firstSetWidth;
-    while (offset > 0) offset -= firstSetWidth;
+  const setX = (x, animate) => {
+    track.style.transition = animate ? EASE : 'none';
+    track.style.transform = `translateX(${x}px)`;
+    curX = x;
   };
-  const apply = () => {
-    track.style.transform = `translateX(${offset}px)`;
+  const goto = (i, animate = true) => {
+    index = i;
+    setX(-index * step, animate);
   };
 
-  const tick = () => {
-    if (!dragging && !paused) {
-      offset -= speed;
-      normalize();
-      apply();
+  // 끝 세트에 닿으면 보이지 않게 가운데로 리셋
+  track.addEventListener('transitionend', (e) => {
+    if (e.propertyName !== 'transform') return;
+    if (index >= 2 * N) {
+      index -= N;
+      setX(-index * step, false);
+    } else if (index < N) {
+      index += N;
+      setX(-index * step, false);
     }
-    requestAnimationFrame(tick);
+  });
+
+  let timer = null;
+  const startAuto = () => {
+    stopAuto();
+    timer = setInterval(() => {
+      if (!dragging) goto(index + 1);
+    }, INTERVAL);
+  };
+  const stopAuto = () => {
+    if (timer) clearInterval(timer);
+    timer = null;
   };
 
   // 드래그 (마우스/터치 공통 - Pointer Events)
@@ -457,16 +471,15 @@ document.querySelectorAll('[data-marquee]').forEach((root) => {
     dragging = true;
     moved = 0;
     startX = e.clientX;
-    startOffset = offset;
+    startCurX = curX;
+    setX(curX, false); // transition 제거
     viewport.setPointerCapture(e.pointerId);
   });
   viewport.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     const dx = e.clientX - startX;
     moved = Math.max(moved, Math.abs(dx));
-    offset = startOffset + dx;
-    normalize();
-    apply();
+    setX(startCurX + dx, false);
   });
   const endDrag = (e) => {
     if (!dragging) return;
@@ -474,6 +487,16 @@ document.querySelectorAll('[data-marquee]').forEach((root) => {
     try {
       viewport.releasePointerCapture(e.pointerId);
     } catch (_) {}
+    // 가장 가까운 카드로 스냅
+    const target = Math.round(-curX / step);
+    if (target === index && curX === -index * step) {
+      // 위치 변화 없음 → transitionend가 안 뜨므로 직접 정규화
+      if (index >= 2 * N) goto(index - N, false);
+      else if (index < N) goto(index + N, false);
+    } else {
+      goto(target, true);
+    }
+    startAuto();
   };
   viewport.addEventListener('pointerup', endDrag);
   viewport.addEventListener('pointercancel', endDrag);
@@ -493,25 +516,17 @@ document.querySelectorAll('[data-marquee]').forEach((root) => {
   // 이미지 네이티브 드래그(고스트) 방지
   track.addEventListener('dragstart', (e) => e.preventDefault());
 
-  // 호버 시 일시정지
-  viewport.addEventListener('mouseenter', () => (paused = true));
-  viewport.addEventListener('mouseleave', () => (paused = false));
-
+  const recalc = () => {
+    step = cards[0].getBoundingClientRect().width + gapOf();
+    setX(-index * step, false);
+  };
   let rt;
   window.addEventListener('resize', () => {
     clearTimeout(rt);
-    rt = setTimeout(() => {
-      firstSetWidth = setWidth();
-      ensureClones();
-      normalize();
-      apply();
-    }, 150);
+    rt = setTimeout(recalc, 150);
   });
+  window.addEventListener('load', recalc);
 
-  window.addEventListener('load', () => {
-    firstSetWidth = setWidth();
-    ensureClones();
-  });
-
-  requestAnimationFrame(tick);
+  setX(curX, false);
+  startAuto();
 });
