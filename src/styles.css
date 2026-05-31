@@ -157,6 +157,7 @@
     width: 80px;
     height: 12px;
     position: relative;
+    z-index: 5;
     background: radial-gradient(circle, #c2ccdb 1.6px, transparent 2.2px) 0 50% / 12px 12px repeat-x;
   }
   .review-dot::before {
