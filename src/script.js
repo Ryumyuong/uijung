@@ -506,6 +506,31 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       render();
     });
 
+  // 자동 슬라이드 (data-autoplay="ms")
+  const autoplayMs = parseInt(root.dataset.autoplay || '0', 10);
+  if (autoplayMs > 0) {
+    let timer = null;
+    const advance = () => {
+      if (isAnimating) return;
+      isAnimating = isLooping;
+      index++;
+      if (!isLooping && index > maxIndex()) index = 0;
+      render();
+    };
+    const startAuto = () => {
+      if (!timer) timer = setInterval(advance, autoplayMs);
+    };
+    const stopAuto = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    root.addEventListener('mouseenter', stopAuto);
+    root.addEventListener('mouseleave', startAuto);
+    startAuto();
+  }
+
   let rt;
   window.addEventListener('resize', () => {
     clearTimeout(rt);

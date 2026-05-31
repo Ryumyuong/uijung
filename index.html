@@ -1428,27 +1428,26 @@
             상담받은 분들이<br />
             <span class="bg-[linear-gradient(90deg,#2576c9_0%,#002f5e_100%)] bg-clip-text text-transparent">가장 많이 말한 변화</span>
           </h2>
-          <div data-marquee class="relative mb-[30px]">
-            <div
-              data-carousel-viewport
-              class="cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing"
-            >
-              <div data-carousel-track class="flex w-max items-center gap-6 select-none py-2">
-                <img
-                  src="/images/voice-1.png"
-                  alt="박OO · 50대 자영업자 후기"
-                  class="h-auto w-[300px] flex-none"
-                />
-                <img
-                  src="/images/voice-2.png"
-                  alt="이OO · 40대 직장인 후기"
-                  class="h-auto w-[300px] flex-none"
-                />
-                <img
-                  src="/images/voice-3.png"
-                  alt="최OO · 30대 직장인 후기"
-                  class="h-auto w-[300px] flex-none"
-                />
+          <div
+            data-carousel
+            data-mode="center"
+            data-autoplay="3000"
+            class="carousel-center relative mx-auto mb-[30px] max-w-[1000px]"
+          >
+            <div data-carousel-viewport class="overflow-hidden py-4">
+              <div
+                data-carousel-track
+                class="flex items-center gap-6 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              >
+                <div class="pick-card w-[300px] flex-none scale-[0.88] opacity-55 transition-all duration-400">
+                  <img src="/images/voice-1.png" alt="박OO · 50대 자영업자 후기" class="h-auto w-full" />
+                </div>
+                <div class="pick-card w-[300px] flex-none scale-[0.88] opacity-55 transition-all duration-400">
+                  <img src="/images/voice-2.png" alt="이OO · 40대 직장인 후기" class="h-auto w-full" />
+                </div>
+                <div class="pick-card w-[300px] flex-none scale-[0.88] opacity-55 transition-all duration-400">
+                  <img src="/images/voice-3.png" alt="최OO · 30대 직장인 후기" class="h-auto w-full" />
+                </div>
               </div>
             </div>
           </div>
