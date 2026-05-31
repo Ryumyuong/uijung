@@ -809,7 +809,7 @@
             class="mb-10 grid grid-cols-2 gap-[18px] text-left max-[900px]:grid-cols-1"
           >
             <div
-              class="rounded-2xl bg-[#000000D1] p-7"
+              class="rounded-2xl bg-[#081622] p-7"
             >
               <div class="mb-6 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -822,7 +822,7 @@
               </div>
               <ul class="flex flex-col gap-2.5">
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-[#4FA7B2] bg-[rgba(79,167,178,0.06)] px-5 py-4"
+                  class="flex items-center justify-between gap-3 rounded-[6px] border-[0.5px] border-white/40 bg-white/10 px-5 py-4"
                 >
                   <div>
                     <p class="mb-0.5">
@@ -834,7 +834,7 @@
                   <span class="inline-flex min-w-[100px] items-center justify-center rounded-full bg-[rgba(214,174,89,0.18)] px-3 py-1 text-[14px] font-bold text-[#E6B54C]">상담접수중</span>
                 </li>
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-white/30 bg-white/[0.02] px-5 py-4"
+                  class="flex items-center justify-between gap-3 rounded-[6px] border-[0.5px] border-white/30 bg-white/10 px-5 py-4"
                 >
                   <div>
                     <p class="mb-0.5">
@@ -846,7 +846,7 @@
                   <span class="inline-flex min-w-[100px] items-center justify-center rounded-full bg-[rgba(56,210,122,0.15)] px-3 py-1 text-[14px] font-bold text-[#7ee0a3]">상담접수완료</span>
                 </li>
                 <li
-                  class="flex items-center justify-between gap-3 rounded-xl border border-white/30 bg-white/[0.02] px-5 py-4"
+                  class="flex items-center justify-between gap-3 rounded-[6px] border-[0.5px] border-white/30 bg-white/10 px-5 py-4"
                 >
                   <div>
                     <p class="mb-0.5">
@@ -859,13 +859,13 @@
                 </li>
               </ul>
             </div>
-            <div class="rounded-2xl bg-[#000000D1] p-7">
+            <div class="rounded-2xl bg-[#081622] p-7">
               <h3 class="mb-6 text-[22px] font-extrabold text-white">주요 상담 유형</h3>
               <ul class="flex flex-col gap-4">
                 <li>
                   <div class="mb-1.5 flex items-center justify-between text-[17px]">
                     <span class="text-white">주택담보</span>
-                    <b class="font-bold text-[#0359EE]">32%</b>
+                    <b class="font-bold text-[#4FA7B2]">32%</b>
                   </div>
                   <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
                     <i class="block h-full rounded-full bg-[#0359EE]" style="width: 32%"></i>
@@ -874,7 +874,7 @@
                 <li>
                   <div class="mb-1.5 flex items-center justify-between text-[17px]">
                     <span class="text-white">최근대출</span>
-                    <b class="font-bold text-[#0359EE]">24%</b>
+                    <b class="font-bold text-[#4FA7B2]">24%</b>
                   </div>
                   <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
                     <i class="block h-full rounded-full bg-[#0359EE]" style="width: 24%"></i>
@@ -883,7 +883,7 @@
                 <li>
                   <div class="mb-1.5 flex items-center justify-between text-[17px]">
                     <span class="text-white">재회생</span>
-                    <b class="font-bold text-[#0359EE]">18%</b>
+                    <b class="font-bold text-[#4FA7B2]">18%</b>
                   </div>
                   <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
                     <i class="block h-full rounded-full bg-[#0359EE]" style="width: 18%"></i>
@@ -892,7 +892,7 @@
                 <li>
                   <div class="mb-1.5 flex items-center justify-between text-[17px]">
                     <span class="text-white">배우자 모르게</span>
-                    <b class="font-bold text-[#0359EE]">15%</b>
+                    <b class="font-bold text-[#4FA7B2]">15%</b>
                   </div>
                   <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
                     <i class="block h-full rounded-full bg-[#0359EE]" style="width: 15%"></i>
@@ -901,7 +901,7 @@
                 <li>
                   <div class="mb-1.5 flex items-center justify-between text-[17px]">
                     <span class="text-white">도박/주식/코인</span>
-                    <b class="font-bold text-[#0359EE]">11%</b>
+                    <b class="font-bold text-[#4FA7B2]">11%</b>
                   </div>
                   <div class="h-[6px] overflow-hidden rounded-full bg-white/10">
                     <i class="block h-full rounded-full bg-[#0359EE]" style="width: 11%"></i>
@@ -909,9 +909,10 @@
                 </li>
               </ul>
               <div
-                class="mt-6 grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-2 rounded-[6px] bg-white/10 px-5 py-4"
+                class="mt-6 grid grid-cols-[auto_auto_1fr] items-center gap-x-6 gap-y-2 rounded-[6px] bg-white/10 px-5 py-4"
               >
                 <span class="text-[17px] font-bold text-[#4FA7B2]">상담진행방식</span>
+                <span class="w-px self-stretch bg-white/30" aria-hidden="true"></span>
                 <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[16px] text-white">
                   <span>전화상담 <span class="text-white/40">|</span> <b class="font-bold">42%</b></span>
                   <span>카톡상담 <span class="text-white/40">|</span> <b class="font-bold">38%</b></span>
