@@ -495,6 +495,8 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       cards.forEach((c, i) => {
         c.classList.toggle('is-center', i === index);
         c.classList.toggle('is-near', i === index - 1 || i === index + 1);
+        // 가운데 카드는 드래그(grab), 양옆 흐린 카드는 클릭(pointer) 커서
+        c.style.cursor = i === index ? 'grab' : 'pointer';
       });
     } else {
       x = -(index * step);
@@ -551,6 +553,19 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
       if (!isLooping && index > maxIndex()) index = 0;
       render();
     });
+
+  // center 모드: 양옆 흐린 카드를 클릭하면 그 카드가 가운데로
+  // (드래그 후의 클릭은 viewport의 capture 핸들러가 막아준다)
+  if (mode === 'center') {
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        if (isAnimating || i === index) return;
+        isAnimating = isLooping;
+        index = i;
+        render();
+      });
+    });
+  }
 
   // 자동 슬라이드 (data-autoplay="ms")
   let autoStart = () => {};
