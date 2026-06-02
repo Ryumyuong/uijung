@@ -6,12 +6,24 @@
 const GAS_URL =
   'https://script.google.com/macros/s/AKfycbx9Qx_5jVJZWzz-BYcZFFiw0ySkPvckr9oYH8XxQK0DyFebTrJul9bP0vw7hDl00QD9/exec';
 
+// 유입경로(ref): URL의 ?ref= 값이 있으면 우선 사용, 없으면 아래 기본값 사용
+const REF = ''; // ← 여기에 기본 유입경로를 직접 설정하세요 (예: 'naver', 'blog', 'meta')
+
+function getRef() {
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get('ref');
+    return (fromUrl || REF || '').trim();
+  } catch (_) {
+    return REF;
+  }
+}
+
 function sendToSheet(form, data) {
   // text/plain 으로 보내 CORS 프리플라이트 회피 (제출만, 응답은 읽지 않음)
   return fetch(GAS_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ form, ...data }),
+    body: JSON.stringify({ form, ref: getRef(), ...data }),
   }).catch((err) => console.error('sheet 전송 실패:', err));
 }
 
