@@ -338,4 +338,15 @@
   .hero-photo-md-hide {
     display: none;
   }
+  /* 모바일 전용 변호사 사진 — 오른쪽에 잘린 느낌으로 배치 */
+  .hero-photo-mobile {
+    display: block !important;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: clamp(-70px, -9vw, -28px);
+    top: auto;
+    width: clamp(190px, 52vw, 320px);
+    height: auto;
+  }
 }
