@@ -330,15 +330,15 @@
         </section>
       </div>
 
-      <!-- ============== 간편 상담 신청 ============== -->
+      <!-- ============== 간편 상담 신청 (중간) ============== -->
       <section
-        id="contact"
+        id="contact-mid"
         class="bg-section-dark scroll-mt-20 py-[150px] text-white max-[900px]:py-24"
-        aria-labelledby="contact-title"
+        aria-labelledby="contact-title-mid"
       >
         <div class="mx-auto max-w-[1200px] px-6 text-center">
           <h2
-            id="contact-title"
+            id="contact-title-mid"
             class="text-[clamp(30px,4.2vw,48px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-white"
           >
             빚 문제,<br />
@@ -353,7 +353,7 @@
             class="grid grid-cols-[1.05fr_0.95fr] gap-[22px] text-left max-[900px]:grid-cols-1"
           >
             <form
-              id="contactForm"
+              id="contactFormMid"
               novalidate
               class="flex flex-col gap-4 rounded-[18px] border border-white/10 bg-[#0C2845] p-8"
             >
@@ -1845,6 +1845,127 @@
                   </li>
                   <li class="flex items-center gap-[9px] text-[15px] text-[#455168]">
                     <img src="/images/check-green.png" alt="" aria-hidden="true" class="h-[18px] w-[18px] flex-none" /> 비대면 접수 가능
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== 간편 상담 신청 (하단) ============== -->
+      <section
+        id="contact"
+        class="bg-section-dark scroll-mt-20 py-[150px] text-white max-[900px]:py-24"
+        aria-labelledby="contact-title"
+      >
+        <div class="mx-auto max-w-[1200px] px-6 text-center">
+          <h2
+            id="contact-title"
+            class="text-[clamp(30px,4.2vw,48px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-white"
+          >
+            빚 문제,<br />
+            <span class="bg-[linear-gradient(180deg,#419FFF_0%,#71B6FD_100%)] bg-clip-text text-transparent">복잡하게 시작하지 마세요</span>
+          </h2>
+          <p class="mx-auto mb-11 mt-5 text-[clamp(16px,1.9vw,20px)] leading-[1.85] text-[#aab6cb]">
+            지금 필요한 건 <br class="hidden max-[480px]:inline" />모든 서류를 준비하는 것이 아니라,<br />
+            내 상황이 개인회생으로 <br class="hidden max-[480px]:inline" />정리될 수 있는지 먼저 확인하는 것입니다.
+          </p>
+
+          <div
+            class="grid grid-cols-[1.05fr_0.95fr] gap-[22px] text-left max-[900px]:grid-cols-1"
+          >
+            <form
+              id="contactForm"
+              novalidate
+              class="flex flex-col gap-4 rounded-[18px] border border-white/10 bg-[#0C2845] p-8"
+            >
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="inline-flex items-center rounded-full bg-[#2f9e8f] px-3.5 py-1.5 text-[15px] font-bold text-white"
+                  >24H</span
+                >
+                <span class="text-[23px] font-extrabold text-white">간편 상담 신청</span>
+              </div>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                이름
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="이름을 입력하세요"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                연락처
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="010-0000-0000"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex items-center gap-2.5 text-[14px] font-medium text-[#aab6cb]">
+                <input
+                  type="checkbox"
+                  name="agree"
+                  required
+                  class="h-4 w-4 accent-brand-bright"
+                />
+                <span>개인정보 수집 및 이용에 동의합니다</span>
+              </label>
+              <button
+                type="submit"
+                class="btn-shine mt-auto w-full rounded-[10px] bg-[#0359EE] px-4 py-2.5 text-[18px] font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.28)] transition hover:-translate-y-0.5 hover:bg-[#1d54cf]"
+              >
+                무서류 비대면 상담 신청 →
+              </button>
+            </form>
+
+            <div class="flex flex-col gap-[22px]">
+              <div
+                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
+              >
+                <h3 class="mb-5 text-[23px] font-extrabold text-white">실시간 상담 현황</h3>
+                <div class="grid grid-cols-3 gap-3 divide-x divide-white/10 text-center">
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#0359EE]">47건</b
+                    ><span class="text-sm text-[#aab6cb]">오늘 <br class="hidden max-[480px]:inline" />신규 상담</span>
+                  </div>
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#D6AE59]">92%</b
+                    ><span class="text-sm text-[#aab6cb]">평균 <br class="hidden max-[480px]:inline" />감면율</span>
+                  </div>
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#DF3434]">78%</b
+                    ><span class="text-sm text-[#aab6cb]">비대면 <br class="hidden max-[480px]:inline" />상담 비율</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
+              >
+                <h3 class="mb-5 text-[23px] font-extrabold text-white">최근 접수</h3>
+                <ul class="flex flex-col gap-3">
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >1분 전 · 40대 직장인 - <br class="hidden max-[480px]:inline" />주택담보대출
+                  </li>
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >3분 전 · 30대 자영업자 - <br class="hidden max-[480px]:inline" />최근대출
+                  </li>
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >7분 전 · 50대 가장 - <br class="hidden max-[480px]:inline" />배우자 모르게
                   </li>
                 </ul>
               </div>

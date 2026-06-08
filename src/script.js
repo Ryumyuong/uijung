@@ -253,9 +253,8 @@ if (quickTop) {
   quickTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-/* ---------- 상담 신청 폼 ---------- */
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
+/* ---------- 상담 신청 폼 (중간·하단 동일 처리) ---------- */
+document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm) => {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = contactForm.name.value.trim();
@@ -277,7 +276,7 @@ if (contactForm) {
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
     contactForm.reset();
   });
-}
+});
 
 /* ---------- 하단 고정 진단 바 (PC + 모바일) ---------- */
 [
