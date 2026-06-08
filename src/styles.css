@@ -391,4 +391,17 @@
     height: auto;
     filter: drop-shadow(-8px 0 24px rgba(0, 0, 0, 0.3));
   }
+  /* 히어로 모바일 전용 세로 배경 + 상단/하단 가독성 그라데이션 */
+  .hero-bg {
+    background-image: url('/images/hero-bg-mobile.png');
+  }
+  .hero-bg::after {
+    background: linear-gradient(
+      180deg,
+      rgba(7, 15, 32, 0.6) 0%,
+      rgba(7, 15, 32, 0.15) 28%,
+      rgba(7, 15, 32, 0) 52%,
+      rgba(7, 15, 32, 0.45) 100%
+    );
+  }
 }
