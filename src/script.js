@@ -612,15 +612,23 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   });
 });
 
-/* ---------- #diagnosis 링크 — step 선택 패널을 화면 중앙으로 ---------- */
+/* ---------- CTA 링크 — 핵심 패널을 화면 중앙으로 스크롤 ---------- */
 (() => {
-  const panels = document.getElementById('diagPanels');
-  if (!panels) return;
-  document.querySelectorAll('a[href="#diagnosis"]').forEach((link) => {
+  // 해시 → 실제로 중앙에 둘 요소 id
+  const CENTER_TARGET = {
+    '#diagnosis': 'diagPanels', // step 선택 패널
+    '#contact': 'contactForm', // 간편 상담 신청 폼
+  };
+  document.querySelectorAll('a[href]').forEach((link) => {
+    const hash = link.getAttribute('href');
+    const targetId = CENTER_TARGET[hash];
+    if (!targetId) return;
+    const target = document.getElementById(targetId);
+    if (!target) return;
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      panels.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      history.replaceState(null, '', '#diagnosis');
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      history.replaceState(null, '', hash);
     });
   });
 })();
