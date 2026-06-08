@@ -311,8 +311,8 @@
 @layer utilities {
   /* 헤더 스크롤 시 배경 — bg-transparent utility를 덮어쓰기 위해 utilities 레이어에 배치 */
   .header-scrolled {
-    background: #121d2a;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(10, 20, 40, 0.12);
   }
 
   .carousel-center .pick-card {
