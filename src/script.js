@@ -272,8 +272,6 @@ if (contactForm) {
     sendToSheet('상담신청', {
       이름: name,
       연락처: phone,
-      채무금액: contactForm.debt.value.trim(),
-      통화가능시간: contactForm.time.value.trim(),
       동의: 'Y',
     });
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
