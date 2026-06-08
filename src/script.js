@@ -633,16 +633,17 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   });
 })();
 
-/* ---------- 망설이는 이유 — 3개씩 세로 자동 순환 ---------- */
-(() => {
-  const wrap = document.querySelector('[data-worry-rotator]');
-  if (!wrap) return;
-  const track = wrap.querySelector('.worry-track');
-  if (!track || track.children.length <= 3) return;
-
-  const VISIBLE = 3;
-  const INTERVAL = 2600; // ms — 한 칸 회전 주기
-  const DURATION = 600; // ms — 이동 애니메이션 시간
+/* ---------- 세로 자동 순환 (망설이는 이유 / FAQ) ----------
+   3개씩 보여주고 일정 시간마다 한 칸씩 위로 회전.
+   data-expandable: details 펼침 시 순환 중지 + 뷰포트 확장 */
+function initVRotator(wrap) {
+  const track = wrap.querySelector('[data-rotator-track]');
+  if (!track) return;
+  const VISIBLE = parseInt(wrap.dataset.visible || '3', 10);
+  const INTERVAL = parseInt(wrap.dataset.interval || '2600', 10);
+  const DURATION = 600;
+  const expandable = wrap.hasAttribute('data-expandable');
+  if (track.children.length <= VISIBLE) return;
 
   const gap = () => parseFloat(getComputedStyle(track).rowGap) || 0;
   const sizeViewport = () => {
@@ -650,11 +651,13 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     wrap.style.height = h * VISIBLE + gap() * (VISIBLE - 1) + 'px';
     return h + gap();
   };
-
   sizeViewport();
+
   let timer = null;
+  let paused = false;
 
   const tick = () => {
+    if (paused) return;
     const step = sizeViewport();
     track.style.transition = `transform ${DURATION}ms ease`;
     track.style.transform = `translateY(-${step}px)`;
@@ -670,7 +673,7 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   };
 
   const start = () => {
-    if (!timer) timer = setInterval(tick, INTERVAL);
+    if (!timer && !paused) timer = setInterval(tick, INTERVAL);
   };
   const stop = () => {
     if (timer) {
@@ -681,13 +684,43 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
   wrap.addEventListener('mouseenter', stop);
-  wrap.addEventListener('mouseleave', start);
+  wrap.addEventListener('mouseleave', () => {
+    if (!paused) start();
+  });
+
+  if (expandable) {
+    // toggle 은 버블링되지 않으므로 capture 로 수신
+    track.addEventListener(
+      'toggle',
+      () => {
+        if (track.querySelector('details[open]')) {
+          paused = true;
+          stop();
+          track.style.transition = 'none';
+          track.style.transform = 'translateY(0)';
+          wrap.style.height = 'auto';
+          wrap.style.overflow = 'visible';
+        } else {
+          wrap.style.overflow = 'hidden';
+          sizeViewport();
+          paused = false;
+          start();
+        }
+      },
+      true,
+    );
+  }
+
   let rt;
   window.addEventListener('resize', () => {
     clearTimeout(rt);
-    rt = setTimeout(sizeViewport, 150);
+    rt = setTimeout(() => {
+      if (wrap.style.overflow !== 'visible') sizeViewport();
+    }, 150);
   });
-})();
+}
+
+document.querySelectorAll('[data-vrotator]').forEach(initVRotator);
 
 /* ============================================================
    마퀴 캐러셀 (data-marquee)
