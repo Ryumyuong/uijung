@@ -639,12 +639,16 @@ function initVRotator(wrap) {
   const INTERVAL = parseInt(wrap.dataset.interval || '2600', 10);
   const DURATION = 600;
   const expandable = wrap.hasAttribute('data-expandable');
+  // 다음 항목을 살짝 노출 + 하단 페이드로 '넘어가는 중'임을 표시
+  const peekOn = wrap.hasAttribute('data-peek');
   if (track.children.length <= VISIBLE) return;
 
   const gap = () => parseFloat(getComputedStyle(track).rowGap) || 0;
   const sizeViewport = () => {
     const h = track.children[0].getBoundingClientRect().height;
-    wrap.style.height = h * VISIBLE + gap() * (VISIBLE - 1) + 'px';
+    const peek = peekOn ? gap() + h * 0.42 : 0;
+    wrap.style.height = h * VISIBLE + gap() * (VISIBLE - 1) + peek + 'px';
+    if (peekOn) wrap.classList.add('is-peeking');
     return h + gap();
   };
   sizeViewport();
@@ -693,6 +697,7 @@ function initVRotator(wrap) {
           // 펼쳐도 보이는 3개만 유지 — 열린 항목 포함한 현재 상단 3개 높이로 확장
           paused = true;
           stop();
+          if (peekOn) wrap.classList.remove('is-peeking');
           track.style.transition = 'none';
           track.style.transform = 'translateY(0)';
           let h = 0;
