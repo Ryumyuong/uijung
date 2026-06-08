@@ -694,14 +694,18 @@ function initVRotator(wrap) {
       'toggle',
       () => {
         if (track.querySelector('details[open]')) {
+          // 펼쳐도 보이는 3개만 유지 — 열린 항목 포함한 현재 상단 3개 높이로 확장
           paused = true;
           stop();
           track.style.transition = 'none';
           track.style.transform = 'translateY(0)';
-          wrap.style.height = 'auto';
-          wrap.style.overflow = 'visible';
+          let h = 0;
+          const n = Math.min(VISIBLE, track.children.length);
+          for (let i = 0; i < n; i++) {
+            h += track.children[i].getBoundingClientRect().height;
+          }
+          wrap.style.height = h + gap() * (n - 1) + 'px';
         } else {
-          wrap.style.overflow = 'hidden';
           sizeViewport();
           paused = false;
           start();
@@ -715,7 +719,7 @@ function initVRotator(wrap) {
   window.addEventListener('resize', () => {
     clearTimeout(rt);
     rt = setTimeout(() => {
-      if (wrap.style.overflow !== 'visible') sizeViewport();
+      if (!paused) sizeViewport();
     }, 150);
   });
 }
