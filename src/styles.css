@@ -259,7 +259,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(7, 15, 32, 0.55) 0%, rgba(7, 15, 32, 0.22) 42%, rgba(7, 15, 32, 0) 68%);
+    /* 어두운 네이비 텍스트 가독성을 위해 좌측을 밝게 워시 */
+    background: linear-gradient(90deg, rgba(238, 245, 255, 0.72) 0%, rgba(238, 245, 255, 0.3) 38%, rgba(238, 245, 255, 0) 62%);
   }
 
   /* FAQ details 토글 아이콘 */
@@ -396,12 +397,13 @@
     background-image: url('/images/hero-bg-mobile.png');
   }
   .hero-bg::after {
+    /* 모바일: 상단(제목/체크리스트) 밝게, 하단(통계 그리드) 살짝 어둡게 */
     background: linear-gradient(
       180deg,
-      rgba(7, 15, 32, 0.6) 0%,
-      rgba(7, 15, 32, 0.15) 28%,
-      rgba(7, 15, 32, 0) 52%,
-      rgba(7, 15, 32, 0.45) 100%
+      rgba(238, 245, 255, 0.72) 0%,
+      rgba(238, 245, 255, 0.25) 26%,
+      rgba(7, 15, 32, 0) 50%,
+      rgba(7, 15, 32, 0.4) 100%
     );
   }
 }
