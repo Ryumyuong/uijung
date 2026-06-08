@@ -285,8 +285,8 @@
 
   /* 회전 로테이터 — 다음 항목을 하단에 흐릿하게 노출(넘어가는 중 표시) */
   .is-peeking {
-    -webkit-mask-image: linear-gradient(to bottom, #000 80%, rgba(0, 0, 0, 0.22) 100%);
-    mask-image: linear-gradient(to bottom, #000 80%, rgba(0, 0, 0, 0.22) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, 0.3) 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, 0.3) 100%);
   }
 
   /* 흰배경 로고 어둡게 (location 섹션) */

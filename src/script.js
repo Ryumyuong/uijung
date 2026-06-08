@@ -653,7 +653,7 @@ function initVRotator(wrap) {
   const gap = () => parseFloat(getComputedStyle(track).rowGap) || 0;
   const sizeViewport = () => {
     const h = track.children[0].getBoundingClientRect().height;
-    const peek = peekOn ? gap() + h * 0.42 : 0;
+    const peek = peekOn ? gap() + h * 0.72 : 0;
     wrap.style.height = h * VISIBLE + gap() * (VISIBLE - 1) + peek + 'px';
     if (peekOn) wrap.classList.add('is-peeking');
     return h + gap();
