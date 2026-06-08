@@ -347,6 +347,145 @@
         </section>
       </div>
 
+      <!-- ============== 간편 상담 신청 ============== -->
+      <section
+        id="contact"
+        class="bg-section-dark scroll-mt-20 py-[150px] text-white max-[900px]:py-24"
+        aria-labelledby="contact-title"
+      >
+        <div class="mx-auto max-w-[1200px] px-6 text-center">
+          <h2
+            id="contact-title"
+            class="text-[clamp(30px,4.2vw,48px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-white"
+          >
+            빚 문제,<br />
+            <span class="bg-[linear-gradient(180deg,#419FFF_0%,#71B6FD_100%)] bg-clip-text text-transparent">복잡하게 시작하지 마세요</span>
+          </h2>
+          <p class="mx-auto mb-11 mt-5 text-[clamp(16px,1.9vw,20px)] leading-[1.85] text-[#aab6cb]">
+            지금 필요한 건 <br class="hidden max-[480px]:inline" />모든 서류를 준비하는 것이 아니라,<br />
+            내 상황이 개인회생으로 <br class="hidden max-[480px]:inline" />정리될 수 있는지 먼저 확인하는 것입니다.
+          </p>
+
+          <div
+            class="grid grid-cols-[1.05fr_0.95fr] gap-[22px] text-left max-[900px]:grid-cols-1"
+          >
+            <form
+              id="contactForm"
+              novalidate
+              class="flex flex-col gap-4 rounded-[18px] border border-white/10 bg-[#0C2845] p-8"
+            >
+              <div class="flex items-center gap-2.5">
+                <span
+                  class="inline-flex items-center rounded-full bg-[#2f9e8f] px-3.5 py-1.5 text-[15px] font-bold text-white"
+                  >24H</span
+                >
+                <span class="text-[23px] font-extrabold text-white">간편 상담 신청</span>
+              </div>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                이름
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="이름을 입력하세요"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                연락처
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="010-0000-0000"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                채무금액 (선택)
+                <input
+                  type="text"
+                  name="debt"
+                  placeholder="예: 5천만 원"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
+                통화 가능 시간
+                <input
+                  type="text"
+                  name="time"
+                  placeholder="예: 평일 오후 2시~5시"
+                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
+                />
+              </label>
+              <label class="flex items-center gap-2.5 text-[14px] font-medium text-[#aab6cb]">
+                <input
+                  type="checkbox"
+                  name="agree"
+                  required
+                  class="h-4 w-4 accent-brand-bright"
+                />
+                <span>개인정보 수집 및 이용에 동의합니다</span>
+              </label>
+              <button
+                type="submit"
+                class="btn-shine w-full rounded-[10px] bg-[#0359EE] px-4 py-2.5 text-[18px] font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.28)] transition hover:-translate-y-0.5 hover:bg-[#1d54cf]"
+              >
+                무서류 비대면 상담 신청 →
+              </button>
+            </form>
+
+            <div class="flex flex-col gap-[22px]">
+              <div
+                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
+              >
+                <h3 class="mb-5 text-[23px] font-extrabold text-white">실시간 상담 현황</h3>
+                <div class="grid grid-cols-3 gap-3 divide-x divide-white/10 text-center">
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#0359EE]">47건</b
+                    ><span class="text-sm text-[#aab6cb]">오늘 <br class="hidden max-[480px]:inline" />신규 상담</span>
+                  </div>
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#D6AE59]">67%</b
+                    ><span class="text-sm text-[#aab6cb]">평균 <br class="hidden max-[480px]:inline" />감면율</span>
+                  </div>
+                  <div>
+                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#DF3434]">78%</b
+                    ><span class="text-sm text-[#aab6cb]">비대면 <br class="hidden max-[480px]:inline" />상담 비율</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
+              >
+                <h3 class="mb-5 text-[23px] font-extrabold text-white">최근 접수</h3>
+                <ul class="flex flex-col gap-3">
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >1분 전 · 40대 직장인 - <br class="hidden max-[480px]:inline" />주택담보대출
+                  </li>
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >3분 전 · 30대 자영업자 - <br class="hidden max-[480px]:inline" />최근대출
+                  </li>
+                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
+                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
+                      aria-hidden="true"
+                      >·</span
+                    >7분 전 · 50대 가장 - <br class="hidden max-[480px]:inline" />배우자 모르게
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ============== 이런 상황이라면 의정이 답입니다 ============== -->
       <section
         class="scroll-mt-20 bg-soft-bg py-[120px] max-[900px]:py-20"
@@ -398,6 +537,69 @@
 
           <p class="mt-9 text-[clamp(16px,2vw,21px)] font-bold text-navy-800">
             까다로운 상황일수록 <br class="hidden max-[480px]:inline" />도산전문 변호사의 판단이 필요합니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============== 사례 캐러셀 ============== -->
+      <section
+        class="scroll-mt-20 bg-white py-[150px] max-[900px]:py-24"
+        aria-labelledby="caseslide-title"
+      >
+        <div class="mx-auto max-w-[1200px] px-6 text-center">
+          <h2
+            id="caseslide-title"
+            class="text-[clamp(26px,3.6vw,40px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-ink"
+          >
+            월 납부 부담,<br />
+            <span class="text-grad-blue">얼마나 줄어들 수 있는지 <br class="hidden max-[480px]:inline" />확인하세요</span>
+          </h2>
+
+          <div
+            data-marquee
+            class="relative left-1/2 mt-12 w-[min(1500px,calc(100vw-48px))] -translate-x-1/2"
+          >
+            <div
+              data-carousel-viewport
+              class="cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing"
+            >
+              <div
+                data-carousel-track
+                class="flex w-max gap-6 select-none"
+              >
+                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
+                  <img
+                    src="/images/case-card-1.png"
+                    alt="면책 후 재회생 58% 탕감 사례 — 기존 채무 8,900만 원, 월 198만원에서 월 112만원으로"
+                    class="h-auto w-full"
+                  />
+                </a>
+                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
+                  <img
+                    src="/images/case-card-2.png"
+                    alt="주택 경매없이 72% 탕감 사례 — 기존 채무 1억 2,400만 원, 월 235만원에서 월 154만원으로"
+                    class="h-auto w-full"
+                  />
+                </a>
+                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
+                  <img
+                    src="/images/case-card-3.png"
+                    alt="배우자 모르게 69% 탕감 사례 — 기존 채무 9,800만 원, 월 215만원에서 월 128만원으로"
+                    class="h-auto w-full"
+                  />
+                </a>
+                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
+                  <img
+                    src="/images/case-card-4.png"
+                    alt="도박·주식·코인 82% 탕감 사례 — 기존 채무 1억 5,200만 원, 월 280만원에서 월 132만원으로"
+                    class="h-auto w-full"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+          <p class="mt-[30px] text-[15px] text-ink-mute">
+            ※ 모든 사례는 이해를 돕기 위한 예시이며, <br class="hidden max-[480px]:inline" />실제 결과는 개인별 상황과 <br class="hidden max-[480px]:inline" />법원 판단에 따라 달라질 수 있습니다.
           </p>
         </div>
       </section>
@@ -1420,69 +1622,6 @@
         </div>
       </section>
 
-      <!-- ============== 사례 캐러셀 ============== -->
-      <section
-        class="scroll-mt-20 bg-white py-[150px] max-[900px]:py-24"
-        aria-labelledby="caseslide-title"
-      >
-        <div class="mx-auto max-w-[1200px] px-6 text-center">
-          <h2
-            id="caseslide-title"
-            class="text-[clamp(26px,3.6vw,40px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-ink"
-          >
-            월 납부 부담,<br />
-            <span class="text-grad-blue">얼마나 줄어들 수 있는지 <br class="hidden max-[480px]:inline" />확인하세요</span>
-          </h2>
-
-          <div
-            data-marquee
-            class="relative left-1/2 mt-12 w-[min(1500px,calc(100vw-48px))] -translate-x-1/2"
-          >
-            <div
-              data-carousel-viewport
-              class="cursor-grab overflow-hidden [touch-action:pan-y] active:cursor-grabbing"
-            >
-              <div
-                data-carousel-track
-                class="flex w-max gap-6 select-none"
-              >
-                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
-                  <img
-                    src="/images/case-card-1.png"
-                    alt="면책 후 재회생 58% 탕감 사례 — 기존 채무 8,900만 원, 월 198만원에서 월 112만원으로"
-                    class="h-auto w-full"
-                  />
-                </a>
-                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
-                  <img
-                    src="/images/case-card-2.png"
-                    alt="주택 경매없이 72% 탕감 사례 — 기존 채무 1억 2,400만 원, 월 235만원에서 월 154만원으로"
-                    class="h-auto w-full"
-                  />
-                </a>
-                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
-                  <img
-                    src="/images/case-card-3.png"
-                    alt="배우자 모르게 69% 탕감 사례 — 기존 채무 9,800만 원, 월 215만원에서 월 128만원으로"
-                    class="h-auto w-full"
-                  />
-                </a>
-                <a href="#contact" class="w-[406px] flex-none max-[480px]:w-[78vw]" data-marquee-card>
-                  <img
-                    src="/images/case-card-4.png"
-                    alt="도박·주식·코인 82% 탕감 사례 — 기존 채무 1억 5,200만 원, 월 280만원에서 월 132만원으로"
-                    class="h-auto w-full"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-          <p class="mt-[30px] text-[15px] text-ink-mute">
-            ※ 모든 사례는 이해를 돕기 위한 예시이며, <br class="hidden max-[480px]:inline" />실제 결과는 개인별 상황과 <br class="hidden max-[480px]:inline" />법원 판단에 따라 달라질 수 있습니다.
-          </p>
-        </div>
-      </section>
-
       <!-- ============== 후기 (변화) ============== -->
       <section
         class="scroll-mt-20 bg-[#F1F4F9] py-[150px] max-[900px]:py-24"
@@ -1731,145 +1870,6 @@
                 결정합니다.
               </div>
             </details>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============== 간편 상담 신청 ============== -->
-      <section
-        id="contact"
-        class="bg-section-dark scroll-mt-20 py-[150px] text-white max-[900px]:py-24"
-        aria-labelledby="contact-title"
-      >
-        <div class="mx-auto max-w-[1200px] px-6 text-center">
-          <h2
-            id="contact-title"
-            class="text-[clamp(30px,4.2vw,48px)] font-extrabold leading-[1.35] -tracking-[0.02em] text-white"
-          >
-            빚 문제,<br />
-            <span class="bg-[linear-gradient(180deg,#419FFF_0%,#71B6FD_100%)] bg-clip-text text-transparent">복잡하게 시작하지 마세요</span>
-          </h2>
-          <p class="mx-auto mb-11 mt-5 text-[clamp(16px,1.9vw,20px)] leading-[1.85] text-[#aab6cb]">
-            지금 필요한 건 <br class="hidden max-[480px]:inline" />모든 서류를 준비하는 것이 아니라,<br />
-            내 상황이 개인회생으로 <br class="hidden max-[480px]:inline" />정리될 수 있는지 먼저 확인하는 것입니다.
-          </p>
-
-          <div
-            class="grid grid-cols-[1.05fr_0.95fr] gap-[22px] text-left max-[900px]:grid-cols-1"
-          >
-            <form
-              id="contactForm"
-              novalidate
-              class="flex flex-col gap-4 rounded-[18px] border border-white/10 bg-[#0C2845] p-8"
-            >
-              <div class="flex items-center gap-2.5">
-                <span
-                  class="inline-flex items-center rounded-full bg-[#2f9e8f] px-3.5 py-1.5 text-[15px] font-bold text-white"
-                  >24H</span
-                >
-                <span class="text-[23px] font-extrabold text-white">간편 상담 신청</span>
-              </div>
-              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
-                이름
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="이름을 입력하세요"
-                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
-                />
-              </label>
-              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
-                연락처
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  placeholder="010-0000-0000"
-                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
-                />
-              </label>
-              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
-                채무금액 (선택)
-                <input
-                  type="text"
-                  name="debt"
-                  placeholder="예: 5천만 원"
-                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
-                />
-              </label>
-              <label class="flex flex-col gap-2 text-[17px] font-semibold text-[#c3cee0]">
-                통화 가능 시간
-                <input
-                  type="text"
-                  name="time"
-                  placeholder="예: 평일 오후 2시~5시"
-                  class="h-[48px] rounded-[10px] border border-white/15 bg-white/5 px-4 text-[18px] text-white placeholder:text-[#6f7e98] focus:border-brand-bright focus:outline-none"
-                />
-              </label>
-              <label class="flex items-center gap-2.5 text-[14px] font-medium text-[#aab6cb]">
-                <input
-                  type="checkbox"
-                  name="agree"
-                  required
-                  class="h-4 w-4 accent-brand-bright"
-                />
-                <span>개인정보 수집 및 이용에 동의합니다</span>
-              </label>
-              <button
-                type="submit"
-                class="btn-shine w-full rounded-[10px] bg-[#0359EE] px-4 py-2.5 text-[18px] font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.28)] transition hover:-translate-y-0.5 hover:bg-[#1d54cf]"
-              >
-                무서류 비대면 상담 신청 →
-              </button>
-            </form>
-
-            <div class="flex flex-col gap-[22px]">
-              <div
-                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
-              >
-                <h3 class="mb-5 text-[23px] font-extrabold text-white">실시간 상담 현황</h3>
-                <div class="grid grid-cols-3 gap-3 divide-x divide-white/10 text-center">
-                  <div>
-                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#0359EE]">47건</b
-                    ><span class="text-sm text-[#aab6cb]">오늘 <br class="hidden max-[480px]:inline" />신규 상담</span>
-                  </div>
-                  <div>
-                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#D6AE59]">67%</b
-                    ><span class="text-sm text-[#aab6cb]">평균 <br class="hidden max-[480px]:inline" />감면율</span>
-                  </div>
-                  <div>
-                    <b class="block text-4xl font-extrabold max-[480px]:text-[26px] text-[#DF3434]">78%</b
-                    ><span class="text-sm text-[#aab6cb]">비대면 <br class="hidden max-[480px]:inline" />상담 비율</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="flex flex-1 flex-col justify-center rounded-[18px] border border-white/10 bg-[#0C2845] px-11 py-10"
-              >
-                <h3 class="mb-5 text-[23px] font-extrabold text-white">최근 접수</h3>
-                <ul class="flex flex-col gap-3">
-                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
-                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
-                      aria-hidden="true"
-                      >·</span
-                    >1분 전 · 40대 직장인 - <br class="hidden max-[480px]:inline" />주택담보대출
-                  </li>
-                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
-                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
-                      aria-hidden="true"
-                      >·</span
-                    >3분 전 · 30대 자영업자 - <br class="hidden max-[480px]:inline" />최근대출
-                  </li>
-                  <li class="relative pl-3.5 font-['Inter'] text-[18px] font-normal text-[#c3cee0]">
-                    <span class="absolute left-0.5 font-extrabold text-[#c3cee0]"
-                      aria-hidden="true"
-                      >·</span
-                    >7분 전 · 50대 가장 - <br class="hidden max-[480px]:inline" />배우자 모르게
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
       </section>
