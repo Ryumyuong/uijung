@@ -623,7 +623,14 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
     if (!target) return;
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // 모바일: 고정 헤더(80px) 아래로 상단을 맞춰 약간 위에 포커스
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        const OFFSET = 96; // 헤더 80px + 여백
+        const y = target.getBoundingClientRect().top + window.pageYOffset - OFFSET;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       history.replaceState(null, '', hash);
     });
   });
