@@ -612,6 +612,62 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   });
 });
 
+/* ---------- 망설이는 이유 — 3개씩 세로 자동 순환 ---------- */
+(() => {
+  const wrap = document.querySelector('[data-worry-rotator]');
+  if (!wrap) return;
+  const track = wrap.querySelector('.worry-track');
+  if (!track || track.children.length <= 3) return;
+
+  const VISIBLE = 3;
+  const INTERVAL = 2600; // ms — 한 칸 회전 주기
+  const DURATION = 600; // ms — 이동 애니메이션 시간
+
+  const gap = () => parseFloat(getComputedStyle(track).rowGap) || 0;
+  const sizeViewport = () => {
+    const h = track.children[0].getBoundingClientRect().height;
+    wrap.style.height = h * VISIBLE + gap() * (VISIBLE - 1) + 'px';
+    return h + gap();
+  };
+
+  sizeViewport();
+  let timer = null;
+
+  const tick = () => {
+    const step = sizeViewport();
+    track.style.transition = `transform ${DURATION}ms ease`;
+    track.style.transform = `translateY(-${step}px)`;
+    const onEnd = (e) => {
+      if (e.target !== track || e.propertyName !== 'transform') return;
+      track.removeEventListener('transitionend', onEnd);
+      track.style.transition = 'none';
+      track.style.transform = 'translateY(0)';
+      track.appendChild(track.children[0]); // 맨 위 항목을 맨 아래로
+      void track.offsetHeight; // 리플로우 강제
+    };
+    track.addEventListener('transitionend', onEnd);
+  };
+
+  const start = () => {
+    if (!timer) timer = setInterval(tick, INTERVAL);
+  };
+  const stop = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+  wrap.addEventListener('mouseenter', stop);
+  wrap.addEventListener('mouseleave', start);
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(sizeViewport, 150);
+  });
+})();
+
 /* ============================================================
    마퀴 캐러셀 (data-marquee)
    무한 루프 + 3초마다 1카드씩 자동 이동 + 마우스/터치 드래그
