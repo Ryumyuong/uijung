@@ -304,9 +304,6 @@ if (contactForm) {
     }
     // 검증 통과 시: 시트로 전송 + 기본 동작(#diagnosis 스크롤) 진행
     sendToSheet('하단진단', {
-      상담분야: q('상담분야')?.value || '',
-      신용채무액: q('신용채무액')?.value || '',
-      세전연봉: q('세전연봉')?.value || '',
       이름: name,
       연락처: phone,
       동의: 'Y',
