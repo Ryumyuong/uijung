@@ -612,6 +612,19 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   });
 });
 
+/* ---------- #diagnosis 링크 — step 선택 패널을 화면 중앙으로 ---------- */
+(() => {
+  const panels = document.getElementById('diagPanels');
+  if (!panels) return;
+  document.querySelectorAll('a[href="#diagnosis"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      panels.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      history.replaceState(null, '', '#diagnosis');
+    });
+  });
+})();
+
 /* ---------- 망설이는 이유 — 3개씩 세로 자동 순환 ---------- */
 (() => {
   const wrap = document.querySelector('[data-worry-rotator]');
