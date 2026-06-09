@@ -616,6 +616,7 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
   const CENTER_TARGET = {
     '#diagnosis': 'contactForm', // 모든 CTA → 최하단 문의 폼으로 통일
     '#contact': 'contactForm', // 간편 상담 신청 폼(최하단)
+    '#contact-mid': 'contactFormMid', // 히어로 간편상담 → 바로 아래 중간 문의 폼
   };
   document.querySelectorAll('a[href]').forEach((link) => {
     const hash = link.getAttribute('href');
