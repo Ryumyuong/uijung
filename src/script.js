@@ -293,15 +293,17 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
     const agree = q('동의')?.checked;
     if (!name || !phone) {
       e.preventDefault();
+      e.stopImmediatePropagation(); // 검증 실패 시 스크롤 핸들러 차단
       alert('이름과 연락처를 입력해 주세요.');
       return;
     }
     if (!agree) {
       e.preventDefault();
+      e.stopImmediatePropagation(); // 검증 실패 시 스크롤 핸들러 차단
       alert('개인정보 수집 및 활용에 동의해 주세요.');
       return;
     }
-    // 검증 통과 시: 시트로 전송 + 기본 동작(#diagnosis 스크롤) 진행
+    // 검증 통과 시: 시트로 전송 + 최하단 문의 폼으로 스크롤
     sendToSheet('하단진단', {
       이름: name,
       연락처: phone,
@@ -612,8 +614,8 @@ document.querySelectorAll('[data-carousel]').forEach((root) => {
 (() => {
   // 해시 → 실제로 중앙에 둘 요소 id
   const CENTER_TARGET = {
-    '#diagnosis': 'diagPanels', // step 선택 패널
-    '#contact': 'contactForm', // 간편 상담 신청 폼
+    '#diagnosis': 'contactForm', // 모든 CTA → 최하단 문의 폼으로 통일
+    '#contact': 'contactForm', // 간편 상담 신청 폼(최하단)
   };
   document.querySelectorAll('a[href]').forEach((link) => {
     const hash = link.getAttribute('href');
