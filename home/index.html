@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>의정종합법률사무소 | 상담 안내</title>
+    <meta
+      name="description"
+      content="개인회생 채무조정 간편상담문의 / 채권추심·민사·형사·가사 종합 법률 문의 — 의정종합법률사무소"
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family:
+          'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+          'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        background: #0c1422;
+        -webkit-font-smoothing: antialiased;
+      }
+      .gate {
+        display: flex;
+        min-height: 100dvh;
+      }
+      .panel {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-decoration: none;
+        text-align: center;
+      }
+      .panel__bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.6s ease;
+      }
+      .panel--left .panel__bg {
+        background-image: url('/images/home-left.png');
+        background-position: 35% center;
+      }
+      .panel--right .panel__bg {
+        background-image: url('/images/home-right.png');
+        background-position: center;
+      }
+      .panel::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.6);
+        transition: background-color 0.35s ease;
+      }
+      .panel:hover::before {
+        background: rgba(0, 0, 0, 0);
+      }
+      .panel__text {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: 0 24px;
+        line-height: 1.4;
+        transition: color 0.35s ease;
+      }
+      .panel:hover .panel__text {
+        color: #111430;
+      }
+      .panel__title {
+        display: block;
+        font-size: clamp(26px, 3.4vw, 46px);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+      }
+      .panel__sub {
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(17px, 2vw, 28px);
+        font-weight: 500;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+      }
+      .gate__logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 3;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 14px;
+        padding: 16px 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+      .gate__logo img {
+        display: block;
+        width: clamp(120px, 12vw, 180px);
+        height: auto;
+      }
+
+      @media (max-width: 768px) {
+        .gate {
+          flex-direction: column;
+        }
+        .panel {
+          min-height: 50dvh;
+        }
+        .gate__logo {
+          padding: 12px 16px;
+        }
+        .gate__logo img {
+          width: clamp(120px, 34vw, 160px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="gate">
+      <a class="panel panel--left" href="/" aria-label="개인회생 채무조정 간편상담문의 — 메인 페이지로 이동">
+        <span class="panel__bg" aria-hidden="true"></span>
+        <span class="panel__text">
+          <span class="panel__title">개인회생 채무조정</span>
+          <span class="panel__sub">간편상담문의</span>
+        </span>
+      </a>
+      <a
+        class="panel panel--right"
+        href="https://23law.co.kr/"
+        aria-label="채권추심·민사·형사·가사 종합 법률 문의 — 외부 사이트로 이동"
+      >
+        <span class="panel__bg" aria-hidden="true"></span>
+        <span class="panel__text">
+          <span class="panel__title">채권추심·민사·형사·가사</span>
+          <span class="panel__sub">종합 법률 문의</span>
+        </span>
+      </a>
+      <div class="gate__logo">
+        <img src="/images/logo.png" alt="의정종합법률사무소" />
+      </div>
+    </main>
+  </body>
+</html>

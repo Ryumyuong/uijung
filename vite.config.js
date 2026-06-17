@@ -9,5 +9,11 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     cssMinify: true,
     sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        home: 'home/index.html',
+      },
+    },
   },
 });
