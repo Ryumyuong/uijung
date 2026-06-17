@@ -46,6 +46,7 @@
     <meta name="twitter:image" content="https://www.ujlaw.co.kr/images/og-image.png" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preload" as="image" href="/images/logo.png" fetchpriority="high" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -120,7 +121,7 @@
         class="mx-auto flex h-20 max-w-[1512px] items-center justify-between gap-5 px-6 max-[480px]:gap-2 max-[480px]:px-3 sm:px-10 lg:px-[82px]"
       >
         <a href="#top" class="flex items-center" aria-label="홈으로">
-          <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[38px] w-auto" width="221" height="55" fetchpriority="high" decoding="async" />
+          <span class="logo-img logo-img--header" role="img" aria-label="의정종합법률사무소"></span>
         </a>
         <nav class="hidden gap-[34px] lg:flex" aria-label="주 메뉴">
           <a
@@ -1768,8 +1769,8 @@
                 >
                   오시는 길
                 </h2>
-                <a href="#top" class="logo-dark flex items-center" aria-label="맨 위로">
-                  <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[54px] w-auto max-[480px]:h-[42px]" />
+                <a href="#top" class="flex items-center" aria-label="맨 위로">
+                  <span class="logo-img logo-img--top" role="img" aria-label="의정종합법률사무소"></span>
                 </a>
               </div>
               <span class="mb-7 block h-px w-full bg-black/30" aria-hidden="true"></span>
@@ -1959,11 +1960,7 @@
       <div class="mx-auto max-w-[1200px] px-6">
         <div class="mb-[22px] flex flex-wrap items-center justify-between gap-3">
           <a href="#top" class="flex items-center" aria-label="맨 위로">
-            <img
-              src="/images/logo-footer.png"
-              alt="의정종합법률사무소"
-              class="h-[42px] w-auto"
-            />
+            <span class="logo-img logo-img--footer" role="img" aria-label="의정종합법률사무소"></span>
           </a>
           <button type="button" data-privacy-open class="text-[16px] text-[#c3cee0] hover:underline">개인정보처리방침</button>
         </div>

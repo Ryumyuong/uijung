@@ -291,10 +291,36 @@
     mask-image: linear-gradient(to bottom, #000 72%, rgba(0, 0, 0, 0.3) 100%);
   }
 
-  /* 흰배경 로고 어둡게 (location 섹션) */
-  .logo-dark img {
+  /* 로고를 background-image로 렌더 — 안드로이드 강제 다크모드가 <img>를
+     색반전(흰색으로 뒤집힘)시키는 것을 방지. background는 반전 대상이 아님. */
+  .logo-img {
+    display: block;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .logo-img--header {
+    width: 153px;
+    height: 38px;
+    background-image: url('/images/logo.png');
+  }
+  .logo-img--top {
+    width: 217px;
+    height: 54px;
+    background-image: url('/images/logo.png');
     filter: brightness(0) saturate(0);
     opacity: 0.85;
+  }
+  .logo-img--footer {
+    width: 168px;
+    height: 42px;
+    background-image: url('/images/logo-footer.png');
+  }
+  @media (max-width: 480px) {
+    .logo-img--top {
+      width: 169px;
+      height: 42px;
+    }
   }
 
   /* 캐러셀 dots */
