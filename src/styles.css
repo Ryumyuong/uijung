@@ -400,7 +400,8 @@
   }
   /* 히어로 모바일 전용 세로 배경 + 상단/하단 가독성 그라데이션 */
   .hero-bg {
-    background-image: url('/images/hero-bg-mobile.png');
+    background-image: url('/images/hero-mobile-full.jpg');
+    background-size: cover;
   }
   .hero-bg::after {
     /* 모바일: 상단(제목/체크리스트) 밝게, 하단(통계 그리드) 살짝 어둡게 */
