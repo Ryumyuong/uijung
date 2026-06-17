@@ -45,7 +45,7 @@
         <a href="/home" class="flex items-center" aria-label="홈으로">
           <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[38px] w-auto" />
         </a>
-        <nav class="hidden gap-[34px] md:flex" aria-label="주 메뉴">
+        <nav class="hidden gap-[34px] lg:flex" aria-label="주 메뉴">
           <a
             href="/#case-savings"
             class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
@@ -72,7 +72,7 @@
             >오시는길</a
           >
         </nav>
-        <div class="flex gap-2.5 max-[480px]:gap-1.5">
+        <div class="flex items-center gap-2.5 max-[480px]:gap-1.5">
           <a
             href="tel:0507-0177-8009"
             class="header-phone btn-shine inline-flex items-center justify-center whitespace-nowrap rounded-lg border-[1.5px] border-[#090909]/30 bg-transparent px-5 py-2.5 text-sm font-bold text-[#090909] transition hover:bg-black/5 max-[480px]:px-2.5 max-[480px]:py-1.5 max-[480px]:text-[12px]"
@@ -83,8 +83,29 @@
             class="btn-shine inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-[#002346] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#003056] max-[480px]:px-2.5 max-[480px]:py-1.5 max-[480px]:text-[12px]"
             >간편상담신청</a
           >
+          <button
+            type="button"
+            data-menu-toggle
+            class="inline-flex h-10 w-10 flex-none items-center justify-center rounded-lg text-[#090909] transition hover:bg-black/5 lg:hidden max-[480px]:h-9 max-[480px]:w-9"
+            aria-label="메뉴 열기"
+            aria-expanded="false"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="h-6 w-6 max-[480px]:h-5 max-[480px]:w-5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
         </div>
       </div>
+      <!-- 모바일 메뉴 패널 -->
+      <nav
+        data-menu-panel
+        class="hidden border-t border-black/5 bg-white shadow-[0_8px_18px_rgba(10,20,40,0.12)] lg:hidden"
+        aria-label="모바일 메뉴"
+      >
+        <a href="/#case-savings" class="block border-b border-black/5 px-6 py-3.5 text-[15px] font-semibold text-[#090909] transition hover:bg-black/5">성공사례</a>
+        <a href="/#intro" class="block border-b border-black/5 px-6 py-3.5 text-[15px] font-semibold text-[#090909] transition hover:bg-black/5">개인회생</a>
+        <a href="/#strengths" class="block border-b border-black/5 px-6 py-3.5 text-[15px] font-semibold text-[#090909] transition hover:bg-black/5">의정의 강점</a>
+        <a href="/#faq" class="block border-b border-black/5 px-6 py-3.5 text-[15px] font-semibold text-[#090909] transition hover:bg-black/5">자주묻는질문</a>
+        <a href="/#location" class="block px-6 py-3.5 text-[15px] font-semibold text-[#090909] transition hover:bg-black/5">오시는길</a>
+      </nav>
     </header>
 
     <!-- ============== 분할 게이트 ============== -->

@@ -57,6 +57,25 @@ function sendToSheet(form, data) {
   });
 })();
 
+/* ---------- 모바일 햄버거 메뉴 ---------- */
+(() => {
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const panel = document.querySelector('[data-menu-panel]');
+  if (!toggle || !panel) return;
+  const setOpen = (open) => {
+    panel.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  };
+  toggle.addEventListener('click', () => setOpen(panel.classList.contains('hidden')));
+  // 링크 클릭 시 닫기
+  panel.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  // 데스크탑으로 넓어지면 패널 닫기
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+})();
+
 /* ---------- 헤더 스크롤 그림자 ---------- */
 const header = document.querySelector('[data-header]');
 if (header) {
