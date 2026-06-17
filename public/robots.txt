@@ -58,5 +58,4 @@ Allow: /
 User-agent: ia_archiver
 Allow: /
 
-# TODO: 실제 도메인으로 교체
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://www.ujlaw.co.kr/sitemap.xml

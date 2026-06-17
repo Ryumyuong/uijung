@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: YOUR-DOMAIN.com 을 실제 도메인으로 교체하고, 디자인 확정 후 섹션 앵커(#...) 갱신 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://YOUR-DOMAIN.com/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://www.ujlaw.co.kr/</loc>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
