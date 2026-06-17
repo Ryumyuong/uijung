@@ -60,6 +60,45 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kodchasan:wght@400;500;600;700&display=swap"
     />
 
+    <!-- 구조화 데이터 (검색엔진 사업체 인식용) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "@id": "https://www.ujlaw.co.kr/#organization",
+        "name": "의정종합법률사무소",
+        "alternateName": "Uijeong General Law Office",
+        "url": "https://www.ujlaw.co.kr/",
+        "logo": "https://www.ujlaw.co.kr/images/og-image.png",
+        "image": "https://www.ujlaw.co.kr/images/og-image.png",
+        "telephone": "+82-507-0177-8009",
+        "priceRange": "₩₩",
+        "description": "도산 전문 변호사 오재길이 직접 상담하는 개인회생·채무조정 법률사무소. 주택 경매 방어, 면책 후 재회생, 배우자 모르게, 도박·주식·코인 빚까지 사안별 검토. 무서류 비대면 비밀상담.",
+        "founder": {
+          "@type": "Person",
+          "name": "오재길",
+          "jobTitle": "대표변호사"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "신흥로258번길 25 해태프라자 1301호",
+          "addressLocality": "의정부시",
+          "addressRegion": "경기도",
+          "addressCountry": "KR"
+        },
+        "areaServed": "KR",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "knowsAbout": ["개인회생", "채무조정", "개인파산", "면책", "재회생", "채권추심"]
+      }
+    </script>
+
     <script type="module" src="/src/main.js"></script>
   </head>
   <body class="font-sans text-ink antialiased">
