@@ -122,7 +122,9 @@
    Base
    ============================================================ */
 @layer base {
+  /* OS/브라우저 다크모드여도 라이트(기본) 색상 강제 유지 */
   html {
+    color-scheme: light only;
     scroll-behavior: smooth;
   }
   body {
