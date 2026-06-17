@@ -10,155 +10,190 @@
     />
     <meta name="robots" content="noindex, follow" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       as="style"
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
     />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        font-family:
-          'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
-          'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-        background: #0c1422;
-        -webkit-font-smoothing: antialiased;
-      }
-      .gate {
-        display: flex;
-        min-height: 100dvh;
-      }
-      .panel {
-        position: relative;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        text-decoration: none;
-        text-align: center;
-      }
-      .panel__bg {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        transition: transform 0.6s ease;
-      }
-      .panel--left .panel__bg {
-        background-image: url('/images/home-left.png');
-        background-position: 35% center;
-      }
-      .panel--right .panel__bg {
-        background-image: url('/images/home-right.png');
-        background-position: center;
-      }
-      .panel::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        background: rgba(0, 0, 0, 0.6);
-        transition: background-color 0.35s ease;
-      }
-      .panel:hover::before {
-        background: rgba(0, 0, 0, 0);
-      }
-      .panel__text {
-        position: relative;
-        z-index: 2;
-        color: #fff;
-        padding: 0 24px;
-        line-height: 1.4;
-        transition: color 0.35s ease;
-      }
-      .panel:hover .panel__text {
-        color: #111430;
-      }
-      .panel__title {
-        display: block;
-        font-size: clamp(26px, 3.4vw, 46px);
-        font-weight: 800;
-        letter-spacing: -0.01em;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
-      }
-      .panel__sub {
-        display: block;
-        margin-top: 8px;
-        font-size: clamp(17px, 2vw, 28px);
-        font-weight: 500;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
-      }
-      .gate__logo {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        z-index: 3;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff;
-        border-radius: 14px;
-        padding: 16px 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      }
-      .gate__logo img {
-        display: block;
-        width: clamp(120px, 12vw, 180px);
-        height: auto;
-      }
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kodchasan:wght@400;500;600;700&display=swap"
+    />
 
-      @media (max-width: 768px) {
-        .gate {
-          flex-direction: column;
-        }
-        .panel {
-          min-height: 50dvh;
-        }
-        .gate__logo {
-          padding: 12px 16px;
-        }
-        .gate__logo img {
-          width: clamp(120px, 34vw, 160px);
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      @media (max-width: 1023px) {
+        body {
+          padding-bottom: 120px;
         }
       }
     </style>
   </head>
-  <body>
-    <main class="gate">
-      <a class="panel panel--left" href="/" aria-label="개인회생 채무조정 간편상담문의 — 메인 페이지로 이동">
-        <span class="panel__bg" aria-hidden="true"></span>
-        <span class="panel__text">
-          <span class="panel__title">개인회생 채무조정</span>
-          <span class="panel__sub">간편상담문의</span>
+  <body class="font-sans text-ink antialiased">
+    <!-- ============== HEADER (메인페이지와 동일) ============== -->
+    <header
+      data-header
+      class="fixed inset-x-0 top-0 z-[100] bg-transparent transition-all duration-300"
+      id="top"
+    >
+      <div
+        class="mx-auto flex h-20 max-w-[1512px] items-center justify-between gap-5 px-6 max-[480px]:gap-2 max-[480px]:px-3 sm:px-10 lg:px-[82px]"
+      >
+        <a href="/home" class="flex items-center" aria-label="홈으로">
+          <img src="/images/logo.png" alt="의정종합법률사무소" class="h-[38px] w-auto" />
+        </a>
+        <nav class="hidden gap-[34px] md:flex" aria-label="주 메뉴">
+          <a
+            href="/#case-savings"
+            class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
+            >성공사례</a
+          >
+          <a
+            href="/#intro"
+            class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
+            >개인회생</a
+          >
+          <a
+            href="/#strengths"
+            class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
+            >의정의 강점</a
+          >
+          <a
+            href="/#faq"
+            class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
+            >자주묻는질문</a
+          >
+          <a
+            href="/#location"
+            class="nav-link text-base font-semibold text-[#090909] transition hover:text-gold-500"
+            >오시는길</a
+          >
+        </nav>
+        <div class="flex gap-2.5 max-[480px]:gap-1.5">
+          <a
+            href="tel:0507-0177-8009"
+            class="header-phone btn-shine inline-flex items-center justify-center whitespace-nowrap rounded-lg border-[1.5px] border-[#090909]/30 bg-transparent px-5 py-2.5 text-sm font-bold text-[#090909] transition hover:bg-black/5 max-[480px]:px-2.5 max-[480px]:py-1.5 max-[480px]:text-[12px]"
+            >전화상담</a
+          >
+          <a
+            href="/#diagnosis"
+            class="btn-shine inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-[#002346] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#003056] max-[480px]:px-2.5 max-[480px]:py-1.5 max-[480px]:text-[12px]"
+            >간편상담신청</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== 분할 게이트 ============== -->
+    <main class="relative flex h-[100dvh] flex-col pt-20 md:flex-row">
+      <a
+        class="group relative flex flex-1 items-center justify-center overflow-hidden text-center"
+        href="/"
+        aria-label="개인회생 채무조정 간편상담문의 — 메인 페이지로 이동"
+      >
+        <span
+          class="absolute inset-0 bg-cover bg-[position:35%_center]"
+          style="background-image: url('/images/home-left.png')"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="absolute inset-0 bg-black/60 transition-colors duration-300 group-hover:bg-black/0"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="relative z-[2] px-6 text-white transition-colors duration-300 group-hover:text-[#111430]"
+        >
+          <span class="block text-[clamp(26px,3.4vw,46px)] font-extrabold -tracking-[0.01em] [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]">개인회생 채무조정</span>
+          <span class="mt-2 block text-[clamp(17px,2vw,28px)] font-medium [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]">간편상담문의</span>
         </span>
       </a>
       <a
-        class="panel panel--right"
+        class="group relative flex flex-1 items-center justify-center overflow-hidden text-center"
         href="https://23law.co.kr/"
         aria-label="채권추심·민사·형사·가사 종합 법률 문의 — 외부 사이트로 이동"
       >
-        <span class="panel__bg" aria-hidden="true"></span>
-        <span class="panel__text">
-          <span class="panel__title">채권추심·민사·형사·가사</span>
-          <span class="panel__sub">종합 법률 문의</span>
+        <span
+          class="absolute inset-0 bg-cover bg-center"
+          style="background-image: url('/images/home-right.png')"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="absolute inset-0 bg-black/60 transition-colors duration-300 group-hover:bg-black/0"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="relative z-[2] px-6 text-white transition-colors duration-300 group-hover:text-[#111430]"
+        >
+          <span class="block text-[clamp(26px,3.4vw,46px)] font-extrabold -tracking-[0.01em] [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]">채권추심·민사·형사·가사</span>
+          <span class="mt-2 block text-[clamp(17px,2vw,28px)] font-medium [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]">종합 법률 문의</span>
         </span>
       </a>
-      <div class="gate__logo">
-        <img src="/images/logo.png" alt="의정종합법률사무소" />
-      </div>
+      <img
+        src="/images/home-badge.png"
+        alt="의정종합법률사무소"
+        class="pointer-events-none absolute left-1/2 top-1/2 z-[5] w-[clamp(104px,13vw,180px)] -translate-x-1/2 -translate-y-1/2"
+      />
     </main>
+
+    <!-- ============== 하단 고정 진단 바 (메인페이지와 동일) ============== -->
+    <div class="fixed inset-x-0 bottom-0 z-[80] hidden bg-[#262E4A] shadow-[0_-6px_20px_rgba(0,0,0,0.25)] lg:block">
+      <div class="mx-auto flex max-w-[1512px] items-stretch gap-6 px-8 py-3">
+        <div class="flex flex-none flex-col justify-center leading-[1.25]">
+          <span class="text-[24px] font-extrabold text-white">무서류 · 비대면</span>
+          <span class="text-[24px] font-extrabold text-gold-500">간편 상담 가능</span>
+        </div>
+        <span class="w-px flex-none self-stretch bg-white/15" aria-hidden="true"></span>
+        <form id="quickDiagForm" class="grid flex-1 grid-cols-3 items-center gap-x-7 gap-y-2.5">
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">이름</span>
+            <input type="text" name="이름" placeholder="홍길동" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+          </label>
+          <label class="flex items-center gap-2.5">
+            <span class="w-[112px] flex-none text-[15px] font-medium text-[#aab6cb]">연락처</span>
+            <input type="tel" name="연락처" placeholder="010-0000-0000" class="h-9 w-full min-w-0 rounded-md border border-black/5 bg-white px-3 text-[15px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none" />
+          </label>
+          <label class="flex items-center gap-2.5 text-[15px] text-[#aab6cb]">
+            <input type="checkbox" name="동의" class="h-4 w-4 accent-brand-bright" />
+            개인정보 수집 및 활용 동의
+          </label>
+        </form>
+        <a href="/#diagnosis" id="quickDiagBtn" class="btn-shine flex flex-none flex-col items-center justify-center rounded-lg bg-[#161B2E] px-7 text-center leading-tight transition hover:bg-[#0f1322]">
+          <span class="text-[24px] font-extrabold text-white">간편상담신청</span>
+          <span class="mt-0.5 text-[12px] text-white/60">상담 비밀보장 · 무서류 가능</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ============== 모바일 하단 고정 진단 바 (메인페이지와 동일) ============== -->
+    <form
+      id="quickDiagFormM"
+      class="fixed inset-x-0 bottom-0 z-[80] bg-[linear-gradient(90deg,#2c2f57_0%,#222a47_45%,#1a2138_100%)] px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pt-2.5 shadow-[0_-6px_20px_rgba(0,0,0,0.25)] lg:hidden"
+    >
+      <div class="mb-2 flex gap-2">
+        <label class="flex min-w-0 flex-1 items-center gap-2">
+          <span class="flex-none text-[13px] font-bold text-white/60 max-[360px]:text-[11px]">이름</span>
+          <input type="text" name="이름" placeholder="홍길동" class="h-9 w-full min-w-0 rounded-md border-0 bg-[#e9eaf1] px-2.5 text-[13px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none max-[360px]:h-8 max-[360px]:text-[12px]" />
+        </label>
+        <label class="flex min-w-0 flex-1 items-center gap-2">
+          <span class="flex-none text-[13px] font-bold text-white/60 max-[360px]:text-[11px]">연락처</span>
+          <input type="tel" name="연락처" placeholder="010-0000-0000" class="h-9 w-full min-w-0 rounded-md border-0 bg-[#e9eaf1] px-2.5 text-[13px] text-[#2c3450] placeholder:text-[#9aa6bd] focus:outline-none max-[360px]:h-8 max-[360px]:text-[12px]" />
+        </label>
+      </div>
+      <div class="flex items-center justify-between gap-3">
+        <label class="flex items-center gap-2 text-[13px] leading-tight text-white max-[360px]:text-[11px]">
+          <input type="checkbox" name="동의" class="h-4 w-4 flex-none accent-brand-bright" />
+          개인정보 수집 및 활용 동의
+        </label>
+        <a
+          href="/#diagnosis"
+          id="quickDiagBtnM"
+          class="btn-shine flex-none rounded-lg bg-[#1a2138] px-6 py-2.5 text-[15px] font-extrabold text-white transition hover:bg-[#11162a] max-[360px]:px-4 max-[360px]:py-2 max-[360px]:text-[13px]"
+          >간편상담신청</a
+        >
+      </div>
+    </form>
   </body>
 </html>
