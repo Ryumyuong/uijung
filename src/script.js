@@ -233,10 +233,6 @@ faqItems.forEach((d) => {
         alert('이름과 연락처를 입력해 주세요.');
         return;
       }
-      if (!agree) {
-        alert('개인정보 수집 및 이용에 동의해 주세요.');
-        return;
-      }
       // 결과 계산 (시트 저장 + 화면 표시에 동일하게 사용)
       const r = calculate(state.debt, state.income, DEFAULT_LIVING_COST);
       const resultFields =
@@ -255,7 +251,7 @@ faqItems.forEach((d) => {
         월소득: `${state.income}만원`,
         주요상황: state.situations.join(', '),
         ...resultFields,
-        동의: 'Y',
+        동의: agree ? 'Y' : 'N',
       });
       showResult(r);
     });
@@ -295,14 +291,10 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
       alert('이름과 연락처를 입력해 주세요.');
       return;
     }
-    if (!agree) {
-      alert('개인정보 수집 및 이용에 동의해 주세요.');
-      return;
-    }
     sendToSheet('상담신청', {
       이름: name,
       연락처: phone,
-      동의: 'Y',
+      동의: agree ? 'Y' : 'N',
     });
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
     contactForm.reset();
@@ -329,15 +321,11 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
       alert('이름과 연락처를 입력해 주세요.');
       return;
     }
-    if (!agree) {
-      alert('개인정보 수집 및 활용에 동의해 주세요.');
-      return;
-    }
     // 검증 통과 시: 시트로 전송 + 확인 안내 + 입력값 초기화
     sendToSheet('하단진단', {
       이름: name,
       연락처: phone,
-      동의: 'Y',
+      동의: agree ? 'Y' : 'N',
     });
     alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
     if (typeof quickDiagForm.reset === 'function') {
