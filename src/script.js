@@ -4,7 +4,7 @@
 
 /* ---------- 구글 스프레드시트(GAS) 전송 ---------- */
 const GAS_URL =
-  'https://script.google.com/macros/s/AKfycbx9Qx_5jVJZWzz-BYcZFFiw0ySkPvckr9oYH8XxQK0DyFebTrJul9bP0vw7hDl00QD9/exec';
+  'https://script.google.com/macros/s/AKfycbzIxxSyIX5q64ZuKuYW2xp0X_Q0AGHoMuvP0OVO5x-avoYsrjZYoTKMmfogLCs0f6Zj/exec';
 
 // 유입경로(ref): URL의 ?ref= 값이 있으면 우선 사용, 없으면 아래 기본값 사용
 const REF = ''; // ← 여기에 기본 유입경로를 직접 설정하세요 (예: 'naver', 'blog', 'meta')
