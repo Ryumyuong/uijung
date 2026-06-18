@@ -307,27 +307,34 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
   if (!quickDiagBtn || !quickDiagForm) return;
   const q = (n) => quickDiagForm.querySelector(`[name="${n}"]`);
   quickDiagBtn.addEventListener('click', (e) => {
+    // 스크롤(앵커 이동) 없이 항상 그 자리에서 접수 처리
+    e.preventDefault();
+    e.stopImmediatePropagation();
     const name = (q('이름')?.value || '').trim();
     const phone = (q('연락처')?.value || '').trim();
     const agree = q('동의')?.checked;
     if (!name || !phone) {
-      e.preventDefault();
-      e.stopImmediatePropagation(); // 검증 실패 시 스크롤 핸들러 차단
       alert('이름과 연락처를 입력해 주세요.');
       return;
     }
     if (!agree) {
-      e.preventDefault();
-      e.stopImmediatePropagation(); // 검증 실패 시 스크롤 핸들러 차단
       alert('개인정보 수집 및 활용에 동의해 주세요.');
       return;
     }
-    // 검증 통과 시: 시트로 전송 + 최하단 문의 폼으로 스크롤
+    // 검증 통과 시: 시트로 전송 + 확인 안내 + 입력값 초기화
     sendToSheet('하단진단', {
       이름: name,
       연락처: phone,
       동의: 'Y',
     });
+    alert('상담 신청이 접수되었습니다.\n담당자가 순차적으로 연락드리겠습니다.');
+    if (typeof quickDiagForm.reset === 'function') {
+      quickDiagForm.reset();
+    } else {
+      [q('이름'), q('연락처')].forEach((el) => el && (el.value = ''));
+      const c = q('동의');
+      if (c) c.checked = false;
+    }
   });
 });
 
