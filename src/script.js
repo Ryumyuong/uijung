@@ -147,7 +147,7 @@ faqItems.forEach((d) => {
 
   const fmt = (n) => n.toLocaleString('ko-KR');
 
-  const showResult = () => {
+  const showResult = (precomputed) => {
     stepEls.forEach((el) => {
       el.hidden = true;
     });
@@ -155,7 +155,7 @@ faqItems.forEach((d) => {
     if (!resultEl || !resultBody) return;
     resultEl.hidden = false;
 
-    const r = calculate(state.debt, state.income, DEFAULT_LIVING_COST);
+    const r = precomputed || calculate(state.debt, state.income, DEFAULT_LIVING_COST);
 
     if (r.branch === 'B') {
       resultBody.innerHTML = `
@@ -237,15 +237,27 @@ faqItems.forEach((d) => {
         alert('개인정보 수집 및 이용에 동의해 주세요.');
         return;
       }
+      // 결과 계산 (시트 저장 + 화면 표시에 동일하게 사용)
+      const r = calculate(state.debt, state.income, DEFAULT_LIVING_COST);
+      const resultFields =
+        r.branch === 'B'
+          ? { 진단결과: '회생 외 대안 적합' }
+          : {
+              진단결과: '개인회생 검토 가능',
+              예상월변제액: `${r.monthlyPayment}만원`,
+              '36개월총변제액': `${r.totalPayment}만원`,
+              예상감면율: `${Math.round(((r.originalDebt - r.totalPayment) / r.originalDebt) * 100)}%`,
+            };
       sendToSheet('진단신청', {
         이름: name,
         연락처: phone,
-        채무금액: state.debt,
-        월소득: state.income,
+        채무금액: `${state.debt}만원`,
+        월소득: `${state.income}만원`,
         주요상황: state.situations.join(', '),
+        ...resultFields,
         동의: 'Y',
       });
-      showResult();
+      showResult(r);
     });
   }
 
