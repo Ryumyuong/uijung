@@ -18,12 +18,74 @@ function getRef() {
   }
 }
 
+/* ---------- 메타 전환 API(서버 측) 연동용 보조 데이터 ----------
+   토큰은 절대 여기 두지 않습니다. 실제 전송은 GAS(doPost)에서 처리.
+   여기서는 매칭 품질을 높일 값(_fbp/_fbc/UA/event_id)만 함께 전달하고,
+   같은 event_id로 브라우저 Pixel 이벤트도 발생시켜 서버 이벤트와 중복제거(dedup)되게 합니다. */
+const META_EVENT_NAME = 'Lead'; // 표준 이벤트. 캠페인을 '문의' 맞춤 이벤트로 최적화했다면 '문의'로 변경
+// 표준 이벤트 목록(여기 있으면 track, 없으면 trackCustom 으로 발생)
+const META_STANDARD_EVENTS = [
+  'Lead', 'Contact', 'CompleteRegistration', 'SubmitApplication',
+  'Schedule', 'Subscribe', 'PageView', 'ViewContent', 'Search',
+  'AddToCart', 'InitiateCheckout', 'Purchase',
+];
+
+function getCookie(name) {
+  try {
+    const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+// _fbc 쿠키가 없으면 URL의 fbclid로 직접 구성 (광고 클릭 attribution 보존)
+function getFbc() {
+  let fbc = getCookie('_fbc');
+  if (!fbc) {
+    try {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (fbclid) fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+    } catch (_) {}
+  }
+  return fbc;
+}
+
+function genEventId() {
+  return 'evt_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+}
+
+// 브라우저 Pixel 이벤트 발생 (서버 CAPI와 같은 event_id → 메타가 중복제거)
+function trackMetaPixel(eventName, eventId) {
+  if (typeof fbq !== 'function') return;
+  const opts = { eventID: eventId };
+  if (META_STANDARD_EVENTS.indexOf(eventName) !== -1) {
+    fbq('track', eventName, {}, opts);
+  } else {
+    fbq('trackCustom', eventName, {}, opts);
+  }
+}
+
 function sendToSheet(form, data) {
+  // 서버(GAS)에서 메타 CAPI 전송에 쓸 보조 필드 (시트에는 기록하지 않음 — GAS에서 제거)
+  const eventId = genEventId();
+  const meta = {
+    _eventName: META_EVENT_NAME,
+    _eventId: eventId,
+    _eventSourceUrl: location.href,
+    _fbp: getCookie('_fbp'),
+    _fbc: getFbc(),
+    _ua: navigator.userAgent,
+  };
+
+  // 같은 event_id로 브라우저 픽셀 이벤트도 발생(서버 이벤트와 dedup)
+  trackMetaPixel(META_EVENT_NAME, eventId);
+
   // text/plain 으로 보내 CORS 프리플라이트 회피 (제출만, 응답은 읽지 않음)
   return fetch(GAS_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ form, ref: getRef(), ...data }),
+    body: JSON.stringify({ form, ref: getRef(), ...data, ...meta }),
   }).catch((err) => console.error('sheet 전송 실패:', err));
 }
 
