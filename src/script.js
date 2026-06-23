@@ -81,9 +81,11 @@ function sendToSheet(form, data) {
   // 같은 event_id로 브라우저 픽셀 이벤트도 발생(서버 이벤트와 dedup)
   trackMetaPixel(META_EVENT_NAME, eventId);
 
-  // text/plain 으로 보내 CORS 프리플라이트 회피 (제출만, 응답은 읽지 않음)
+  // no-cors: GAS /exec 는 302 리다이렉트라 CORS 응답 헤더가 없음.
+  // 응답은 읽지 않고 제출만 하므로 no-cors 로 보내 CORS 차단을 회피한다.
   return fetch(GAS_URL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({ form, ref: getRef(), ...data, ...meta }),
   }).catch((err) => console.error('sheet 전송 실패:', err));
