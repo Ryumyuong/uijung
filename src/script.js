@@ -22,7 +22,7 @@ function getRef() {
    토큰은 절대 여기 두지 않습니다. 실제 전송은 GAS(doPost)에서 처리.
    여기서는 매칭 품질을 높일 값(_fbp/_fbc/UA/event_id)만 함께 전달하고,
    같은 event_id로 브라우저 Pixel 이벤트도 발생시켜 서버 이벤트와 중복제거(dedup)되게 합니다. */
-const META_EVENT_NAME = 'SubmitApplication'; // 문의 폼 제출 전환 이벤트. 브라우저 픽셀+서버 CAPI 동일 적용
+const META_EVENT_NAME = 'Lead'; // 표준 이벤트. 캠페인을 '문의' 맞춤 이벤트로 최적화했다면 '문의'로 변경
 // 표준 이벤트 목록(여기 있으면 track, 없으면 trackCustom 으로 발생)
 const META_STANDARD_EVENTS = [
   'Lead', 'Contact', 'CompleteRegistration', 'SubmitApplication',
