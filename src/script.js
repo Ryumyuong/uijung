@@ -11,12 +11,24 @@ const REF = ''; // ← 여기에 기본 유입경로를 직접 설정하세요 (
 
 function getRef() {
   try {
+    // URL의 ?ref= 가 있으면 세션에 저장(페이지 이동해도 유지)
     const fromUrl = new URLSearchParams(window.location.search).get('ref');
-    return (fromUrl || REF || '').trim();
+    if (fromUrl) {
+      const v = fromUrl.trim();
+      try { sessionStorage.setItem('ref', v); } catch (_) {}
+      return v;
+    }
+    // 없으면 세션에 저장된 값 → 기본값 순
+    let stored = '';
+    try { stored = sessionStorage.getItem('ref') || ''; } catch (_) {}
+    return (stored || REF || '').trim();
   } catch (_) {
     return REF;
   }
 }
+
+// 진입 시점에 ?ref= 를 세션에 1회 저장(이후 어느 페이지에서 제출해도 유지)
+getRef();
 
 /* ---------- 메타 전환 API(서버 측) 연동용 보조 데이터 ----------
    토큰은 절대 여기 두지 않습니다. 실제 전송은 GAS(doPost)에서 처리.
@@ -68,6 +80,9 @@ function trackMetaPixel(eventName, eventId) {
 
 function sendToSheet(form, data) {
   // 서버(GAS)에서 메타 CAPI 전송에 쓸 보조 필드 (시트에는 기록하지 않음 — GAS에서 제거)
+  const ref = getRef();
+  const isMeta = ref.toLowerCase() === 'meta'; // 메타 유입만 메타로 전환 전송
+
   const eventId = genEventId();
   const meta = {
     _eventName: META_EVENT_NAME,
@@ -78,8 +93,9 @@ function sendToSheet(form, data) {
     _ua: navigator.userAgent,
   };
 
-  // 같은 event_id로 브라우저 픽셀 이벤트도 발생(서버 이벤트와 dedup)
-  trackMetaPixel(META_EVENT_NAME, eventId);
+  // 메타 유입(?ref=meta)일 때만 브라우저 픽셀 이벤트 발생(서버 이벤트와 dedup)
+  // 서버(CAPI) 전송 게이트는 GAS 에서 row.ref === 'meta' 로 처리한다.
+  if (isMeta) trackMetaPixel(META_EVENT_NAME, eventId);
 
   // no-cors: GAS /exec 는 302 리다이렉트라 CORS 응답 헤더가 없음.
   // 응답은 읽지 않고 제출만 하므로 no-cors 로 보내 CORS 차단을 회피한다.
@@ -87,7 +103,7 @@ function sendToSheet(form, data) {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ form, ref: getRef(), ...data, ...meta }),
+    body: JSON.stringify({ form, ref, ...data, ...meta }),
   }).catch((err) => console.error('sheet 전송 실패:', err));
 }
 

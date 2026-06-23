@@ -74,6 +74,9 @@ function doGet() {
 function sendMetaCapi_(row, meta) {
   if (!META_ACCESS_TOKEN || !META_PIXEL_ID) return;
 
+  // ★ 메타 유입(?ref=meta)만 전환 전송. 그 외(네이버·블로그·직접방문 등)는 시트만 기록하고 메타엔 안 보냄.
+  if (String(row['ref'] || '').toLowerCase() !== 'meta') return;
+
   const userData = {};
   const ph = normalizePhone_(row['연락처']);
   if (ph) userData.ph = [sha256_(ph)];
