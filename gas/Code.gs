@@ -18,7 +18,7 @@ const META_API_VERSION = 'v21.0';
 // 테스트 중에만 사용: Events Manager → 테스트 이벤트 탭의 코드 (예: 'TEST12345').
 // 실제 운영 시에는 반드시 '' (빈 문자열)로 두세요.
 const META_TEST_EVENT_CODE = '';
-const META_DEFAULT_EVENT_NAME = 'Lead';
+const META_DEFAULT_EVENT_NAME = '문의제출';
 
 // ★ 시트 컬럼 고정 순서 (이 순서대로 정렬, 목록에 없는 키는 뒤에 자동 추가)
 const HEADERS = ['접수시각', '이름', '연락처', '동의', '채무금액', '월소득', '주요상황', 'ref'];
