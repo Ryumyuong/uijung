@@ -173,17 +173,20 @@ function sendToSheet(form, data) {
     try { video.pause(); } catch (_) {}
   };
 
-  modal.querySelectorAll('[data-exit-close]').forEach((btn) =>
-    btn.addEventListener('click', close),
-  );
-  // 배경 클릭 시 닫기
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) close();
-  });
-  // ESC로 닫기
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
-  });
+  // 팝업 클릭 → 닫고 하단 문의 폼으로 이동
+  const goToForm = () => {
+    close();
+    // 하단 문의 폼: #contact 우선, 없으면 페이지 마지막 form
+    const forms = document.querySelectorAll('form');
+    const target =
+      document.querySelector('#contact') || (forms.length ? forms[forms.length - 1] : null);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // 첫 입력칸에 포커스(부드러운 스크롤 후)
+    const input = target.querySelector('input, textarea, select');
+    if (input) setTimeout(() => { try { input.focus({ preventScroll: true }); } catch (_) {} }, 600);
+  };
+  modal.addEventListener('click', goToForm);
 
   // PC: 마우스가 화면 상단 밖으로 나가면(주소창/탭 닫기 의도) 노출
   document.addEventListener('mouseout', (e) => {
