@@ -217,7 +217,8 @@ function sendToSheet(form, data) {
     armed = true;
     armBackTrap();
   };
-  ['touchstart', 'scroll', 'click', 'pointerdown', 'keydown'].forEach((ev) =>
+  // ⚠ 스크롤은 user-activation으로 인정 안 됨 → 탭/클릭 같은 '명확한 터치'에만 설치
+  ['pointerdown', 'touchend', 'click', 'keydown'].forEach((ev) =>
     window.addEventListener(ev, armOnce, { passive: true }),
   );
   window.addEventListener('popstate', () => {
