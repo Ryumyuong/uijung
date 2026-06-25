@@ -190,6 +190,21 @@ function sendToSheet(form, data) {
     if (!e.relatedTarget && e.clientY <= 0) open();
   });
 
+  // 모바일: 스크롤 기반 이탈 감지 (popstate가 막히는 인앱브라우저/안드로이드 대응)
+  //   한 화면 이상 아래로 읽은 뒤, 다시 맨 위로 빠르게 올라오면 = 나가려는 신호
+  let lastY = window.scrollY || 0;
+  let engaged = false;
+  window.addEventListener(
+    'scroll',
+    () => {
+      const y = window.scrollY || 0;
+      if (y > window.innerHeight * 0.9) engaged = true; // 한 화면 이상 내려간 적 있음
+      if (engaged && y < 60 && y < lastY - 4) open(); // 위로 올라와 상단 도달
+      lastY = y;
+    },
+    { passive: true },
+  );
+
   // 모바일 등: 뒤로가기 시도 시 노출 (back 버튼을 가로챔) — 기기 구분 없이 항상 설치
   // 주의: 크롬/삼성은 "사용자 동작 없이 추가된 history 항목"을 뒤로가기 시 건너뜀.
   //       → 반드시 첫 터치/스크롤/클릭 이후에 트랩을 설치해야 정상 인식됨.
