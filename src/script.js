@@ -190,19 +190,17 @@ function sendToSheet(form, data) {
     if (!e.relatedTarget && e.clientY <= 0) open();
   });
 
-  // 모바일: 뒤로가기 시도 시 노출 (back 버튼을 한 번 가로챔)
-  const isTouch = window.matchMedia('(hover: none)').matches;
-  if (isTouch) {
-    try {
-      history.pushState(null, '', location.href);
-      window.addEventListener('popstate', () => {
-        if (!shown) {
-          history.pushState(null, '', location.href);
-          open();
-        }
-      });
-    } catch (_) {}
-  }
+  // 모바일 등: 뒤로가기 시도 시 노출 (back 버튼을 가로챔) — 기기 구분 없이 항상 설치
+  const armBackTrap = () => {
+    try { history.pushState({ exitGuard: true }, '', location.href); } catch (_) {}
+  };
+  window.addEventListener('popstate', () => {
+    if (shown) return; // 이미 1회 노출됨 → 다음 뒤로가기는 정상 동작
+    armBackTrap(); // 다시 가둬서 페이지 유지
+    open();
+  });
+  // 사용자 첫 상호작용 직후 트랩 설치(자동재생/히스토리 정책 안정성)
+  armBackTrap();
 })();
 
 /* ---------- 모바일 햄버거 메뉴 ---------- */
