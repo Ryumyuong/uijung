@@ -137,6 +137,74 @@ function sendToSheet(form, data) {
   });
 })();
 
+/* ---------- 이탈 방지 영상 팝업 ---------- */
+(() => {
+  const modal = document.querySelector('[data-exit-modal]');
+  const video = modal && modal.querySelector('[data-exit-video]');
+  if (!modal || !video) return;
+
+  // 두 영상 중 랜덤 1개 (둘 다 있으면 랜덤, 하나만 쓰려면 배열에서 하나만 남기세요)
+  const SOURCES = ['/exit-benefit.mp4', '/exit-loss.mp4'];
+
+  let shown = false; // 세션당 1회만
+  try {
+    if (sessionStorage.getItem('exitShown') === '1') shown = true;
+  } catch (_) {}
+
+  const open = () => {
+    if (shown) return;
+    shown = true;
+    try { sessionStorage.setItem('exitShown', '1'); } catch (_) {}
+
+    const src = SOURCES[Math.floor(Math.random() * SOURCES.length)];
+    video.src = src;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    // muted 자동재생 정책 대응
+    video.muted = true;
+    video.play().catch(() => {});
+  };
+
+  const close = () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    try { video.pause(); } catch (_) {}
+  };
+
+  modal.querySelectorAll('[data-exit-close]').forEach((btn) =>
+    btn.addEventListener('click', close),
+  );
+  // 배경 클릭 시 닫기
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+  // ESC로 닫기
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
+  });
+
+  // PC: 마우스가 화면 상단 밖으로 나가면(주소창/탭 닫기 의도) 노출
+  document.addEventListener('mouseout', (e) => {
+    if (!e.relatedTarget && e.clientY <= 0) open();
+  });
+
+  // 모바일: 뒤로가기 시도 시 노출 (back 버튼을 한 번 가로챔)
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if (isTouch) {
+    try {
+      history.pushState(null, '', location.href);
+      window.addEventListener('popstate', () => {
+        if (!shown) {
+          history.pushState(null, '', location.href);
+          open();
+        }
+      });
+    } catch (_) {}
+  }
+})();
+
 /* ---------- 모바일 햄버거 메뉴 ---------- */
 (() => {
   const toggle = document.querySelector('[data-menu-toggle]');
