@@ -191,16 +191,25 @@ function sendToSheet(form, data) {
   });
 
   // 모바일 등: 뒤로가기 시도 시 노출 (back 버튼을 가로챔) — 기기 구분 없이 항상 설치
+  // 주의: 크롬/삼성은 "사용자 동작 없이 추가된 history 항목"을 뒤로가기 시 건너뜀.
+  //       → 반드시 첫 터치/스크롤/클릭 이후에 트랩을 설치해야 정상 인식됨.
+  let armed = false;
   const armBackTrap = () => {
     try { history.pushState({ exitGuard: true }, '', location.href); } catch (_) {}
   };
+  const armOnce = () => {
+    if (armed || shown) return;
+    armed = true;
+    armBackTrap();
+  };
+  ['touchstart', 'scroll', 'click', 'pointerdown', 'keydown'].forEach((ev) =>
+    window.addEventListener(ev, armOnce, { passive: true }),
+  );
   window.addEventListener('popstate', () => {
     if (shown) return; // 이미 1회 노출됨 → 다음 뒤로가기는 정상 동작
     armBackTrap(); // 다시 가둬서 페이지 유지
     open();
   });
-  // 사용자 첫 상호작용 직후 트랩 설치(자동재생/히스토리 정책 안정성)
-  armBackTrap();
 })();
 
 /* ---------- 모바일 햄버거 메뉴 ---------- */
