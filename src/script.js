@@ -78,7 +78,17 @@ function trackMetaPixel(eventName, eventId) {
   }
 }
 
+// 연락처를 010-0000-0000 형태로 정규화 (숫자만 추출 후 하이픈 삽입)
+function formatPhone(v) {
+  const d = String(v || '').replace(/\D/g, '');
+  if (d.length === 11) return d.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+  if (d.length === 10) return d.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+  return v; // 형식이 다르면 원본 유지
+}
+
 function sendToSheet(form, data) {
+  // 연락처가 있으면 010-0000-0000 형태로 저장되도록 정규화
+  if (data && data.연락처 != null) data = { ...data, 연락처: formatPhone(data.연락처) };
   // 서버(GAS)에서 메타 CAPI 전송에 쓸 보조 필드 (시트에는 기록하지 않음 — GAS에서 제거)
   const ref = getRef();
   const isMeta = ref.toLowerCase() === 'meta'; // 메타 유입만 메타로 전환 전송
