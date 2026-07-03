@@ -78,6 +78,12 @@ function trackMetaPixel(eventName, eventId) {
   }
 }
 
+// 휴대폰 번호 유효성: 010으로 시작하는 10~11자리(숫자만)
+function isValidPhone(v) {
+  const d = String(v || '').replace(/\D/g, '');
+  return /^01[016789]\d{7,8}$/.test(d);
+}
+
 // 연락처를 010-0000-0000 형태로 정규화 (숫자만 추출 후 하이픈 삽입)
 function formatPhone(v) {
   const d = String(v || '').replace(/\D/g, '');
@@ -417,6 +423,10 @@ faqItems.forEach((d) => {
         alert('이름과 연락처를 입력해 주세요.');
         return;
       }
+      if (!isValidPhone(phone)) {
+        alert('연락처를 정확히 입력해 주세요. (예: 010-0000-0000)');
+        return;
+      }
       if (!agree) {
         alert('개인정보 수집 및 이용에 동의해 주세요.');
         return;
@@ -479,6 +489,10 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
       alert('이름과 연락처를 입력해 주세요.');
       return;
     }
+    if (!isValidPhone(phone)) {
+      alert('연락처를 정확히 입력해 주세요. (예: 010-0000-0000)');
+      return;
+    }
     if (!agree) {
       alert('개인정보 수집 및 이용에 동의해 주세요.');
       return;
@@ -511,6 +525,10 @@ document.querySelectorAll('#contactForm, #contactFormMid').forEach((contactForm)
     const agree = q('동의')?.checked;
     if (!name || !phone) {
       alert('이름과 연락처를 입력해 주세요.');
+      return;
+    }
+    if (!isValidPhone(phone)) {
+      alert('연락처를 정확히 입력해 주세요. (예: 010-0000-0000)');
       return;
     }
     if (!agree) {
