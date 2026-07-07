@@ -9,19 +9,40 @@ const GAS_URL =
 // 유입경로(ref): URL의 ?ref= 값이 있으면 우선 사용, 없으면 아래 기본값 사용
 const REF = ''; // ← 여기에 기본 유입경로를 직접 설정하세요 (예: 'naver', 'blog', 'meta')
 
+// 리퍼러(넘어온 페이지)의 도메인만 추출. 우리 사이트 내부 이동/빈 값은 제외.
+// 예) 네이버 플레이스에서 들어오면 'm.place.naver.com' 반환
+function getReferrerHost() {
+  try {
+    if (!document.referrer) return '';
+    const host = new URL(document.referrer).hostname.toLowerCase();
+    if (!host || host === location.hostname.toLowerCase()) return '';
+    return host;
+  } catch (_) {
+    return '';
+  }
+}
+
 function getRef() {
   try {
-    // URL의 ?ref= 가 있으면 세션에 저장(페이지 이동해도 유지)
+    // 1) URL의 ?ref= 가 있으면 최우선(세션에 저장 → 페이지 이동해도 유지)
     const fromUrl = new URLSearchParams(window.location.search).get('ref');
     if (fromUrl) {
       const v = fromUrl.trim();
       try { sessionStorage.setItem('ref', v); } catch (_) {}
       return v;
     }
-    // 없으면 세션에 저장된 값 → 기본값 순
+    // 2) 세션에 저장된 값(진입 시점에 정해진 유입경로 유지)
     let stored = '';
     try { stored = sessionStorage.getItem('ref') || ''; } catch (_) {}
-    return (stored || REF || '').trim();
+    if (stored) return stored;
+    // 3) ?ref=가 없으면 리퍼러 도메인으로 자동 기록(예: m.place.naver.com)
+    const host = getReferrerHost();
+    if (host) {
+      try { sessionStorage.setItem('ref', host); } catch (_) {}
+      return host;
+    }
+    // 4) 그래도 없으면 기본값(비어 있으면 GAS에서 '직접방문')
+    return (REF || '').trim();
   } catch (_) {
     return REF;
   }
