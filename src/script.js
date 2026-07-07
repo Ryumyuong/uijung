@@ -9,13 +9,21 @@ const GAS_URL =
 // 유입경로(ref): URL의 ?ref= 값이 있으면 우선 사용, 없으면 아래 기본값 사용
 const REF = ''; // ← 여기에 기본 유입경로를 직접 설정하세요 (예: 'naver', 'blog', 'meta')
 
+// 리퍼러 도메인 → 시트에 남길 이름 매핑(부분일치). 없으면 도메인 그대로 사용.
+const REFERRER_MAP = [
+  { match: 'place.naver.com', label: '플레이스' }, // m.place / pcmap.place 등 모두 포함
+];
+
 // 리퍼러(넘어온 페이지)의 도메인만 추출. 우리 사이트 내부 이동/빈 값은 제외.
-// 예) 네이버 플레이스에서 들어오면 'm.place.naver.com' 반환
+// 예) 네이버 플레이스에서 들어오면 '플레이스', 그 외는 'm.search.naver.com' 처럼 도메인 그대로
 function getReferrerHost() {
   try {
     if (!document.referrer) return '';
     const host = new URL(document.referrer).hostname.toLowerCase();
     if (!host || host === location.hostname.toLowerCase()) return '';
+    for (let i = 0; i < REFERRER_MAP.length; i++) {
+      if (host.indexOf(REFERRER_MAP[i].match) !== -1) return REFERRER_MAP[i].label;
+    }
     return host;
   } catch (_) {
     return '';
