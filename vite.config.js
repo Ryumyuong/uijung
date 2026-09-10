@@ -13,6 +13,9 @@ export default defineConfig({
       input: {
         main: 'index.html',
         home: 'home/index.html',
+        housing: '집경매방어/index.html',
+        spouse: '배우자모르게/index.html',
+        refiling: '면책후재회생/index.html',
       },
     },
   },
